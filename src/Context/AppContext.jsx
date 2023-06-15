@@ -74,6 +74,10 @@ export const AppContextProvider = ({ children }) => {
         return { ...state, userLoggedIn: true };
       }
 
+      case "UPDATE_POSTS": {
+        return { ...state, userPosts: action.payload };
+      }
+
       default:
         return state;
     }
@@ -90,6 +94,7 @@ export const AppContextProvider = ({ children }) => {
       isSignupConditionsChecked: false,
     },
     userLoggedIn: false,
+    userPosts: [],
   };
 
   const [state, dispatch] = useReducer(reducerFunction, initialValue);
