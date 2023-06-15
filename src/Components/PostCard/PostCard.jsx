@@ -71,7 +71,23 @@ function PostCard({
         },
       });
       const jsonResponse = await response.json();
-      console.log(jsonResponse.bookmarks);
+      if (jsonResponse.bookmarks) {
+        dispatch({ type: "UPDATE_BOOKMARKS", payload: jsonResponse.bookmarks });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const removePostFromBookmarkHandler = async () => {
+    try {
+      const response = await fetch(`/api/users/remove-bookmark/${_id}`, {
+        method: "POST",
+        headers: {
+          authorization: localStorage.getItem("encodedToken"),
+        },
+      });
+      const jsonResponse = await response.json();
       if (jsonResponse.bookmarks) {
         dispatch({ type: "UPDATE_BOOKMARKS", payload: jsonResponse.bookmarks });
       }
@@ -135,7 +151,13 @@ function PostCard({
           <button>
             <i className="fa-sharp fa-solid fa-share-nodes"></i>
           </button>
-          <button onClick={bookmarkPostHandler}>
+          <button
+            onClick={
+              state.userBookmarks.some((book) => book._id === _id)
+                ? removePostFromBookmarkHandler
+                : bookmarkPostHandler
+            }
+          >
             <i className="fa-solid fa-bookmark"></i>
           </button>
         </div>
