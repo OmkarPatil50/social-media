@@ -80,16 +80,18 @@ export const createPostHandler = function (schema, request) {
     const { postData } = JSON.parse(request.requestBody);
     const post = {
       _id: uuid(),
-      ...postData,
       likes: {
         likeCount: 0,
         likedBy: [],
         dislikedBy: [],
       },
+      content: postData,
+      userFullName: `${user.firstName} ${user.lastName}`,
       username: user.username,
       createdAt: formatDate(),
       updatedAt: formatDate(),
     };
+
     this.db.posts.insert(post);
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
