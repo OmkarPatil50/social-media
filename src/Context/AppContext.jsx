@@ -78,6 +78,10 @@ export const AppContextProvider = ({ children }) => {
         return { ...state, userPosts: action.payload };
       }
 
+      case "SHOW_POST_OPTIONS": {
+        return { ...state, showPostOptions: action.payload };
+      }
+
       default:
         return state;
     }
@@ -95,6 +99,7 @@ export const AppContextProvider = ({ children }) => {
     },
     userLoggedIn: false,
     userPosts: [],
+    showPostOptions: false,
   };
 
   const [state, dispatch] = useReducer(reducerFunction, initialValue);

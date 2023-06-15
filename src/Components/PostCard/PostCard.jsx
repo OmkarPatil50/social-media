@@ -45,6 +45,23 @@ function PostCard({
     }
   };
 
+  const deletePostHandler = async () => {
+    try {
+      const response = await fetch(`/api/posts/${_id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: localStorage.getItem("encodedToken"),
+        },
+      });
+      const jsonResponse = await response.json();
+      if (jsonResponse.posts) {
+        dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="post-card">
       <div className="user-profile-pic">
@@ -55,6 +72,34 @@ function PostCard({
           <h2>{userFullName}</h2>
           <p>{username}</p>
           <p>{createdAt.slice(10)}</p>
+          <div className="post-options">
+            <p
+              onClick={() =>
+                dispatch({
+                  type: "SHOW_POST_OPTIONS",
+                  payload: !state.showPostOptions,
+                })
+              }
+            >
+              ...
+            </p>
+            {state.showPostOptions ? (
+              <button
+                className="delete-post"
+                onClick={() => {
+                  deletePostHandler();
+                  dispatch({
+                    type: "SHOW_POST_OPTIONS",
+                    payload: !state.showPostOptions,
+                  });
+                }}
+              >
+                Delete
+              </button>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
         <section className="post-content">{postContent}</section>
         <div className="btn-section-postcard">
