@@ -77,6 +77,13 @@ export const AppContextProvider = ({ children }) => {
       case "UPDATE_POSTS": {
         return { ...state, userPosts: action.payload };
       }
+      case "UPDATE_BOOKMARKS": {
+        return { ...state, userBookmarks: action.payload };
+      }
+
+      case "SHOW_POST_OPTIONS": {
+        return { ...state, showPostOptions: action.payload };
+      }
 
       default:
         return state;
@@ -95,6 +102,8 @@ export const AppContextProvider = ({ children }) => {
     },
     userLoggedIn: false,
     userPosts: [],
+    userBookmarks: [],
+    showPostOptions: false,
   };
 
   const [state, dispatch] = useReducer(reducerFunction, initialValue);
