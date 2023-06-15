@@ -9,14 +9,14 @@ function Navbar() {
           <i className="fa-solid fa-house"></i>Home
         </p>
         <p>
-          <i className="fa-sharp fa-regular fa-rocket"></i>Explore
+          <i className="fa-solid fa-regular fa-rocket"></i>Explore
         </p>
         <p>
           {" "}
-          <i className="fa-light fa-bookmark"></i>Bookmark
+          <i className="fa-solid fa-bookmark"></i>Bookmark
         </p>
         <p>
-          <i className="fa-regular fa-user"></i>Profile
+          <i className="fa-solid fa-user"></i>Profile
         </p>
       </nav>
       <button>Create New Post</button>

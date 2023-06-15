@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../../Components/Navbar/Navbar";
 import { AppContext } from "../..";
 import PostCard from "../../Components/PostCard/PostCard";
+import Footer from "../../Components/Footer/Footer";
 
 function Home() {
   const { state, dispatch } = useContext(AppContext);
@@ -92,6 +93,7 @@ function Home() {
           </ul>
         </section>
       </section>
+      <Footer />
     </div>
   );
 }
