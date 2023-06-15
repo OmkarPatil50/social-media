@@ -62,6 +62,24 @@ function PostCard({
     }
   };
 
+  const bookmarkPostHandler = async () => {
+    try {
+      const response = await fetch(`/api/users/bookmark/${_id}`, {
+        method: "POST",
+        headers: {
+          authorization: localStorage.getItem("encodedToken"),
+        },
+      });
+      const jsonResponse = await response.json();
+      console.log(jsonResponse.bookmarks);
+      if (jsonResponse.bookmarks) {
+        dispatch({ type: "UPDATE_BOOKMARKS", payload: jsonResponse.bookmarks });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="post-card">
       <div className="user-profile-pic">
@@ -117,7 +135,7 @@ function PostCard({
           <button>
             <i className="fa-sharp fa-solid fa-share-nodes"></i>
           </button>
-          <button>
+          <button onClick={bookmarkPostHandler}>
             <i className="fa-solid fa-bookmark"></i>
           </button>
         </div>
