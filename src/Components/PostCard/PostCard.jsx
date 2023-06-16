@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AppContext } from "../..";
+import { Link } from "react-router-dom";
 
 function PostCard({
   postContent,
@@ -135,7 +136,9 @@ function PostCard({
             )}
           </div>
         </div>
-        <section className="post-content">{postContent}</section>
+        <Link to={`/posts/${_id}`} className="post-content">
+          {postContent}
+        </Link>
         <div className="btn-section-postcard">
           <button
             onClick={

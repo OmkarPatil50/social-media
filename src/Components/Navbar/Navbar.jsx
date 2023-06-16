@@ -1,23 +1,24 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
     <div className="navbar">
       <nav>
-        <p>
+        <Link to="/home">
           {" "}
           <i className="fa-solid fa-house"></i>Home
-        </p>
-        <p>
+        </Link>
+        <Link to="/explore">
           <i className="fa-solid fa-regular fa-rocket"></i>Explore
-        </p>
-        <p>
+        </Link>
+        <Link to="/bookmark">
           {" "}
           <i className="fa-solid fa-bookmark"></i>Bookmark
-        </p>
-        <p>
+        </Link>
+        <Link to="/profile">
           <i className="fa-solid fa-user"></i>Profile
-        </p>
+        </Link>
       </nav>
       <button>Create New Post</button>
       <div className="profile-sub-section">

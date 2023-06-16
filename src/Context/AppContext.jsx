@@ -85,6 +85,10 @@ export const AppContextProvider = ({ children }) => {
         return { ...state, showPostOptions: action.payload };
       }
 
+      case "UPDATE_POST_DETAILS_OBJ": {
+        return { ...state, userPostDetails: action.payload };
+      }
+
       default:
         return state;
     }
@@ -104,6 +108,16 @@ export const AppContextProvider = ({ children }) => {
     userPosts: [],
     userBookmarks: [],
     showPostOptions: false,
+    userPostDetails: {
+      content: "",
+      createdAt: "",
+      id: "",
+      likes: "",
+      updatedAt: "",
+      userFullName: "",
+      username: "",
+      _id: "",
+    },
   };
 
   const [state, dispatch] = useReducer(reducerFunction, initialValue);
