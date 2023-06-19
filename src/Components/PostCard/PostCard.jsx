@@ -104,7 +104,7 @@ function PostCard({
       </div>
       <div className="post-main-section">
         <div className="name-tab">
-          <h2>{userFullName}</h2>
+          <Link to={`/users/${_id}`}>{userFullName}</Link>
           <p>{username}</p>
           <p>{createdAt.slice(10)}</p>
           <div className="post-options">

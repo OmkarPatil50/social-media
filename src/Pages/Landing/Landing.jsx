@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AppContext } from "../..";
+import "./Lander.css";
 
 function Landing() {
   const { state, dispatch } = useContext(AppContext);
@@ -19,7 +20,7 @@ function Landing() {
       const jsonResponse = await response.json();
 
       localStorage.setItem("encodedToken", jsonResponse.encodedToken);
-      
+
       if (jsonResponse.encodedToken) {
       }
     } catch (err) {
@@ -30,25 +31,30 @@ function Landing() {
   return (
     <div className="landing-page">
       <section className="app-info">
-        <h1>Sociocourt</h1>
-        <div className="app-quotes">
-          <p>
-            <span>Follow</span>PEOPLE AROUND THE GLOBE
+        <h1 className="app-heading">
+          <span>Socio</span>court
+        </h1>
+        <div className="app-quotes-container">
+          <p className="app-quote">
+            <span className="app-quotes-span">Follow</span>PEOPLE AROUND THE
+            GLOBE
           </p>
-          <p>
-            <span>CONNECT</span> WITH YOUR FRIENDS
+          <p className="app-quote">
+            <span className="app-quotes-span">CONNECT</span> WITH YOUR FRIENDS
           </p>
-          <p>
-            <span>SHARE</span> WHAT YOU ARE THINKING
+          <p className="app-quote">
+            <span className="app-quotes-span">SHARE</span> WHAT YOU ARE THINKING
           </p>
         </div>
-        <button className="join-now">Join Now</button>
-        <button className="already-have-account">
-          Already have an account?
+        <button className="join-now-btn">Join Now</button>
+        <button className="already-have-account-btn">
+          Already have an account? <i className="fa-solid fa-chevron-right"></i>
         </button>
       </section>
       <section className="sign-up-section">
-        <h2>Signup</h2>
+        <h2 className="section-header">
+          <span>Sign</span>up
+        </h2>
         <div className="sign-up-details">
           <div className="name-section">
             <label htmlFor="first-name">First Name</label>
@@ -124,7 +130,10 @@ function Landing() {
           <label htmlFor="terms-and-conditions">
             <input
               type="checkbox"
+              value={state.isSignupConditionsChecked}
+              required
               name="terms-and-conditions"
+              className="terms-and-conditions-checkbox"
               onChange={(event) =>
                 dispatch({
                   type: "UPDATE_SIGNUP_CONDITIONS_CHECK",
@@ -134,10 +143,11 @@ function Landing() {
             />
             I accept all Terms & Conditions
           </label>
-          <button type="submit" onClick={getSignupData}>
+          <button type="submit" onClick={getSignupData} className="sign-up-btn">
             Create New Account
           </button>
           <button
+            className="sign-up-btn"
             onClick={() =>
               dispatch({
                 type: "UPDATE_USER_SIGNUP_DATA",

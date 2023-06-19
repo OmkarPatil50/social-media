@@ -1,0 +1,163 @@
+:root {
+  --primary-color: #ff3b30;
+  --secondary-color: #fff6ea;
+  --action-color: #3b82f6;
+  --grey-color: #9a9a9a;
+  --black-color: #282828;
+  --white-color: #fff;
+  --lynx-white-color: #f7f7f7;
+  --violet-color: #5348c7;
+  --lynx-gray-color: #c5c5c5;
+  --font: "Open Sans", sans-serif;
+  --xxl-size: 4rem;
+  --xl-size: 2.5rem;
+  --l-size: 2rem;
+  --m-size: 1.5rem;
+  --s-size: 1rem;
+  --xs-size: 0.5rem;
+  --xl-font: 3rem;
+  --light-weight: 300;
+  --regular-weight: 400;
+  --semibold-weight: 600;
+  --bold-weight: 700;
+  --black-weight: 900;
+}
+
+.landing-page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------app-info-------------------------------------------------- */
+
+.app-info {
+  width: 100%;
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.app-heading {
+  font-size: var(--xxl-size);
+  align-self: center;
+}
+
+.app-heading span {
+  color: var(--primary-color);
+}
+
+.app-quotes-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.app-quote {
+  font-size: var(--s-size);
+}
+
+.app-quotes-span {
+  color: var(--grey-color);
+  font-size: var(--l-size);
+  font-weight: var(--bold-weight);
+}
+
+.join-now-btn {
+  width: 400px;
+  align-self: center;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: var(--secondary-color);
+  font-size: var(--s-size);
+  cursor: pointer;
+}
+
+.join-now-btn:hover {
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+  transition-duration: 0.5s;
+}
+
+.already-have-account-btn {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: var(--s-size);
+  cursor: pointer;
+}
+
+/* ----------------------------------------------signup----------------------------------------- */
+
+.sign-up-section {
+  box-sizing: border-box;
+  padding: 0 20px 40px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.section-header {
+  font-size: var(--l-size);
+  align-self: center;
+}
+
+.section-header span {
+  color: var(--primary-color);
+}
+
+.sign-up-details {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.name-section {
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.name-section input {
+  width: 100%;
+  padding: 0;
+}
+
+.sign-up-details label {
+  font-size: var(--s-size);
+  padding: 5px;
+}
+
+.sign-up-details input {
+  font-size: var(--s-size);
+  color: var(--primary-color);
+  padding: 5px 10px;
+  margin: 0 10px;
+}
+
+.terms-and-conditions-checkbox:checked {
+  background-color: var(--primary-color);
+}
+
+.sign-up-btn {
+  background-color: var(--primary-color);
+  border: none;
+  margin: 10px 30px 0;
+  padding: 10px;
+  color: var(--secondary-color);
+  font-size: var(--s-size);
+  cursor: pointer;
+}
+
+.sign-up-btn:hover {
+  opacity: 0.7;
+}

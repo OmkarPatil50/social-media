@@ -13,7 +13,6 @@ function PostDetails() {
     try {
       const response = await fetch(`/api/posts/${postID}`);
       const jsonResponse = await response.json();
-      console.log(jsonResponse);
       if (jsonResponse.post) {
         dispatch({
           type: "UPDATE_POST_DETAILS_OBJ",
