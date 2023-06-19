@@ -104,6 +104,7 @@ export const AppContextProvider = ({ children }) => {
       userConfirmPassword: "",
       isSignupConditionsChecked: false,
     },
+    userData: [],
     userLoggedIn: false,
     userPosts: [],
     userBookmarks: [],

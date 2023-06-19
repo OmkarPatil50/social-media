@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { AppContext } from "../..";
 import "./Lander.css";
+import { useNavigate } from "react-router-dom";
 
 function Landing() {
   const { state, dispatch } = useContext(AppContext);
+  const navigate = useNavigate();
 
   const getSignupData = async () => {
     try {
@@ -22,6 +24,11 @@ function Landing() {
       localStorage.setItem("encodedToken", jsonResponse.encodedToken);
 
       if (jsonResponse.encodedToken) {
+        dispatch({
+          type: "UPDATE_USER_DATA",
+          payload: jsonResponse.createdUser,
+        });
+        navigate("/home");
       }
     } catch (err) {
       console.error(err);
@@ -130,7 +137,7 @@ function Landing() {
           <label htmlFor="terms-and-conditions">
             <input
               type="checkbox"
-              value={state.isSignupConditionsChecked}
+              checked={state.isSignupConditionsChecked}
               required
               name="terms-and-conditions"
               className="terms-and-conditions-checkbox"
