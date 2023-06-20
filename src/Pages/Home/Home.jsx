@@ -3,6 +3,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import { AppContext } from "../..";
 import PostCard from "../../Components/PostCard/PostCard";
 import Footer from "../../Components/Footer/Footer";
+import "./Home.css";
 
 function Home() {
   const { state, dispatch } = useContext(AppContext);

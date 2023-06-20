@@ -13,6 +13,9 @@ import Mockman from "mockman-js";
 function App() {
   return (
     <div className="App">
+      <h1 className="app-heading-small">
+        <span>Socio</span>court
+      </h1>
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/home' element={<Home />} />

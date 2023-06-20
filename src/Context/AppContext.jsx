@@ -89,6 +89,10 @@ export const AppContextProvider = ({ children }) => {
         return { ...state, userPostDetails: action.payload };
       }
 
+      case "UPDATE_USER_DATA": {
+        return { ...state, userData: action.payload };
+      }
+
       default:
         return state;
     }

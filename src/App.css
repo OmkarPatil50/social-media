@@ -1,0 +1,15 @@
+.app-heading-small {
+  width: 100vw;
+  padding: 22.5px;
+  position: fixed;
+  font-size: var(--l-size);
+  align-self: center;
+  z-index: 1;
+  overflow: hidden;
+  background-color: white;
+  margin: 0;
+}
+
+.app-heading-small span {
+  color: var(--primary-color);
+}

@@ -1,0 +1,89 @@
+:root {
+  --primary-color: #ff3b30;
+  --secondary-color: #fff6ea;
+  --action-color: #3b82f6;
+  --grey-color: #9a9a9a;
+  --black-color: #282828;
+  --white-color: #fff;
+  --lynx-white-color: #f7f7f7;
+  --violet-color: #5348c7;
+  --lynx-gray-color: #c5c5c5;
+  --font: "Open Sans", sans-serif;
+  --xxl-size: 4rem;
+  --xl-size: 2.5rem;
+  --l-size: 2rem;
+  --m-size: 1.5rem;
+  --s-size: 1rem;
+  --xs-size: 0.5rem;
+  --xl-font: 3rem;
+  --light-weight: 300;
+  --regular-weight: 400;
+  --semibold-weight: 600;
+  --bold-weight: 700;
+  --black-weight: 900;
+}
+
+.navbar-section {
+  height: 100vh;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: fixed;
+  left: 0;
+  top: 87.5px;
+  background-color: var(--lynx-white-color);
+  font-family: var(--font);
+}
+
+.navigation-section nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0px 50px 20px;
+}
+
+.nav-items {
+  width: 100%;
+  margin: 10px;
+  text-decoration: none;
+  color: var(--black-color);
+}
+
+.nav-items i {
+  padding-right: 10px;
+}
+
+.btn-new-post {
+  width: 70%;
+  padding: 12.5px;
+  margin: 0 40px;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  font-size: var(--s-size);
+}
+
+.profile-sub-section {
+  display: flex;
+  margin: 50px;
+}
+
+.profile-pic {
+  margin: 10px;
+  padding: 20px;
+  background-color: var(--grey-color);
+  border-radius: 50%;
+}
+
+.nav-user-profile-details {
+  line-height: 0.4;
+}
+
+.nav-user-full-name {
+  font-size: var(--s-size);
+}
+
+.nav-username {
+  color: var(--grey-color);
+}
