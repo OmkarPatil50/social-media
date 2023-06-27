@@ -29,7 +29,7 @@ function Navbar() {
         <button className="btn-new-post">Create New Post</button>
       </div>
 
-      <div className="profile-sub-section">
+      <Link to={`/users/${state.userData._id}`} className="profile-sub-section">
         <label htmlFor="profile-pic">
           <img src="/" alt="" className="profile-pic" />
         </label>
@@ -37,7 +37,7 @@ function Navbar() {
           <h2 className="nav-user-full-name">{`${state.userData.firstName} ${state.userData.lastName}`}</h2>
           <p className="nav-username">@{state.userData.username}</p>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }

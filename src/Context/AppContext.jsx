@@ -93,6 +93,57 @@ export const AppContextProvider = ({ children }) => {
         return { ...state, userData: action.payload };
       }
 
+      case "UPDATE_PROFILE_DETAILS_OBJ": {
+        return { ...state, userProfileDetails: action.payload };
+      }
+
+      case "UPDATE_SPECIFIED_USER_POSTS": {
+        return { ...state, specifiedUserPosts: action.payload };
+      }
+
+      case "SORT_BY_DATE_LATEST": {
+        return {
+          ...state,
+          userPosts: [...state.userPosts].sort((a, b) => {
+            const dateA = new Date(a.createdAt);
+            const dateB = new Date(b.createdAt);
+            if (dateA > dateB) {
+              return -1;
+            } else if (dateB > dateA) {
+              return 1;
+            }
+          }),
+        };
+      }
+
+      case "SORT_BY_DATE_OLDEST": {
+        return {
+          ...state,
+          userPosts: [...state.userPosts].sort((a, b) => {
+            const dateA = new Date(a.createdAt);
+            const dateB = new Date(b.createdAt);
+            if (dateA > dateB) {
+              return 1;
+            } else if (dateB > dateA) {
+              return -1;
+            }
+          }),
+        };
+      }
+
+      case "SORT_BY_TRENDING": {
+        return {
+          ...state,
+          userPosts: [...state.userPosts].sort((a, b) => {
+            if (b.likes.likeCount > a.likes.likeCount) {
+              return 1;
+            } else if (a.likes.likeCount > b.likes.likeCount) {
+              return -1;
+            }
+          }),
+        };
+      }
+
       default:
         return state;
     }
@@ -111,6 +162,7 @@ export const AppContextProvider = ({ children }) => {
     userData: [],
     userLoggedIn: false,
     userPosts: [],
+    specifiedUserPosts: [],
     userBookmarks: [],
     showPostOptions: false,
     userPostDetails: {
@@ -123,6 +175,7 @@ export const AppContextProvider = ({ children }) => {
       username: "",
       _id: "",
     },
+    userProfileDetails: {},
   };
 
   const [state, dispatch] = useReducer(reducerFunction, initialValue);

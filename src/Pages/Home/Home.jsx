@@ -8,6 +8,8 @@ import "./Home.css";
 function Home() {
   const { state, dispatch } = useContext(AppContext);
   const [postContent, setPostContent] = useState("");
+  const [showSortItems, setShowSortItems] = useState(false);
+  const [homeHeading, setHomeHeading] = useState("Oldest Posts");
 
   const getPostData = async () => {
     try {
@@ -16,6 +18,7 @@ function Home() {
 
       if (jsonResponse.posts) {
         dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
+        dispatch({ type: "UPDATE_PROFILE_DETAILS_OBJ", payload: {} });
       }
     } catch (err) {
       console.error(err);
@@ -52,6 +55,9 @@ function Home() {
       <Navbar />
       <section className="home-page-section">
         <div className="section-new-post">
+          <label htmlFor="profile-pic">
+            <img src="/" alt="" className="profile-pic" />
+          </label>
           <label htmlFor="new-post">
             <input
               type="text"
@@ -64,7 +70,44 @@ function Home() {
             Post
           </button>
         </div>
-        <h1>Latest Posts</h1>
+        <h1>{homeHeading}</h1>
+        <button
+          onClick={() => {
+            setShowSortItems(!showSortItems);
+          }}
+        >
+          <i className="fa-solid fa-sort"></i>
+        </button>
+        {showSortItems ? (
+          <div>
+            <button
+              onClick={() => {
+                setHomeHeading("Latest Posts");
+                dispatch({ type: "SORT_BY_DATE_LATEST" });
+              }}
+            >
+              Latest
+            </button>
+            <button
+              onClick={() => {
+                setHomeHeading("Oldest Posts");
+                dispatch({ type: "SORT_BY_DATE_OLDEST" });
+              }}
+            >
+              Oldest
+            </button>
+            <button
+              onClick={() => {
+                setHomeHeading("Trending Posts");
+                dispatch({ type: "SORT_BY_TRENDING" });
+              }}
+            >
+              Trending
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
         <section className="posts-section">
           <ul>
             {state.userPosts.map((post) => {
@@ -79,15 +122,8 @@ function Home() {
                 _id,
               } = post;
               return (
-                <li key={_id}>
-                  <PostCard
-                    postContent={content}
-                    likesObj={likes}
-                    username={username}
-                    _id={_id}
-                    userFullName={userFullName}
-                    createdAt={createdAt}
-                  />
+                <li key={id}>
+                  <PostCard post={post} />
                 </li>
               );
             })}

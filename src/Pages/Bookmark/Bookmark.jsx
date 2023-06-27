@@ -13,6 +13,7 @@ function Bookmark() {
         headers: { authorization: localStorage.getItem("encodedToken") },
       });
       const jsonResponse = await response.json();
+      console.log(jsonResponse.bookmarks);
       if (jsonResponse.bookmarks) {
         dispatch({ type: "UPDATE_BOOKMARKS", payload: jsonResponse.bookmarks });
       }
@@ -41,14 +42,7 @@ function Bookmark() {
           } = post;
           return (
             <li key={_id}>
-              <PostCard
-                postContent={content}
-                likesObj={likes}
-                username={username}
-                _id={_id}
-                userFullName={userFullName}
-                createdAt={createdAt}
-              />
+              <PostCard post={post} />
             </li>
           );
         })}

@@ -7,7 +7,7 @@ import { formatDate } from "../utils/authUtils";
 
 export const users = [
   {
-    _id: uuid(),
+    _id: 1,
     firstName: "Adarsh",
     lastName: "Balika",
     username: "adarshbalika",
@@ -16,84 +16,39 @@ export const users = [
     updatedAt: formatDate(),
   },
   {
-    _id: uuid(),
-    firstName: "Noah",
-    lastName: "Martin",
-    username: "noahmartin",
-    password: "noahMartin123",
-    createdAt: formatDate(),
-    updatedAt: formatDate()
+    _id: 2,
+    firstName: 'John',
+    lastName: 'Doe',
+    username: 'johndoe',
+    password: 'johnDoe456',
+    createdAt: '2023-06-21 12:34:56',
+    updatedAt: '2023-06-21 12:34:56',
   },
   {
-    _id: uuid(),
-    firstName: "Mia",
-    lastName: "Clark",
-    username: "miaclark",
-    password: "miaClark123",
-    createdAt: formatDate(),
-    updatedAt: formatDate()
+    _id: 3,
+    firstName: 'Jane',
+    lastName: 'Smith',
+    username: 'janesmith',
+    password: 'janeSmith789',
+    createdAt: '2023-06-21 12:34:56',
+    updatedAt: '2023-06-21 12:34:56',
   },
   {
-    _id: uuid(),
-    firstName: "Liam",
-    lastName: "Harris",
-    username: "liamharris",
-    password: "liamHarris123",
-    createdAt: formatDate(),
-    updatedAt: formatDate()
+    _id: 4,
+    firstName: 'Alice',
+    lastName: 'Johnson',
+    username: 'alicejohnson',
+    password: 'alice123',
+    createdAt: '2023-06-21 12:34:56',
+    updatedAt: '2023-06-21 12:34:56',
   },
   {
-    _id: uuid(),
-    firstName: "Ava",
-    lastName: "Lee",
-    username: "avalee",
-    password: "avaLee123",
-    createdAt: formatDate(),
-    updatedAt: formatDate()
+    _id: 5,
+    firstName: 'Bob',
+    lastName: 'Williams',
+    username: 'bobwilliams',
+    password: 'bob456',
+    createdAt: '2023-06-21 12:34:56',
+    updatedAt: '2023-06-21 12:34:56',
   },
-  {
-    _id: uuid(),
-    firstName: "Oliver",
-    lastName: "Wilson",
-    username: "oliverwilson",
-    password: "oliverWilson123",
-    createdAt: formatDate(),
-    updatedAt: formatDate()
-  },
-  {
-    _id: uuid(),
-    firstName: "Sophia",
-    lastName: "Brown",
-    username: "sophiabrown",
-    password: "sophiaBrown123",
-    createdAt: formatDate(),
-    updatedAt: formatDate()
-  },
-  {
-    _id: uuid(),
-    firstName: "Michael",
-    lastName: "Johnson",
-    username: "michaeljohnson",
-    password: "michaelJohnson123",
-    createdAt: formatDate(),
-    updatedAt: formatDate()
-  },
-  {
-    _id: uuid(),
-    firstName: "Emma",
-    lastName: "Smith",
-    username: "emmasmith",
-    password: "emmaSmith123",
-    createdAt: formatDate(),
-    updatedAt: formatDate()
-  },
-  {
-    _id: uuid(),
-    firstName: "John",
-    lastName: "Doe",
-    username: "johndoe",
-    password: "johnDoe123",
-    createdAt: formatDate(),
-    updatedAt: formatDate()
-  }
 ];

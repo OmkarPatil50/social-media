@@ -1,10 +1,16 @@
 import React from "react";
+import "./Footer.css";
 
 function Footer() {
   return (
     <div className="footer-section">
       <label htmlFor="search-bar">
-        <input type="text" placeholder="Search Posts,People,Anything" />
+        <i className="fa-solid fa-magnifying-glass mag-"></i>
+        <input
+          type="text"
+          placeholder="Search Posts,People,Anything"
+          className="footer-search-bar"
+        />
       </label>
       <div className="to-follow-list">
         <div className="to-follow-header">

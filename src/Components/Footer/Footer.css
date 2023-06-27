@@ -23,15 +23,27 @@
   --black-weight: 900;
 }
 
-.home-page {
-  display: flex;
-  flex-wrap: wrap;
-  position: relative;
+.footer-section {
+  margin: 20px;
+  position: fixed;
   top: 87.5px;
-  left: 300px;
-  background-color: var(--lynx-white-color);
+  right: 0;
 }
 
-.home-page-section {
-  margin: 30px;
+.footer-search-bar {
+  width: 200px;
+  padding: 10px;
+}
+
+.mag-glass {
+  padding: 10px;
+}
+
+.to-follow-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.to-follow-header {
+  display: flex;
 }

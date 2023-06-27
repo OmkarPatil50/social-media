@@ -137,7 +137,7 @@ function Landing() {
           <label htmlFor="terms-and-conditions">
             <input
               type="checkbox"
-              checked={state.isSignupConditionsChecked}
+              checked={state.userSignupData.isSignupConditionsChecked}
               required
               name="terms-and-conditions"
               className="terms-and-conditions-checkbox"

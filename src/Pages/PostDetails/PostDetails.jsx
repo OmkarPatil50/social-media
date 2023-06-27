@@ -41,14 +41,7 @@ function PostDetails() {
   return (
     <div className="post-details-page">
       <Navbar />
-      <PostCard
-        postContent={content}
-        likesObj={likes}
-        username={username}
-        _id={_id}
-        userFullName={userFullName}
-        createdAt={createdAt}
-      />
+      <PostCard post={state.userPostDetails} />
       <Footer />
     </div>
   );
