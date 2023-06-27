@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./Footer.css";
+import { AppContext } from "../..";
 
 function Footer() {
+  const { state, dispatch } = useContext(AppContext);
+
+  const getAllUsers = async () => {
+    try {
+      const response = await fetch("/api/users");
+      const jsonResponse = await response.json();
+      if (jsonResponse.users) {
+        dispatch({ type: "UPDATE_ALL_USERS", payload: jsonResponse.users });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    getAllUsers();
+  }, [state.allUsers]);
+
   return (
     <div className="footer-section">
       <label htmlFor="search-bar">

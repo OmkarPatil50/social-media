@@ -144,6 +144,10 @@ export const AppContextProvider = ({ children }) => {
         };
       }
 
+      case "UPDATE_ALL_USERS": {
+        return { ...state, allusers: action.payload };
+      }
+
       default:
         return state;
     }
@@ -159,6 +163,7 @@ export const AppContextProvider = ({ children }) => {
       userConfirmPassword: "",
       isSignupConditionsChecked: false,
     },
+    allusers: [],
     userData: [],
     userLoggedIn: false,
     userPosts: [],

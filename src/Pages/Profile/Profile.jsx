@@ -27,7 +27,7 @@ function Profile() {
 
   useEffect(() => {
     getUserProfileDetails();
-  }, []);
+  }, [state.userProfileDetails]);
 
   const getPostsFromUser = async () => {
     try {
@@ -50,6 +50,43 @@ function Profile() {
     getPostsFromUser();
   }, [state.userProfileDetails, state.userPosts]);
 
+  const followUserHandler = async () => {
+    try {
+      const response = await fetch(
+        `/api/users/follow/${state.userProfileDetails._id}`,
+        {
+          method: "POST",
+          headers: { authorization: localStorage.getItem("encodedToken") },
+        }
+      );
+      const jsonResponse = await response.json();
+      if (jsonResponse.user && jsonResponse.followUser) {
+        dispatch({ type: "UPDATE_USER_DATA", payload: jsonResponse.user });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const unFollowUserHandler = async () => {
+    try {
+      const response = await fetch(
+        `/api/users/unfollow/${state.userProfileDetails._id}`,
+        {
+          method: "POST",
+          headers: { authorization: localStorage.getItem("encodedToken") },
+        }
+      );
+      const jsonResponse = await response.json();
+
+      if (jsonResponse.user && jsonResponse.followUser) {
+        dispatch({ type: "UPDATE_USER_DATA", payload: jsonResponse.user });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="user-profile-page">
       <Navbar />
@@ -61,7 +98,15 @@ function Profile() {
           {`${state.userProfileDetails?.firstName} ${state.userProfileDetails?.lastName}`}
         </h1>
         <p>@{state.userProfileDetails.username}</p>
-        <button>
+        <button
+          onClick={() => {
+            state?.userData?.following?.some(
+              (user) => user._id === state.userProfileDetails._id
+            )
+              ? unFollowUserHandler()
+              : followUserHandler();
+          }}
+        >
           {state?.userData?.following?.some(
             (user) => user._id === state.userProfileDetails._id
           )
@@ -69,8 +114,18 @@ function Profile() {
             : "Follow"}
         </button>
         <div className="following-section">
-          <p>{state.followers ? state.followers : 0} Followers</p>
-          <p>{state.following ? state.following : 0} Following</p>
+          <p>
+            {state.userProfileDetails.followers
+              ? state.userProfileDetails.followers.length
+              : 0}{" "}
+            Followers
+          </p>
+          <p>
+            {state.userProfileDetails.following
+              ? state.userProfileDetails.following.length
+              : 0}{" "}
+            Following
+          </p>
         </div>
       </div>
       <div className="user-posts-section">
