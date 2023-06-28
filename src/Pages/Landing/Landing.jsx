@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AppContext } from "../..";
 import "./Lander.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Landing() {
   const { state, dispatch } = useContext(AppContext);
@@ -24,11 +24,12 @@ function Landing() {
       localStorage.setItem("encodedToken", jsonResponse.encodedToken);
 
       if (jsonResponse.encodedToken) {
+        dispatch({ type: "UPDATE_USER_LOGGEDIN", payload: true });
         dispatch({
           type: "UPDATE_USER_DATA",
           payload: jsonResponse.createdUser,
         });
-        navigate("/home");
+        navigate("/");
       }
     } catch (err) {
       console.error(err);
@@ -55,7 +56,10 @@ function Landing() {
         </div>
         <button className="join-now-btn">Join Now</button>
         <button className="already-have-account-btn">
-          Already have an account? <i className="fa-solid fa-chevron-right"></i>
+          <Link to="/login">
+            Already have an account?{" "}
+            <i className="fa-solid fa-chevron-right"></i>
+          </Link>
         </button>
       </section>
       <section className="sign-up-section">

@@ -3,7 +3,8 @@ import { AppContext } from "../..";
 import { Link } from "react-router-dom";
 
 function PostCard({ post }) {
-  const { content, likes, username, _id, userFullName, createdAt } = post;
+  const { content, likes, username, _id, firstName, lastName, createdAt } =
+    post;
   const { state, dispatch } = useContext(AppContext);
 
   const [showEditWindow, setShowEditWindow] = useState(false);
@@ -125,7 +126,7 @@ function PostCard({ post }) {
       </div>
       <div className="post-main-section">
         <div className="name-tab">
-          <Link to={`/users/${_id}`}>{userFullName}</Link>
+          <Link to={`/users/${_id}`}>{`${firstName} ${lastName}`}</Link>
           <p>{username}</p>
           <p>{createdAt}</p>
           <div className="post-options">

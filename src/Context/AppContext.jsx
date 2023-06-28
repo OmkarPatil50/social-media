@@ -176,7 +176,6 @@ export const AppContextProvider = ({ children }) => {
       id: "",
       likes: "",
       updatedAt: "",
-      userFullName: "",
       username: "",
       _id: "",
     },

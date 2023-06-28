@@ -9,6 +9,7 @@ import PostDetails from './Pages/PostDetails/PostDetails';
 import Profile from './Pages/Profile/Profile';
 import Explore from './Pages/Explore/Explore';
 import CreatePost from './Pages/CreatePost/CreatePost';
+import RequireAuth from './Pages/Auth/RequireAuth';
 
 function App() {
   return (
@@ -17,14 +18,24 @@ function App() {
         <span>Socio</span>court
       </h1>
       <Routes>
-        <Route path='/' element={<Landing />} />
-        <Route path='/home' element={<Home />} />
+        <Route path='/signup' element={<Landing />} />
+        <Route path='/' element={
+          <RequireAuth>
+            <Home />
+          </RequireAuth>
+        } />
         <Route path='/login' element={<Login />} />
-        <Route path='/bookmark' element={<Bookmark />} />
-        <Route path='/posts/:postID' element={<PostDetails />} />
-        <Route path='/users/:userId' element={<Profile />} />
-        <Route path='/explore' element={<Explore />} />
-        <Route path='/createpost' element={<CreatePost />} />
+        <Route path='/bookmark' element={
+          <RequireAuth>
+            <Bookmark />
+          </RequireAuth>
+        } />
+        <Route path='/posts/:postID' element={<RequireAuth>
+          <PostDetails />
+        </RequireAuth>} />
+        <Route path='/users/:userId' element={<RequireAuth><Profile /></RequireAuth>} />
+        <Route path='/explore' element={<RequireAuth><Explore /></RequireAuth>} />
+        <Route path='/createpost' element={<RequireAuth><CreatePost /></RequireAuth>} />
 
 
 

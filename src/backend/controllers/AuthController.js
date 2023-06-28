@@ -38,7 +38,6 @@ export const signupHandler = function (schema, request) {
       password,
       firstName,
       lastName,
-      userFullName: `${firstName} ${lastName}`,
       ...rest,
       followers: [],
       following: [],
