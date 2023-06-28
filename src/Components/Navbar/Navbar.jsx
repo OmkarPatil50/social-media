@@ -11,7 +11,7 @@ function Navbar() {
     <div className="navbar-section">
       <div className="navigation-section">
         <nav>
-          <Link className="nav-items" to="/home">
+          <Link className="nav-items" to="/">
             {" "}
             <i className="fa-solid fa-house"></i>Home
           </Link>
@@ -32,9 +32,21 @@ function Navbar() {
       </div>
 
       <Link to={`/users/${state.userData._id}`} className="profile-sub-section">
-        <label htmlFor="profile-pic">
-          <img src="/" alt="" className="profile-pic" />
-        </label>
+        <div
+          className="avatar-image-div-nav"
+          style={{
+            backgroundColor: state.userData.image ? "" : "gray",
+          }}
+        >
+          <img
+            src={state.userData?.image}
+            alt=""
+            className="avatar-image-nav"
+            onError={(e) => (e.target.style.display = "none")}
+
+          />
+        </div>
+
         <div className="nav-user-profile-details">
           <h2 className="nav-user-full-name">{`${state.userData.firstName} ${state.userData.lastName}`}</h2>
           <p className="nav-username">@{state.userData.username}</p>

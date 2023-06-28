@@ -69,10 +69,20 @@
   margin: 50px;
 }
 
-.profile-pic {
+.avatar-image-nav {
+  width: 40px;
+  height: 40px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: none;
+  border-radius: 50%;
+}
+
+.avatar-image-div-nav {
   margin: 10px;
-  padding: 20px;
-  background-color: var(--grey-color);
+
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
 }
 

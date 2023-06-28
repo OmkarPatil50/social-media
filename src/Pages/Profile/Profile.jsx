@@ -111,7 +111,6 @@ function Profile() {
         }),
       });
       const jsonResponse = await response.json();
-      console.log(jsonResponse);
       if (jsonResponse.user) {
         dispatch({ type: "UPDATE_USER_DATA", payload: jsonResponse.user });
       }

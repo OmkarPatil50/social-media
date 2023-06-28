@@ -9,27 +9,34 @@ function Landing() {
 
   const getSignupData = async () => {
     try {
-      const response = await fetch("/api/auth/signup", {
-        method: "POST",
-        body: JSON.stringify({
-          firstName: state.userSignupData.firstName,
-          lastName: state.userSignupData.lastName,
-          username: state.userSignupData.userName,
-          password: state.userSignupData.userPassword,
-        }),
-      });
-
-      const jsonResponse = await response.json();
-
-      localStorage.setItem("encodedToken", jsonResponse.encodedToken);
-
-      if (jsonResponse.encodedToken) {
-        dispatch({ type: "UPDATE_USER_LOGGEDIN", payload: true });
-        dispatch({
-          type: "UPDATE_USER_DATA",
-          payload: jsonResponse.createdUser,
+      if (
+        state.userSignupData.firstName.length &&
+        state.userSignupData.lastName.length &&
+        state.userSignupData.userName.length &&
+        state.userSignupData.userPassword.length
+      ) {
+        const response = await fetch("/api/auth/signup", {
+          method: "POST",
+          body: JSON.stringify({
+            firstName: state.userSignupData.firstName,
+            lastName: state.userSignupData.lastName,
+            username: state.userSignupData.userName,
+            password: state.userSignupData.userPassword,
+          }),
         });
-        navigate("/");
+
+        const jsonResponse = await response.json();
+
+        localStorage.setItem("encodedToken", jsonResponse.encodedToken);
+
+        if (jsonResponse.encodedToken) {
+          dispatch({ type: "UPDATE_USER_LOGGEDIN", payload: true });
+          dispatch({
+            type: "UPDATE_USER_DATA",
+            payload: jsonResponse.createdUser,
+          });
+          navigate("/");
+        }
       }
     } catch (err) {
       console.error(err);
@@ -158,6 +165,7 @@ function Landing() {
             Create New Account
           </button>
           <button
+            type="submit"
             className="sign-up-btn"
             onClick={() =>
               dispatch({

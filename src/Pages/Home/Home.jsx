@@ -48,7 +48,7 @@ function Home() {
 
   useEffect(() => {
     getPostData();
-  }, []);
+  }, [state.userData]);
 
   return (
     <div className="home-page">

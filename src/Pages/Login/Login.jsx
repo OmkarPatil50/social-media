@@ -12,24 +12,26 @@ function Login() {
 
   const getLoginDetails = async () => {
     try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-      });
-
-      const jsonResponse = await response.json();
-      localStorage.setItem("encodedToken", jsonResponse.encodedToken);
-
-      if (jsonResponse.encodedToken) {
-        dispatch({ type: "UPDATE_USER_LOGGEDIN", payload: true });
-        dispatch({
-          type: "UPDATE_USER_DATA",
-          payload: jsonResponse.foundUser,
+      if (username.length && password.length) {
+        const response = await fetch("/api/auth/login", {
+          method: "POST",
+          body: JSON.stringify({
+            username,
+            password,
+          }),
         });
-        navigate("/");
+
+        const jsonResponse = await response.json();
+        localStorage.setItem("encodedToken", jsonResponse.encodedToken);
+
+        if (jsonResponse.encodedToken) {
+          dispatch({ type: "UPDATE_USER_LOGGEDIN", payload: true });
+          dispatch({
+            type: "UPDATE_USER_DATA",
+            payload: jsonResponse.foundUser,
+          });
+          navigate("/");
+        }
       }
     } catch (err) {
       console.error(err);

@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import Landing from './Pages/Landing/Landing';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
@@ -10,13 +10,35 @@ import Profile from './Pages/Profile/Profile';
 import Explore from './Pages/Explore/Explore';
 import CreatePost from './Pages/CreatePost/CreatePost';
 import RequireAuth from './Pages/Auth/RequireAuth';
+import { useContext } from 'react';
+import { AppContext } from '.';
 
 function App() {
+
+  const { state, dispatch } = useContext(AppContext)
+
+  const navigate = useNavigate()
+
+  const logoutHandler = () => {
+    dispatch({ type: "UPDATE_USER_LOGGEDIN", payload: false });
+    dispatch({
+      type: "UPDATE_USER_DATA",
+      payload: {},
+    });
+    navigate("/login");
+  }
+
   return (
     <div className="App">
-      <h1 className="app-heading-small">
-        <span>Socio</span>court
-      </h1>
+      <div className="app-top-bar">
+        <h1 className="app-heading-small">
+          <span>Socio</span>court
+        </h1>
+        <div className="log-out-tag">
+          <i className="fa-solid fa-right-from-bracket" onClick={logoutHandler}></i>
+        </div>
+
+      </div>
       <Routes>
         <Route path='/signup' element={<Landing />} />
         <Route path='/' element={

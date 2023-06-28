@@ -1,15 +1,32 @@
-.app-heading-small {
-  width: 100vw;
-  padding: 22.5px;
+.app-top-bar {
   position: fixed;
-  font-size: var(--l-size);
-  align-self: center;
+  left: 0;
+  right: 0;
   z-index: 1;
-  overflow: hidden;
   background-color: white;
   margin: 0;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.app-heading-small {
+  padding: 0px 30px;
+  font-size: var(--l-size);
 }
 
 .app-heading-small span {
   color: var(--primary-color);
+}
+
+.log-out-tag {
+  font-size: var(--l-size);
+  z-index: 1;
+  padding: 20px 30px;
+  cursor: pointer;
+}
+
+.log-out-tag:hover {
+  color: var(--primary-color);
+  transition-duration: 0.3s;
 }

@@ -78,7 +78,7 @@ function Footer() {
               }, [])
               .map((user) => {
                 return (
-                  <li>
+                  <li key={user._id}>
                     <img src="/" alt="" />
                     <p>{`${user.firstName} ${user.lastName}`}</p>
                     <button

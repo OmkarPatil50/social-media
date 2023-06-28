@@ -121,8 +121,25 @@ function PostCard({ post }) {
 
   return (
     <div className="post-card">
-      <div className="user-profile-pic">
-        <img src="/" alt="" />
+      <div
+        className="avatar-image-div-nav"
+        style={{
+          backgroundColor: post.image ? "" : "gray",
+        }}
+      >
+        <img
+          src={() => {
+            state.allUsers.reduce(
+              ((acc, curr) => {
+                return curr.id == post._id ? (acc = curr.image) : "";
+              },
+              "")
+            );
+          }}
+          alt=""
+          className="avatar-image-nav"
+          onError={(e) => (e.target.style.display = "none")}
+        />
       </div>
       <div className="post-main-section">
         <div className="name-tab">
