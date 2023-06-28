@@ -1,0 +1,12 @@
+.new-post-page {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  top: 87.5px;
+  left: 300px;
+  background-color: var(--lynx-white-color);
+}
+
+.section-new-post {
+  margin: 100px;
+}

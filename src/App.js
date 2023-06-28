@@ -8,7 +8,7 @@ import Bookmark from './Pages/Bookmark/Bookmark';
 import PostDetails from './Pages/PostDetails/PostDetails';
 import Profile from './Pages/Profile/Profile';
 import Explore from './Pages/Explore/Explore';
-import Mockman from "mockman-js";
+import CreatePost from './Pages/CreatePost/CreatePost';
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
         <Route path='/posts/:postID' element={<PostDetails />} />
         <Route path='/users/:userId' element={<Profile />} />
         <Route path='/explore' element={<Explore />} />
-        <Route path='/mockman' element={<Mockman />} />
+        <Route path='/createpost' element={<CreatePost />} />
 
 
 

@@ -26,7 +26,9 @@ function Navbar() {
             <i className="fa-solid fa-user"></i>Profile
           </Link>
         </nav>
-        <button className="btn-new-post">Create New Post</button>
+        <Link to="/createpost" className="btn-new-post">
+          Create New Post
+        </Link>
       </div>
 
       <Link to={`/users/${state.userData._id}`} className="profile-sub-section">
