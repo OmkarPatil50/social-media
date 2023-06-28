@@ -3,6 +3,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import { AppContext } from "../..";
 import PostCard from "../../Components/PostCard/PostCard";
+import "./Bookmark.css";
 
 function Bookmark() {
   const { state, dispatch } = useContext(AppContext);
@@ -28,7 +29,7 @@ function Bookmark() {
   return (
     <div className="bookmark-page">
       <Navbar />
-      <section className="bookmark">
+      <section className="bookmark-posts-section">
         {state.userBookmarks.map((post) => {
           const {
             content,

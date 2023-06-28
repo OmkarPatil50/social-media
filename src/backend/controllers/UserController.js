@@ -57,7 +57,6 @@ export const editUserHandler = function (schema, request) {
       );
     }
     const { userData } = JSON.parse(request.requestBody);
-    console.log(userData && userData.username && userData.username !== user.username);
     if (userData && userData.username && userData.username !== user.username) {
       return new Response(
         404,
@@ -70,7 +69,8 @@ export const editUserHandler = function (schema, request) {
       );
     }
 
-    user = { ...user, ...userData, updatedAt: formatDate() };
+    user = { ...user, userBio: userData.userBio, userPortfolioUrl: userData.userPortfolioUrl, password: userData.password, updatedAt: formatDate() };
+
     this.db.users.update({ _id: user._id }, user);
     return new Response(201, {}, { user });
   } catch (error) {

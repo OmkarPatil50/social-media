@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../..";
 import "./Profile.css";
@@ -9,6 +9,13 @@ import PostCard from "../../Components/PostCard/PostCard";
 function Profile() {
   const { userId } = useParams();
   const { state, dispatch } = useContext(AppContext);
+
+  const [editProfileContainer, setEditProfileContainer] = useState({
+    showContainer: false,
+    bio: "",
+    url: "",
+    password: state.userData.password,
+  });
 
   const getUserProfileDetails = async () => {
     try {
@@ -87,6 +94,29 @@ function Profile() {
     }
   };
 
+  const editUserBioHandler = async () => {
+    try {
+      const response = await fetch("/api/users/edit", {
+        method: "POST",
+        headers: { authorization: localStorage.getItem("encodedToken") },
+        body: JSON.stringify({
+          userData: {
+            userBio: editProfileContainer.bio,
+            userPortfolioUrl: editProfileContainer.url,
+            password: editProfileContainer.password,
+          },
+        }),
+      });
+      const jsonResponse = await response.json();
+      console.log(jsonResponse);
+      if (jsonResponse.user) {
+        dispatch({ type: "UPDATE_USER_DATA", payload: jsonResponse.user });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="user-profile-page">
       <Navbar />
@@ -98,21 +128,53 @@ function Profile() {
           {`${state.userProfileDetails?.firstName} ${state.userProfileDetails?.lastName}`}
         </h1>
         <p>@{state.userProfileDetails.username}</p>
-        <button
-          onClick={() => {
-            state?.userData?.following?.some(
-              (user) => user._id === state.userProfileDetails._id
-            )
-              ? unFollowUserHandler()
-              : followUserHandler();
-          }}
-        >
-          {state?.userData?.following?.some(
-            (user) => user._id === state.userProfileDetails._id
-          )
-            ? "Unfollow"
-            : "Follow"}
-        </button>
+        <p>
+          {state.userProfileDetails.userBio ? (
+            <p>Bio : {state.userProfileDetails.userBio}</p>
+          ) : (
+            ""
+          )}
+        </p>
+        <p>
+          {state.userProfileDetails.userPortfolioUrl ? (
+            <p>Portfolio : {state.userProfileDetails.userPortfolioUrl}</p>
+          ) : (
+            ""
+          )}
+        </p>
+        {state.userProfileDetails._id == state.userData._id ? (
+          <div>
+            <button
+              onClick={() => {
+                setEditProfileContainer(() => ({
+                  ...editProfileContainer,
+                  showContainer: true,
+                }));
+              }}
+            >
+              Edit Profile
+            </button>
+          </div>
+        ) : (
+          <div>
+            <button
+              onClick={() => {
+                state?.userData?.following?.some(
+                  (user) => user._id === state.userProfileDetails._id
+                )
+                  ? unFollowUserHandler()
+                  : followUserHandler();
+              }}
+            >
+              {state?.userData?.following?.some(
+                (user) => user._id === state.userProfileDetails._id
+              )
+                ? "Unfollow"
+                : "Follow"}
+            </button>
+          </div>
+        )}
+
         <div className="following-section">
           <p>
             {state.userProfileDetails.followers
@@ -128,6 +190,74 @@ function Profile() {
           </p>
         </div>
       </div>
+      {state.userProfileDetails._id == state.userData._id &&
+      editProfileContainer.showContainer ? (
+        <div className="edit-profile-container">
+          <label htmlFor="bio">Update Bio : </label>
+          <input
+            type="text"
+            required
+            onChange={(event) => {
+              setEditProfileContainer(() => ({
+                ...editProfileContainer,
+                bio: event.target.value,
+              }));
+            }}
+            defaultValue={state.userProfileDetails?.userBio}
+          />
+          <label htmlFor="portfolio-link">Update Portfolio Link : </label>
+          <input
+            type="email"
+            required
+            onChange={(event) => {
+              setEditProfileContainer(() => ({
+                ...editProfileContainer,
+                url: event.target.value,
+              }));
+            }}
+            defaultValue={state.userProfileDetails?.userPortfolioUrl}
+          />
+
+          <label htmlFor="password">Change Password : </label>
+          <input
+            type="text"
+            required
+            onChange={(event) => {
+              setEditProfileContainer(() => ({
+                ...editProfileContainer,
+                password: event.target.value,
+              }));
+            }}
+            defaultValue={state.userProfileDetails?.password}
+          />
+          <button
+            type="submit"
+            onClick={() => {
+              editUserBioHandler();
+              setEditProfileContainer(() => ({
+                ...editProfileContainer,
+                showContainer: false,
+              }));
+            }}
+          >
+            Save
+          </button>
+          <button
+            type="reset"
+            onClick={() => {
+              setEditProfileContainer(() => ({
+                ...editProfileContainer,
+                showContainer: false,
+              }));
+            }}
+          >
+            Discard
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
+
       <div className="user-posts-section">
         <ul>
           {state.specifiedUserPosts

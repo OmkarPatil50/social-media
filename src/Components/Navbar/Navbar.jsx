@@ -22,7 +22,7 @@ function Navbar() {
             {" "}
             <i className="fa-solid fa-bookmark"></i>Bookmark
           </Link>
-          <Link className="nav-items" to="/profile">
+          <Link className="nav-items" to={`/users/${state.userData._id}`}>
             <i className="fa-solid fa-user"></i>Profile
           </Link>
         </nav>
