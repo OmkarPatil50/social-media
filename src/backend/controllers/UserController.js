@@ -68,7 +68,7 @@ export const editUserHandler = function (schema, request) {
       );
     }
 
-    user = { ...user, userBio: userData.userBio, userPortfolioUrl: userData.userPortfolioUrl, password: userData.password, updatedAt: formatDate() };
+    user = { ...user, userBio: userData.userBio, userPortfolioUrl: userData.userPortfolioUrl, password: userData.password, image: userData.avatar, updatedAt: formatDate() };
 
     this.db.users.update({ _id: user._id }, user);
     return new Response(201, {}, { user });

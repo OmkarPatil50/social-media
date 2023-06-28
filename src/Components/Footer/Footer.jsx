@@ -26,7 +26,7 @@ function Footer() {
       <label htmlFor="search-bar">
         <i className="fa-solid fa-magnifying-glass mag-"></i>
         <input
-          type="text"
+          type="search"
           placeholder="Search Posts,People,Anything"
           className="footer-search-bar"
         />

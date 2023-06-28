@@ -15,6 +15,8 @@ function Profile() {
     bio: "",
     url: "",
     password: state.userData.password,
+    image: null,
+    previewImage: null,
   });
 
   const getUserProfileDetails = async () => {
@@ -104,6 +106,7 @@ function Profile() {
             userBio: editProfileContainer.bio,
             userPortfolioUrl: editProfileContainer.url,
             password: editProfileContainer.password,
+            avatar: editProfileContainer.previewImage,
           },
         }),
       });
@@ -121,8 +124,17 @@ function Profile() {
     <div className="user-profile-page">
       <Navbar />
       <div className="user-profile-main-section">
-        <div className="user-profile-pic">
-          <img src="/" alt="" />
+        <div
+          className="avatar-image-div"
+          style={{
+            backgroundColor: state.userProfileDetails.image ? "" : "gray",
+          }}
+        >
+          <img
+            src={state.userProfileDetails?.image}
+            className="avatar-image"
+            onError={(e) => (e.target.style.display = "none")}
+          />
         </div>
         <h1>
           {`${state.userProfileDetails?.firstName} ${state.userProfileDetails?.lastName}`}
@@ -193,6 +205,46 @@ function Profile() {
       {state.userProfileDetails._id == state.userData._id &&
       editProfileContainer.showContainer ? (
         <div className="edit-profile-container">
+          <label htmlFor="update-avatar"></label>
+          <input
+            type="file"
+            name="img"
+            id="img"
+            accept="image/*"
+            onError={(e) => (e.target.style.display = "none")}
+            onChange={(event) => {
+              setEditProfileContainer(() => ({
+                ...editProfileContainer,
+                image: event.target.files[0],
+              }));
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                setEditProfileContainer(() => ({
+                  ...editProfileContainer,
+                  previewImage: reader.result,
+                }));
+              };
+              reader.readAsDataURL(event.target.files[0]);
+            }}
+          />
+          {editProfileContainer.previewImage && (
+            <div>
+              <img
+                src={editProfileContainer.previewImage}
+                alt="Preview"
+                className="avatar-image"
+              />
+              <i
+                className="fa-solid fa-xmark"
+                onClick={() =>
+                  setEditProfileContainer(() => ({
+                    ...editProfileContainer,
+                    previewImage: null,
+                  }))
+                }
+              ></i>
+            </div>
+          )}
           <label htmlFor="bio">Update Bio : </label>
           <input
             type="text"
