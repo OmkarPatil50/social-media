@@ -20,9 +20,11 @@ export const users = [
     firstName: 'John',
     lastName: 'Doe',
     username: 'johndoe',
-    password: 'johnDoe456',
-    createdAt: '2023-06-21 12:34:56',
-    updatedAt: '2023-06-21 12:34:56',
+    password: 'johnDoe456', createdAt: formatDate(),
+    updatedAt: formatDate(),
+
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
   },
   {
     _id: 3,
@@ -30,8 +32,9 @@ export const users = [
     lastName: 'Smith',
     username: 'janesmith',
     password: 'janeSmith789',
-    createdAt: '2023-06-21 12:34:56',
-    updatedAt: '2023-06-21 12:34:56',
+
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
   },
   {
     _id: 4,
@@ -39,8 +42,9 @@ export const users = [
     lastName: 'Johnson',
     username: 'alicejohnson',
     password: 'alice123',
-    createdAt: '2023-06-21 12:34:56',
-    updatedAt: '2023-06-21 12:34:56',
+
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
   },
   {
     _id: 5,
@@ -48,7 +52,8 @@ export const users = [
     lastName: 'Williams',
     username: 'bobwilliams',
     password: 'bob456',
-    createdAt: '2023-06-21 12:34:56',
-    updatedAt: '2023-06-21 12:34:56',
+
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
   },
 ];
