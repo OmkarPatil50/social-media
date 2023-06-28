@@ -56,9 +56,8 @@ function Login() {
             <span className="app-quotes-span">SHARE</span> WHAT YOU ARE THINKING
           </p>
         </div>
-        <button className="join-now-btn">Join Now</button>
         <button className="already-have-account-btn">
-          <Link to="/signup">
+          <Link to="/signup" className="already-have-account-link">
             Create New Account? <i className="fa-solid fa-chevron-right"></i>
           </Link>
         </button>

@@ -61,9 +61,8 @@ function Landing() {
             <span className="app-quotes-span">SHARE</span> WHAT YOU ARE THINKING
           </p>
         </div>
-        <button className="join-now-btn">Join Now</button>
         <button className="already-have-account-btn">
-          <Link to="/login">
+          <Link to="/login" className="already-have-account-link">
             Already have an account?{" "}
             <i className="fa-solid fa-chevron-right"></i>
           </Link>
