@@ -73,9 +73,10 @@ function Footer() {
                 return curr.followers?.some(
                   (follower) => follower._id === state.userData._id
                 )
-                  ? [...acc]
+                  ? acc
                   : [...acc, curr];
               }, [])
+              .filter((user) => user.id != state.userData.id)
               .map((user) => {
                 return (
                   <li key={user._id}>
