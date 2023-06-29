@@ -41,7 +41,7 @@ function Bookmark() {
             _id,
           } = post;
           return (
-            <li key={_id}>
+            <li key={id}>
               <PostCard post={post} />
             </li>
           );

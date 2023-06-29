@@ -317,13 +317,13 @@ function Profile() {
                   content,
                   likes,
                   username,
-                  _id,
+                  id,
                   userFullName,
                   createdAt,
                 } = post;
 
                 return (
-                  <li key={_id}>
+                  <li key={id}>
                     <PostCard post={post} />
                   </li>
                 );

@@ -24,26 +24,84 @@
 }
 
 .footer-section {
-  margin: 20px;
+  margin: 20px 50px;
   position: fixed;
   top: 87.5px;
   right: 0;
 }
 
 .footer-search-bar {
-  width: 200px;
-  padding: 10px;
+  width: 275px;
+  padding: 10px 10px;
+  margin-left: 10px;
 }
 
 .mag-glass {
+  margin: 5px;
   padding: 10px;
 }
 
 .to-follow-list {
   display: flex;
   flex-direction: column;
+  background-color: var(--white-color);
+  margin-top: 20px;
+  height: 300px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 .to-follow-header {
   display: flex;
+  justify-content: space-around;
+  padding: 5px;
+  font-size: 17px;
+  border-bottom: 1px solid black;
+  font-weight: var(--bold-weight);
+}
+
+.footer-user-list {
+  margin: 0;
+  list-style: none;
+  padding-left: 10px;
+}
+
+.footer-user {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-weight: var(--bold-weight);
+}
+
+.footer-user-head {
+  display: flex;
+  align-items: center;
+  justify-self: start;
+  text-decoration: none;
+}
+.user-name-footer {
+  margin: 0;
+  color: var(--black-color);
+}
+
+.username-footer {
+  color: var(--grey-color);
+  font-size: 14px;
+  margin: 0;
+  font-weight: var(--regular-weight);
+}
+
+.follow-btn-footer {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  padding-right: 15px;
+}
+
+.follow-btn-footer::before {
+  content: "+";
+  margin-right: 5px;
 }

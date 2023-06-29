@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import "./Footer.css";
 import { AppContext } from "../..";
+import { Link } from "react-router-dom";
 
 function Footer() {
   const { state, dispatch } = useContext(AppContext);
@@ -64,44 +65,61 @@ function Footer() {
       </label>
       <div className="to-follow-list">
         <div className="to-follow-header">
-          <p>Who to follow?</p>
-          <p>Show More</p>
-
-          <ul>
-            {state.allUsers
-              ?.reduce((acc, curr) => {
-                return curr.followers?.some(
-                  (follower) => follower._id === state.userData._id
-                )
-                  ? acc
-                  : [...acc, curr];
-              }, [])
-              .filter((user) => user.id != state.userData.id)
-              .map((user) => {
-                return (
-                  <li key={user._id}>
-                    <img src="/" alt="" />
-                    <p>{`${user.firstName} ${user.lastName}`}</p>
-                    <button
-                      onClick={() => {
-                        state?.userData?.following?.some(
-                          (user) => user._id === state.userProfileDetails._id
-                        )
-                          ? unFollowUserHandler(user._id)
-                          : followUserHandler(user._id);
+          <p className="who-to-follow-tag">Who to follow?</p>
+        </div>
+        <ul className="footer-user-list">
+          {state.allUsers
+            ?.reduce((acc, curr) => {
+              return curr.followers?.some(
+                (follower) => follower._id === state.userData._id
+              )
+                ? acc
+                : [...acc, curr];
+            }, [])
+            .filter((user) => user.id != state.userData.id)
+            .map((user) => {
+              return (
+                <li key={user._id} className="footer-user">
+                  <Link to={`/users/${user._id}`} className="footer-user-head">
+                    <div
+                      className="avatar-image-div-nav"
+                      style={{
+                        backgroundColor: "gray",
                       }}
                     >
-                      {user.followers?.some(
-                        (follower) => follower._id === state.userData._id
+                      <img
+                        src={""}
+                        alt=""
+                        className="avatar-image-nav"
+                        onError={(e) => (e.target.style.display = "none")}
+                      />
+                    </div>
+                    <div>
+                      <p className="user-name-footer">{`${user.firstName} ${user.lastName}`}</p>
+                      <p className="username-footer">@{user.username}</p>
+                    </div>
+                  </Link>
+
+                  <button
+                    onClick={() => {
+                      state?.userData?.following?.some(
+                        (user) => user._id === state.userProfileDetails._id
                       )
-                        ? "Unfollow"
-                        : "Follow"}
-                    </button>
-                  </li>
-                );
-              })}
-          </ul>
-        </div>
+                        ? unFollowUserHandler(user._id)
+                        : followUserHandler(user._id);
+                    }}
+                    className="follow-btn-footer"
+                  >
+                    {user.followers?.some(
+                      (follower) => follower._id === state.userData._id
+                    )
+                      ? "Unfollow"
+                      : "Follow"}
+                  </button>
+                </li>
+              );
+            })}
+        </ul>
       </div>
     </div>
   );

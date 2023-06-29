@@ -55,8 +55,9 @@
 }
 
 .btn-new-post {
+  text-decoration: none;
   width: 70%;
-  padding: 12.5px;
+  padding: 12.5px 20px;
   margin: 0 40px;
   background-color: var(--primary-color);
   color: var(--secondary-color);
@@ -67,6 +68,8 @@
 .profile-sub-section {
   display: flex;
   margin: 50px;
+  text-decoration: none;
+  color: var(--black-color);
 }
 
 .avatar-image-nav {

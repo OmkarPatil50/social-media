@@ -43,7 +43,6 @@ function Navbar() {
             alt=""
             className="avatar-image-nav"
             onError={(e) => (e.target.style.display = "none")}
-
           />
         </div>
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../..";
 import { Link } from "react-router-dom";
 
@@ -119,6 +119,31 @@ function PostCard({ post }) {
     }
   };
 
+  const getAllUsers = async () => {
+    try {
+      const response = await fetch("/api/users");
+      const jsonResponse = await response.json();
+      if (jsonResponse.users) {
+        dispatch({ type: "UPDATE_ALL_USERS", payload: jsonResponse.users });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    getAllUsers();
+  }, [state.userData]);
+
+  const getImage = () => {
+    return state.allUsers?.reduce(
+      ((acc, curr) => {
+        return curr._id == post._id ? (acc = curr.image) : acc;
+      },
+      "")
+    );
+  };
+
   return (
     <div className="post-card">
       <div
@@ -128,14 +153,7 @@ function PostCard({ post }) {
         }}
       >
         <img
-          src={() => {
-            return state.allUsers?.reduce(
-              ((acc, curr) => {
-                return curr.id == post._id ? (acc = curr.image) : acc;
-              },
-              "")
-            );
-          }}
+          src={getImage}
           alt=""
           className="avatar-image-nav"
           onError={(e) => (e.target.style.display = "none")}
