@@ -26,9 +26,9 @@ function Bookmark() {
     getBookmarkData();
   }, []);
   return (
-    <div className="bookmark-page">
+    <div className="main-page">
       <Navbar />
-      <section className="bookmark-posts-section">
+      <section className="page-main-section">
         {state.userBookmarks.map((post) => {
           const {
             content,

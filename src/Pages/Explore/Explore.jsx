@@ -66,9 +66,9 @@ function Explore() {
   }, [state.userProfileDetails, state.userPosts]);
 
   return (
-    <div className="home-page">
+    <div className="main-page">
       <Navbar />
-      <section className="home-page-section">
+      <section className="page-main-section">
         <h1>Explore</h1>
         <ul>
           {state.userPosts.map((post) => {

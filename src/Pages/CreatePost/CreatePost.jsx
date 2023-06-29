@@ -32,9 +32,9 @@ function CreatePost() {
   };
 
   return (
-    <div className="new-post-page">
+    <div className="main-page">
       <Navbar />
-      <div className="section-new-post">
+      <div className="page-main-section">
         <label htmlFor="profile-pic">
           <img src="/" alt="" className="profile-pic" />
         </label>
@@ -52,7 +52,7 @@ function CreatePost() {
       </div>
       <Footer />
     </div>
-  );    
+  );
 }
 
 export default CreatePost;

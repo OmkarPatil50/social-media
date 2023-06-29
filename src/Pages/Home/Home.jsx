@@ -90,9 +90,9 @@ function Home() {
   }, [state.userPosts]);
 
   return (
-    <div className="home-page">
+    <div className="main-page">
       <Navbar />
-      <section className="home-page-section">
+      <section className="page-main-section">
         <div className="section-new-post">
           <label htmlFor="profile-pic">
             <img src="/" alt="" className="profile-pic" />

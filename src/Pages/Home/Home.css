@@ -23,7 +23,8 @@
   --black-weight: 900;
 }
 
-.home-page {
+.main-page {
+  height: max-content;
   display: flex;
   flex-wrap: wrap;
   position: relative;
@@ -32,6 +33,6 @@
   background-color: var(--lynx-white-color);
 }
 
-.home-page-section {
+.page-main-section {
   margin: 30px;
 }
