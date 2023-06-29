@@ -3,7 +3,7 @@ import { AppContext } from "../..";
 import { Link } from "react-router-dom";
 
 function PostCard({ post }) {
-  const { content, likes, username, _id, firstName, lastName, createdAt } =
+  const { content, likes, username, id, firstName, lastName, createdAt, _id } =
     post;
   const { state, dispatch } = useContext(AppContext);
 
@@ -12,7 +12,7 @@ function PostCard({ post }) {
 
   const likePostHandler = async () => {
     try {
-      const response = await fetch(`/api/posts/like/${_id}`, {
+      const response = await fetch(`/api/posts/like/${id}`, {
         method: "POST",
         headers: {
           authorization: localStorage.getItem("encodedToken"),
@@ -29,7 +29,7 @@ function PostCard({ post }) {
 
   const dislikePostHandler = async () => {
     try {
-      const response = await fetch(`/api/posts/dislike/${_id}`, {
+      const response = await fetch(`/api/posts/dislike/${id}`, {
         method: "POST",
         headers: {
           authorization: localStorage.getItem("encodedToken"),
@@ -46,7 +46,7 @@ function PostCard({ post }) {
 
   const deletePostHandler = async () => {
     try {
-      const response = await fetch(`/api/posts/${_id}`, {
+      const response = await fetch(`/api/posts/${id}`, {
         method: "DELETE",
         headers: {
           authorization: localStorage.getItem("encodedToken"),
@@ -63,7 +63,7 @@ function PostCard({ post }) {
 
   const editPostHandler = async () => {
     try {
-      const response = await fetch(`/api/posts/edit/${_id}`, {
+      const response = await fetch(`/api/posts/edit/${id}`, {
         method: "POST",
         headers: {
           authorization: localStorage.getItem("encodedToken"),
@@ -86,7 +86,7 @@ function PostCard({ post }) {
 
   const bookmarkPostHandler = async () => {
     try {
-      const response = await fetch(`/api/users/bookmark/${_id}`, {
+      const response = await fetch(`/api/users/bookmark/${id}`, {
         method: "POST",
         headers: {
           authorization: localStorage.getItem("encodedToken"),
@@ -103,7 +103,7 @@ function PostCard({ post }) {
 
   const removePostFromBookmarkHandler = async () => {
     try {
-      const response = await fetch(`/api/users/remove-bookmark/${_id}`, {
+      const response = await fetch(`/api/users/remove-bookmark/${id}`, {
         method: "POST",
         headers: {
           authorization: localStorage.getItem("encodedToken"),
@@ -129,9 +129,9 @@ function PostCard({ post }) {
       >
         <img
           src={() => {
-            state.allUsers.reduce(
+            return state.allUsers?.reduce(
               ((acc, curr) => {
-                return curr.id == post._id ? (acc = curr.image) : "";
+                return curr.id == post._id ? (acc = curr.image) : acc;
               },
               "")
             );
@@ -203,7 +203,7 @@ function PostCard({ post }) {
             )}
           </div>
         </div>
-        <Link to={`/posts/${_id}`} className="post-content">
+        <Link to={`/posts/${id}`} className="post-content">
           {content}
         </Link>
         <div className="btn-section-postcard">
@@ -220,7 +220,7 @@ function PostCard({ post }) {
           </button>
           <button
             onClick={() =>
-              state.userBookmarks?.some((book) => book._id === _id)
+              state.userBookmarks?.some((post) => post.id === id)
                 ? removePostFromBookmarkHandler()
                 : bookmarkPostHandler()
             }

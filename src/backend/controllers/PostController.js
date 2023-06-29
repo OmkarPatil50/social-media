@@ -23,7 +23,7 @@ export const getAllpostsHandler = function () {
 export const getPostHandler = function (schema, request) {
   const postId = request.params.postId;
   try {
-    const post = schema.posts.findBy({ _id: postId }).attrs;
+    const post = schema.posts.findBy({ id: postId }).attrs;
     return new Response(200, {}, { post });
   } catch (error) {
     return new Response(
@@ -93,6 +93,7 @@ export const createPostHandler = function (schema, request) {
       image: user.image,
       createdAt: formatDate(),
       updatedAt: formatDate(),
+      id: uuid()
     };
     this.db.posts.insert(post);
     return new Response(201, {}, { posts: this.db.posts });
@@ -128,7 +129,7 @@ export const editPostHandler = function (schema, request) {
     }
     const postId = request.params.postId;
     const { postData } = JSON.parse(request.requestBody);
-    let post = schema.posts.findBy({ _id: postId }).attrs;
+    let post = schema.posts.findBy({ id: postId }).attrs;
     if (post.username !== user.username) {
       return new Response(
         400,
@@ -139,7 +140,7 @@ export const editPostHandler = function (schema, request) {
       );
     }
     post = { ...post, content: postData };
-    this.db.posts.update({ _id: postId }, post);
+    this.db.posts.update({ id: postId }, post);
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(
@@ -171,10 +172,10 @@ export const likePostHandler = function (schema, request) {
         }
       );
     }
-    const { _id, firstName, lastName, username, createdAt, updatedAt, followers, following } = user;
+    const { id, firstName, lastName, username, createdAt, updatedAt, followers, following } = user;
     const postId = request.params.postId;
-    const post = schema.posts.findBy({ _id: postId }).attrs;
-    if (post.likes.likedBy.some((currUser) => currUser._id === user._id)) {
+    const post = schema.posts.findBy({ id: postId }).attrs;
+    if (post.likes.likedBy.some((currUser) => currUser.id === user.id)) {
       return new Response(
         400,
         {},
@@ -182,11 +183,11 @@ export const likePostHandler = function (schema, request) {
       );
     }
     post.likes.dislikedBy = post.likes.dislikedBy.filter(
-      (currUser) => currUser._id !== user._id
+      (currUser) => currUser.id !== user.id
     );
     post.likes.likeCount += 1;
-    post.likes.likedBy.push({ _id, firstName, lastName, username, createdAt, updatedAt, followers, following });
-    this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
+    post.likes.likedBy.push({ id, firstName, lastName, username, createdAt, updatedAt, followers, following });
+    this.db.posts.update({ id: postId }, { ...post, updatedAt: formatDate() });
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(
@@ -219,7 +220,7 @@ export const dislikePostHandler = function (schema, request) {
       );
     }
     const postId = request.params.postId;
-    let post = schema.posts.findBy({ _id: postId }).attrs;
+    let post = schema.posts.findBy({ id: postId }).attrs;
     if (post.likes.likeCount === 0) {
       return new Response(
         400,
@@ -227,7 +228,7 @@ export const dislikePostHandler = function (schema, request) {
         { errors: ["Cannot decrement like less than 0."] }
       );
     }
-    if (post.likes.dislikedBy.some((currUser) => currUser._id === user._id)) {
+    if (post.likes.dislikedBy.some((currUser) => currUser.id === user.id)) {
       return new Response(
         400,
         {},
@@ -236,11 +237,11 @@ export const dislikePostHandler = function (schema, request) {
     }
     post.likes.likeCount -= 1;
     const updatedLikedBy = post.likes.likedBy.filter(
-      (currUser) => currUser._id !== user._id
+      (currUser) => currUser.id !== user.id
     );
     post.likes.dislikedBy.push(user);
     post = { ...post, likes: { ...post.likes, likedBy: updatedLikedBy } };
-    this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
+    this.db.posts.update({ id: postId }, { ...post, updatedAt: formatDate() });
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(
@@ -272,7 +273,7 @@ export const deletePostHandler = function (schema, request) {
       );
     }
     const postId = request.params.postId;
-    let post = schema.posts.findBy({ _id: postId }).attrs;
+    let post = schema.posts.findBy({ id: postId }).attrs;
     if (post.username !== user.username) {
       return new Response(
         400,
@@ -284,7 +285,7 @@ export const deletePostHandler = function (schema, request) {
         }
       );
     }
-    this.db.posts.remove({ _id: postId });
+    this.db.posts.remove({ id: postId });
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(

@@ -14,7 +14,6 @@ function Bookmark() {
         headers: { authorization: localStorage.getItem("encodedToken") },
       });
       const jsonResponse = await response.json();
-      console.log(jsonResponse.bookmarks);
       if (jsonResponse.bookmarks) {
         dispatch({ type: "UPDATE_BOOKMARKS", payload: jsonResponse.bookmarks });
       }
