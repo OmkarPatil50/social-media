@@ -9,7 +9,7 @@ function Home() {
   const { state, dispatch } = useContext(AppContext);
   const [postContent, setPostContent] = useState("");
   const [showSortItems, setShowSortItems] = useState(false);
-  const [homeHeading, setHomeHeading] = useState("Oldest Posts");
+  const [homeHeading, setHomeHeading] = useState("Latest Posts");
 
   const getPostData = async () => {
     try {
@@ -24,6 +24,9 @@ function Home() {
       console.error(err);
     }
   };
+  useEffect(() => {
+    getPostData();
+  }, [state.userData]);
 
   const addPostHandler = async () => {
     try {
@@ -45,10 +48,6 @@ function Home() {
       console.error(err);
     }
   };
-
-  useEffect(() => {
-    getPostData();
-  }, [state.userData]);
 
   const getUserProfileDetails = async () => {
     try {
@@ -88,7 +87,7 @@ function Home() {
 
   useEffect(() => {
     getPostsFromUser();
-  }, [state.userProfileDetails, state.userPosts]);
+  }, [state.userPosts]);
 
   return (
     <div className="home-page">

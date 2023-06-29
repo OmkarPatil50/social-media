@@ -98,13 +98,24 @@ export const AppContextProvider = ({ children }) => {
       }
 
       case "UPDATE_SPECIFIED_USER_POSTS": {
-        return { ...state, specifiedUserPosts: action.payload };
+        return {
+          ...state,
+          specifiedUserPosts: action.payload.sort((a, b) => {
+            const dateA = new Date(a.createdAt);
+            const dateB = new Date(b.createdAt);
+            if (dateA > dateB) {
+              return -1;
+            } else if (dateB > dateA) {
+              return 1;
+            }
+          }),
+        };
       }
 
       case "SORT_BY_DATE_LATEST": {
         return {
           ...state,
-          userPosts: [...state.userPosts].sort((a, b) => {
+          specifiedUserPosts: [...state.specifiedUserPosts].sort((a, b) => {
             const dateA = new Date(a.createdAt);
             const dateB = new Date(b.createdAt);
             if (dateA > dateB) {
@@ -119,7 +130,7 @@ export const AppContextProvider = ({ children }) => {
       case "SORT_BY_DATE_OLDEST": {
         return {
           ...state,
-          userPosts: [...state.userPosts].sort((a, b) => {
+          specifiedUserPosts: [...state.specifiedUserPosts].sort((a, b) => {
             const dateA = new Date(a.createdAt);
             const dateB = new Date(b.createdAt);
             if (dateA > dateB) {
@@ -134,7 +145,7 @@ export const AppContextProvider = ({ children }) => {
       case "SORT_BY_TRENDING": {
         return {
           ...state,
-          userPosts: [...state.userPosts].sort((a, b) => {
+          specifiedUserPosts: [...state.specifiedUserPosts].sort((a, b) => {
             if (b.likes.likeCount > a.likes.likeCount) {
               return 1;
             } else if (a.likes.likeCount > b.likes.likeCount) {
