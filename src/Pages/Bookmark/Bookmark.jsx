@@ -29,23 +29,31 @@ function Bookmark() {
     <div className="main-page">
       <Navbar />
       <section className="page-main-section">
-        {state.userBookmarks.map((post) => {
-          const {
-            content,
-            createdAt,
-            id,
-            likes,
-            updatedAt,
-            userFullName,
-            username,
-            _id,
-          } = post;
-          return (
-            <li key={id}>
-              <PostCard post={post} />
-            </li>
-          );
-        })}
+        <h1>Bookmarks</h1>
+        {state.userBookmarks.length === 0 ? (
+          <h1 className="empty-page-tag">No Bookmarks Yet</h1>
+        ) : (
+          ""
+        )}
+        <ul>
+          {state.userBookmarks.map((post) => {
+            const {
+              content,
+              createdAt,
+              id,
+              likes,
+              updatedAt,
+              userFullName,
+              username,
+              _id,
+            } = post;
+            return (
+              <li key={id}>
+                <PostCard post={post} />
+              </li>
+            );
+          })}
+        </ul>
       </section>
       <Footer />
     </div>

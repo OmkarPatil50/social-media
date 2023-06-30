@@ -80,11 +80,6 @@ export const AppContextProvider = ({ children }) => {
       case "UPDATE_BOOKMARKS": {
         return { ...state, userBookmarks: action.payload };
       }
-
-      case "SHOW_POST_OPTIONS": {
-        return { ...state, showPostOptions: action.payload };
-      }
-
       case "UPDATE_POST_DETAILS_OBJ": {
         return { ...state, userPostDetails: action.payload };
       }
@@ -100,7 +95,7 @@ export const AppContextProvider = ({ children }) => {
       case "UPDATE_SPECIFIED_USER_POSTS": {
         return {
           ...state,
-          specifiedUserPosts: action.payload.sort((a, b) => {
+          specifiedUserPosts: [...action.payload].sort((a, b) => {
             const dateA = new Date(a.createdAt);
             const dateB = new Date(b.createdAt);
             if (dateA > dateB) {
@@ -180,7 +175,6 @@ export const AppContextProvider = ({ children }) => {
     userPosts: [],
     specifiedUserPosts: [],
     userBookmarks: [],
-    showPostOptions: false,
     userPostDetails: {
       content: "",
       createdAt: "",

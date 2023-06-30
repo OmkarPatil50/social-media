@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../..";
 import { Link } from "react-router-dom";
+import "./PostCard.css";
 
 function PostCard({ post }) {
   const { content, likes, username, id, firstName, lastName, createdAt, _id } =
@@ -144,6 +145,10 @@ function PostCard({ post }) {
     );
   };
 
+  const isUsersPost = (userId) => {
+    return userId === state.userData._id;
+  };
+
   return (
     <div className="post-card">
       <div
@@ -161,65 +166,49 @@ function PostCard({ post }) {
       </div>
       <div className="post-main-section">
         <div className="name-tab">
-          <Link to={`/users/${_id}`}>{`${firstName} ${lastName}`}</Link>
-          <p>{username}</p>
-          <p>{createdAt}</p>
-          <div className="post-options">
-            <p
-              onClick={() =>
-                dispatch({
-                  type: "SHOW_POST_OPTIONS",
-                  payload: !state.showPostOptions,
-                })
-              }
-            >
-              ...
-            </p>
-            {state.showPostOptions ? (
-              <>
+          <section>
+            <Link
+              to={`/users/${_id}`}
+              className="name-tab-items user-full-name-postcard"
+            >{`${firstName} ${lastName}`}</Link>
+            <p className="name-tab-items username-postcard">@{username}</p>
+            <p className="name-tab-items post-time">{createdAt}</p>
+          </section>
+
+          {showEditWindow ? (
+            <div className="edit-page">
+              <div className="edit-window">
                 <button
-                  className="post-control-btn"
+                  className="close-btn"
                   onClick={() => {
-                    deletePostHandler();
-                    dispatch({
-                      type: "SHOW_POST_OPTIONS",
-                      payload: !state.showPostOptions,
-                    });
+                    setShowEditWindow(false);
+                    setNewPostData("");
                   }}
                 >
-                  Delete
+                  <i className="fa-solid fa-xmark"></i>
                 </button>
+                <label htmlFor="edit-post" className="edit-post-label">
+                  New Post Content:
+                </label>
+                <input
+                  type="text"
+                  defaultValue={post.content}
+                  onChange={(event) => setNewPostData(event.target.value)}
+                  className="edit-post-input"
+                />
                 <button
-                  className="post-control-btn"
                   onClick={() => {
-                    setShowEditWindow(true);
+                    editPostHandler();
                   }}
+                  className="update-post-btn"
                 >
-                  Edit
-                  {showEditWindow ? (
-                    <div className="edit-window">
-                      <input
-                        type="text"
-                        defaultValue={post.content}
-                        onChange={(event) => setNewPostData(event.target.value)}
-                      />
-                      <button
-                        onClick={() => {
-                          editPostHandler();
-                        }}
-                      >
-                        Update Post
-                      </button>
-                    </div>
-                  ) : (
-                    ""
-                  )}
+                  Update Post
                 </button>
-              </>
-            ) : (
-              ""
-            )}
-          </div>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         <Link to={`/posts/${id}`} className="post-content">
           {content}
@@ -227,14 +216,21 @@ function PostCard({ post }) {
         <div className="btn-section-postcard">
           <button
             onClick={
-              likes.likeCount === 0 ? likePostHandler : dislikePostHandler
+              likes.likedBy?.some((likedPost) => likedPost._id == _id)
+                ? dislikePostHandler
+                : likePostHandler
             }
           >
-            <i className="fa-solid fa-heart"></i>
-            <p>{likes.likeCount}</p>
+            <i
+              className={`fa-${
+                likes.likedBy?.some((likedPost) => likedPost._id == _id)
+                  ? "solid"
+                  : "regular"
+              } fa-heart`}
+            ></i>
           </button>
           <button>
-            <i className="fa-solid fa-comments"></i>
+            <i className="fa-regular fa-comments"></i>
           </button>
           <button
             onClick={() =>
@@ -243,7 +239,39 @@ function PostCard({ post }) {
                 : bookmarkPostHandler()
             }
           >
-            <i className="fa-solid fa-bookmark"></i>
+            <i
+              className={`fa-${
+                state.userBookmarks?.some((post) => post.id === id)
+                  ? "solid"
+                  : "regular"
+              } fa-bookmark`}
+            ></i>
+          </button>
+
+          <button
+            disabled={!isUsersPost(_id)}
+            className="edit-btn-postcard"
+            onClick={() => {
+              setShowEditWindow(true);
+              setNewPostData(post.content);
+            }}
+            style={{ opacity: !isUsersPost(_id) ? "0.3" : "1" }}
+          >
+            <i className="fa-solid fa-pencil"></i>
+          </button>
+
+          <button
+            onClick={() => {
+              deletePostHandler();
+              dispatch({
+                type: "SHOW_POST_OPTIONS",
+                payload: !state.showPostOptions,
+              });
+            }}
+            disabled={!isUsersPost(_id)}
+            style={{ opacity: !isUsersPost(_id) ? "0.3" : "1" }}
+          >
+            <i className="fa-solid fa-trash"></i>
           </button>
         </div>
       </div>

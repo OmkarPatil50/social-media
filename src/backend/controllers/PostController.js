@@ -172,10 +172,10 @@ export const likePostHandler = function (schema, request) {
         }
       );
     }
-    const { id, firstName, lastName, username, createdAt, updatedAt, followers, following } = user;
+    const { id, firstName, lastName, username, createdAt, updatedAt, followers, following, _id } = user;
     const postId = request.params.postId;
     const post = schema.posts.findBy({ id: postId }).attrs;
-    if (post.likes.likedBy.some((currUser) => currUser.id === user.id)) {
+    if (post.likes.likedBy.some((currUser) => currUser._id === user._id)) {
       return new Response(
         400,
         {},
@@ -183,10 +183,10 @@ export const likePostHandler = function (schema, request) {
       );
     }
     post.likes.dislikedBy = post.likes.dislikedBy.filter(
-      (currUser) => currUser.id !== user.id
+      (currUser) => currUser._id !== user._id
     );
     post.likes.likeCount += 1;
-    post.likes.likedBy.push({ id, firstName, lastName, username, createdAt, updatedAt, followers, following });
+    post.likes.likedBy.push({ id, firstName, lastName, username, createdAt, updatedAt, followers, following, _id });
     this.db.posts.update({ id: postId }, { ...post, updatedAt: formatDate() });
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
@@ -228,7 +228,7 @@ export const dislikePostHandler = function (schema, request) {
         { errors: ["Cannot decrement like less than 0."] }
       );
     }
-    if (post.likes.dislikedBy.some((currUser) => currUser.id === user.id)) {
+    if (post.likes.dislikedBy.some((currUser) => currUser._id === user._id)) {
       return new Response(
         400,
         {},
@@ -237,7 +237,7 @@ export const dislikePostHandler = function (schema, request) {
     }
     post.likes.likeCount -= 1;
     const updatedLikedBy = post.likes.likedBy.filter(
-      (currUser) => currUser.id !== user.id
+      (currUser) => currUser._id !== user._id
     );
     post.likes.dislikedBy.push(user);
     post = { ...post, likes: { ...post.likes, likedBy: updatedLikedBy } };

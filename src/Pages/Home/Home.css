@@ -27,12 +27,70 @@
   height: max-content;
   display: flex;
   flex-wrap: wrap;
-  position: relative;
+  position: absolute;
   top: 87.5px;
   left: 300px;
   background-color: var(--lynx-white-color);
+  padding: 20px;
+  overflow-y: scroll;
 }
 
 .page-main-section {
-  margin: 30px;
+  min-height: 83vh;
+  width: 760px;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  flex-wrap: wrap;
+}
+
+ul {
+  list-style: none;
+}
+
+.empty-page-tag {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 45%;
+  left: 40%;
+}
+
+.sort-items-toggle {
+  cursor: pointer;
+  background: none;
+  color: var(--primary-color);
+  border: none;
+  align-self: flex-start;
+  font-size: 20px;
+}
+
+.sort-items-toggle:hover {
+  color: var(--grey-color);
+}
+
+.sort-btn-section {
+  position: relative;
+}
+
+.sort-type-btn {
+  margin: 0 10px;
+  padding: 5px 10px;
+  background: none;
+  background-color: var(--primary-color);
+  border: none;
+  color: var(--white-color);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sort-type-btn:hover {
+  background-color: var(--grey-color);
+  color: var(--white-color);
+}
+
+.sort-items-toggle-btn-div {
+  position: absolute;
+  top: 0;
+  left: 30px;
 }

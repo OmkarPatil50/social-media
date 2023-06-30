@@ -1,0 +1,195 @@
+:root {
+  --primary-color: #ff3b30;
+  --secondary-color: #fff6ea;
+  --action-color: #3b82f6;
+  --grey-color: #9a9a9a;
+  --black-color: #282828;
+  --white-color: #fff;
+  --lynx-white-color: #f7f7f7;
+  --violet-color: #5348c7;
+  --lynx-gray-color: #c5c5c5;
+  --font: "Open Sans", sans-serif;
+  --xxl-size: 4rem;
+  --xl-size: 2.5rem;
+  --l-size: 2rem;
+  --m-size: 1.5rem;
+  --s-size: 1rem;
+  --xs-size: 0.5rem;
+  --xl-font: 3rem;
+  --light-weight: 300;
+  --regular-weight: 400;
+  --semibold-weight: 600;
+  --bold-weight: 700;
+  --black-weight: 900;
+}
+
+.post-card {
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  background-color: var(--white-color);
+  width: 700px;
+  height: fit-content;
+  padding: 10px;
+  display: flex;
+  position: relative;
+  overflow: hide;
+  border-radius: 10px;
+}
+
+.post-main-section {
+  width: 85%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-self: flex-start;
+  padding: 0 10px;
+}
+
+.name-tab {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 0 10px;
+  padding: 0;
+  line-height: 0.1;
+}
+
+.name-tab section {
+  display: flex;
+}
+
+.name-tab-items {
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.user-full-name-postcard {
+  font-size: 17px;
+  font-weight: var(--semibold-weight);
+  color: var(--black-color);
+}
+
+.username-postcard {
+  color: var(--grey-color);
+}
+
+.post-time {
+  font-size: 15px;
+  color: var(--grey-color);
+}
+
+.edit-btn-postcard {
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  justify-self: flex-end;
+}
+
+.edit-btn-postcard:hover {
+  color: var(--primary-color);
+}
+
+.post-content {
+  box-sizing: border-box;
+  width: 95%;
+  height: 150px;
+  padding: 10px 5px;
+  text-decoration: none;
+  color: var(--black-color);
+  align-self: flex-start;
+  overflow: hidden;
+  color: var(--black-color);
+  font-weight: var(--regular-weight);
+  word-wrap: break-word;
+  position: relative;
+}
+
+.btn-section-postcard {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  justify-self: flex-end;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-top: 1px solid var(--grey-color);
+  position: relative;
+}
+.btn-section-postcard button {
+  box-sizing: border-box;
+  cursor: pointer;
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 1px solid white;
+  padding: 15px;
+  font-size: 18px;
+  color: darkslategray;
+}
+.btn-section-postcard button:hover {
+  border-bottom: 1px solid var(--grey-color);
+  color: var(--primary-color);
+  transition-duration: 0.2s;
+}
+
+.edit-page {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-window {
+  padding: 20px;
+  height: max-content;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--lynx-white-color);
+}
+
+.close-btn {
+  text-align: right;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.edit-post-label {
+  margin-bottom: 20px;
+}
+
+.edit-post-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100px;
+  padding: 5px;
+}
+
+.update-post-btn {
+  box-sizing: border-box;
+  margin: 15px 0 0;
+  padding: 10px;
+  font-size: 14px;
+  background: none;
+  border: none;
+  background-color: var(--primary-color);
+  color: var(--lynx-white-color);
+  cursor: pointer;
+}
+
+.update-post-btn:hover {
+  opacity: 0.7;
+}

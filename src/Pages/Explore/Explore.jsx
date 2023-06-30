@@ -70,6 +70,11 @@ function Explore() {
       <Navbar />
       <section className="page-main-section">
         <h1>Explore</h1>
+        {state.userPosts.length === 0 ? (
+          <h1 className="empty-page-tag">No Post to Explore</h1>
+        ) : (
+          ""
+        )}
         <ul>
           {state.userPosts.map((post) => {
             const {

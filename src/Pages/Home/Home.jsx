@@ -93,6 +93,11 @@ function Home() {
     <div className="main-page">
       <Navbar />
       <section className="page-main-section">
+        {state.specifiedUserPosts?.length === 0 ? (
+          <h1 className="empty-page-tag">Let's Create Some Posts...!</h1>
+        ) : (
+          ""
+        )}
         <div className="section-new-post">
           <label htmlFor="profile-pic">
             <img src="/" alt="" className="profile-pic" />
@@ -109,44 +114,57 @@ function Home() {
             Post
           </button>
         </div>
-        <h1>{homeHeading}</h1>
-        <button
-          onClick={() => {
-            setShowSortItems(!showSortItems);
-          }}
-        >
-          <i className="fa-solid fa-sort"></i>
-        </button>
-        {showSortItems ? (
-          <div>
-            <button
-              onClick={() => {
-                setHomeHeading("Latest Posts");
-                dispatch({ type: "SORT_BY_DATE_LATEST" });
-              }}
-            >
-              Latest
-            </button>
-            <button
-              onClick={() => {
-                setHomeHeading("Oldest Posts");
-                dispatch({ type: "SORT_BY_DATE_OLDEST" });
-              }}
-            >
-              Oldest
-            </button>
-            <button
-              onClick={() => {
-                setHomeHeading("Trending Posts");
-                dispatch({ type: "SORT_BY_TRENDING" });
-              }}
-            >
-              Trending
-            </button>
-          </div>
+        {state.specifiedUserPosts.length ? (
+          <>
+            <h1>{homeHeading}</h1>
+            <div className="sort-btn-section">
+              <button
+                onClick={() => {
+                  setShowSortItems(!showSortItems);
+                }}
+                className="sort-items-toggle"
+              >
+                <i className="fa-solid fa-sort"></i>
+              </button>
+              {showSortItems ? (
+                <div className="sort-items-toggle-btn-div">
+                  <button
+                    className="sort-type-btn"
+                    onClick={() => {
+                      setHomeHeading("Latest Posts");
+                      dispatch({ type: "SORT_BY_DATE_LATEST" });
+                    }}
+                  >
+                    Latest
+                  </button>
+                  <button
+                    className="sort-type-btn"
+                    onClick={() => {
+                      setHomeHeading("Oldest Posts");
+                      dispatch({ type: "SORT_BY_DATE_OLDEST" });
+                    }}
+                  >
+                    Oldest
+                  </button>
+                  <button
+                    className="sort-type-btn"
+                    onClick={() => {
+                      setHomeHeading("Trending Posts");
+                      dispatch({ type: "SORT_BY_TRENDING" });
+                    }}
+                  >
+                    Trending
+                  </button>
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+          </>
         ) : (
           ""
         )}
+
         <section className="posts-section">
           <ul>
             {state.specifiedUserPosts
