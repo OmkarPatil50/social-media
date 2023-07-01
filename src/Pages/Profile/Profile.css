@@ -29,6 +29,10 @@
   border-radius: 50%;
 }
 
+.fa-xmark {
+  cursor: pointer;
+}
+
 .avatar-image-div {
   width: 100px;
   height: 100px;
@@ -37,9 +41,6 @@
 
 .profile-page-header {
   margin: 0;
-  width: 50%;
-  position: fixed;
-  top: 85px;
   display: flex;
   padding: 20px 20px 0px;
   margin: 0;
@@ -48,7 +49,6 @@
   align-items: center;
   background-color: var(--lynx-white-color);
   height: fit-content;
-  z-index: 1;
 }
 
 .user-name-profile {
@@ -69,6 +69,7 @@
   border: 1px solid var(--grey-color);
   font-weight: var(--bold-weight);
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .edit-profile-btn:hover {
@@ -83,12 +84,6 @@
   margin: 0px 0 0 0;
 }
 
-.user-posts-section {
-  position: relative;
-  top: 12%;
-  left: 0;
-}
-
 .edit-profile-container {
   width: 100vw;
   height: 100vh;
@@ -96,9 +91,70 @@
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 12;
+  z-index: 999;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.edit-profile-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--lynx-white-color);
+  padding: 20px 40px;
+  box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.edit-profile-box label {
+  margin: 10px 0 5px 0;
+  font-size: 14px;
+  width: 100%;
+  justify-self: flex-start;
+  font-weight: 500;
+  padding: 0px;
+}
+
+.edit-profile-box input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  font-size: var(--s-size);
+  color: var(--primary-color);
+}
+
+.save-btn-profile {
+  box-sizing: border-box;
+  margin: 10px;
+  padding: 7.5px 15px;
+  background: none;
+  border: none;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  cursor: pointer;
+  border: 1px solid var(--primary-color);
+}
+
+.save-btn-profile:hover {
+  opacity: 0.45;
+}
+
+.save-btn-profile:nth-child(2) {
+  background-color: var(--lynx-white-color);
+  color: var(--primary-color);
+}
+
+.user-profile-details-bio {
+  margin: 0px 10px;
+}
+
+.user-profile-details-url {
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.following-section-count {
+  font-weight: 500;
 }

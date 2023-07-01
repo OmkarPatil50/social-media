@@ -144,13 +144,17 @@ function Profile() {
           </p>
 
           {state.userProfileDetails.userBio ? (
-            <p>Bio : {state.userProfileDetails.userBio}</p>
+            <p className="user-profile-details-bio">
+              {state.userProfileDetails.userBio}
+            </p>
           ) : (
             ""
           )}
 
           {state.userProfileDetails.userPortfolioUrl ? (
-            <p>Portfolio : {state.userProfileDetails.userPortfolioUrl}</p>
+            <p className="user-profile-details-url">
+              @{state.userProfileDetails.userPortfolioUrl}
+            </p>
           ) : (
             ""
           )}
@@ -187,13 +191,13 @@ function Profile() {
           )}
 
           <div className="following-section-profile">
-            <p>
+            <p className="following-section-count">
               {state.userProfileDetails.followers
                 ? state.userProfileDetails.followers.length
                 : 0}{" "}
               Followers
             </p>
-            <p>
+            <p className="following-section-count">
               {state.userProfileDetails.following
                 ? state.userProfileDetails.following.length
                 : 0}{" "}
@@ -203,106 +207,114 @@ function Profile() {
           {state.userProfileDetails._id == state.userData._id &&
           editProfileContainer.showContainer ? (
             <div className="edit-profile-container">
-              <label htmlFor="update-avatar"></label>
-              <input
-                type="file"
-                name="img"
-                id="img"
-                accept="image/*"
-                onError={(e) => (e.target.style.display = "none")}
-                onChange={(event) => {
-                  setEditProfileContainer(() => ({
-                    ...editProfileContainer,
-                    image: event.target.files[0],
-                  }));
-                  const reader = new FileReader();
-                  reader.onloadend = () => {
+              <div className="edit-profile-box">
+                <label htmlFor="update-avatar"></label>
+                <input
+                  type="file"
+                  name="img"
+                  id="img"
+                  accept="image/*"
+                  className="file-input-profile"
+                  onError={(e) => (e.target.style.display = "none")}
+                  onChange={(event) => {
                     setEditProfileContainer(() => ({
                       ...editProfileContainer,
-                      previewImage: reader.result,
+                      image: event.target.files[0],
                     }));
-                  };
-                  reader.readAsDataURL(event.target.files[0]);
-                }}
-              />
-              {editProfileContainer.previewImage && (
-                <div>
-                  <img
-                    src={editProfileContainer.previewImage}
-                    alt="Preview"
-                    className="avatar-image"
-                  />
-                  <i
-                    className="fa-solid fa-xmark"
-                    onClick={() =>
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
                       setEditProfileContainer(() => ({
                         ...editProfileContainer,
-                        previewImage: null,
-                      }))
-                    }
-                  ></i>
-                </div>
-              )}
-              <label htmlFor="bio">Update Bio : </label>
-              <input
-                type="text"
-                required
-                onChange={(event) => {
-                  setEditProfileContainer(() => ({
-                    ...editProfileContainer,
-                    bio: event.target.value,
-                  }));
-                }}
-                defaultValue={state.userProfileDetails?.userBio}
-              />
-              <label htmlFor="portfolio-link">Update Portfolio Link : </label>
-              <input
-                type="email"
-                required
-                onChange={(event) => {
-                  setEditProfileContainer(() => ({
-                    ...editProfileContainer,
-                    url: event.target.value,
-                  }));
-                }}
-                defaultValue={state.userProfileDetails?.userPortfolioUrl}
-              />
+                        previewImage: reader.result,
+                      }));
+                    };
+                    reader.readAsDataURL(event.target.files[0]);
+                  }}
+                />
+                {editProfileContainer.previewImage && (
+                  <div>
+                    <img
+                      src={editProfileContainer.previewImage}
+                      alt="Preview"
+                      className="avatar-image"
+                    />
+                    <i
+                      className="fa-solid fa-xmark"
+                      onClick={() =>
+                        setEditProfileContainer(() => ({
+                          ...editProfileContainer,
+                          previewImage: null,
+                        }))
+                      }
+                    ></i>
+                  </div>
+                )}
+                <label htmlFor="bio">Update Bio : </label>
+                <input
+                  type="text"
+                  required
+                  onChange={(event) => {
+                    setEditProfileContainer(() => ({
+                      ...editProfileContainer,
+                      bio: event.target.value,
+                    }));
+                  }}
+                  defaultValue={state.userProfileDetails?.userBio}
+                />
+                <label htmlFor="portfolio-link">Update Portfolio Link : </label>
+                <input
+                  type="email"
+                  required
+                  onChange={(event) => {
+                    setEditProfileContainer(() => ({
+                      ...editProfileContainer,
+                      url: event.target.value,
+                    }));
+                  }}
+                  defaultValue={state.userProfileDetails?.userPortfolioUrl}
+                />
 
-              <label htmlFor="password">Change Password : </label>
-              <input
-                type="text"
-                required
-                onChange={(event) => {
-                  setEditProfileContainer(() => ({
-                    ...editProfileContainer,
-                    password: event.target.value,
-                  }));
-                }}
-                defaultValue={state.userProfileDetails?.password}
-              />
-              <button
-                type="submit"
-                onClick={() => {
-                  editUserBioHandler();
-                  setEditProfileContainer(() => ({
-                    ...editProfileContainer,
-                    showContainer: false,
-                  }));
-                }}
-              >
-                Save
-              </button>
-              <button
-                type="reset"
-                onClick={() => {
-                  setEditProfileContainer(() => ({
-                    ...editProfileContainer,
-                    showContainer: false,
-                  }));
-                }}
-              >
-                Discard
-              </button>
+                <label htmlFor="password">Change Password : </label>
+                <input
+                  type="text"
+                  required
+                  onChange={(event) => {
+                    setEditProfileContainer(() => ({
+                      ...editProfileContainer,
+                      password: event.target.value,
+                    }));
+                  }}
+                  defaultValue={state.userProfileDetails?.password}
+                />
+
+                <div className="btn-section">
+                  <button
+                    type="submit"
+                    className="save-btn-profile"
+                    onClick={() => {
+                      editUserBioHandler();
+                      setEditProfileContainer(() => ({
+                        ...editProfileContainer,
+                        showContainer: false,
+                      }));
+                    }}
+                  >
+                    Save
+                  </button>
+                  <button
+                    type="reset"
+                    className="save-btn-profile"
+                    onClick={() => {
+                      setEditProfileContainer(() => ({
+                        ...editProfileContainer,
+                        showContainer: false,
+                      }));
+                    }}
+                  >
+                    Discard
+                  </button>
+                </div>
+              </div>
             </div>
           ) : (
             ""
