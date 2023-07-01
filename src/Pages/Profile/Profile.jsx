@@ -120,55 +120,56 @@ function Profile() {
   };
 
   return (
-    <div className="user-profile-page">
+    <div className="main-page">
       <Navbar />
-      <div className="user-profile-main-section">
-        <div
-          className="avatar-image-div"
-          style={{
-            backgroundColor: state.userProfileDetails.image ? "" : "gray",
-          }}
-        >
-          <img
-            src={state.userProfileDetails?.image}
-            className="avatar-image"
-            onError={(e) => (e.target.style.display = "none")}
-          />
-        </div>
-        <h1>
-          {`${state.userProfileDetails?.firstName} ${state.userProfileDetails?.lastName}`}
-        </h1>
-        <p>@{state.userProfileDetails.username}</p>
-        <p>
+      <div className="page-main-section">
+        <div className="profile-page-header">
+          <div
+            className="avatar-image-div"
+            style={{
+              backgroundColor: state.userProfileDetails.image ? "" : "gray",
+            }}
+          >
+            <img
+              src={state.userProfileDetails?.image}
+              className="avatar-image"
+              onError={(e) => (e.target.style.display = "none")}
+            />
+          </div>
+          <h1 className="user-name-profile">
+            {`${state.userProfileDetails?.firstName} ${state.userProfileDetails?.lastName}`}
+          </h1>
+          <p className="username-profile">
+            @{state.userProfileDetails.username}
+          </p>
+
           {state.userProfileDetails.userBio ? (
             <p>Bio : {state.userProfileDetails.userBio}</p>
           ) : (
             ""
           )}
-        </p>
-        <p>
+
           {state.userProfileDetails.userPortfolioUrl ? (
             <p>Portfolio : {state.userProfileDetails.userPortfolioUrl}</p>
           ) : (
             ""
           )}
-        </p>
-        {state.userProfileDetails._id == state.userData._id ? (
-          <div>
+
+          {state.userProfileDetails._id == state.userData._id ? (
             <button
+              className="edit-profile-btn"
               onClick={() => {
                 setEditProfileContainer(() => ({
                   ...editProfileContainer,
-                  showContainer: true,
+                  showContainer: !editProfileContainer.showContainer,
                 }));
               }}
             >
               Edit Profile
             </button>
-          </div>
-        ) : (
-          <div>
+          ) : (
             <button
+              className="edit-profile-btn"
               onClick={() => {
                 state?.userData?.following?.some(
                   (user) => user._id === state.userProfileDetails._id
@@ -183,154 +184,155 @@ function Profile() {
                 ? "Unfollow"
                 : "Follow"}
             </button>
-          </div>
-        )}
+          )}
 
-        <div className="following-section">
-          <p>
-            {state.userProfileDetails.followers
-              ? state.userProfileDetails.followers.length
-              : 0}{" "}
-            Followers
-          </p>
-          <p>
-            {state.userProfileDetails.following
-              ? state.userProfileDetails.following.length
-              : 0}{" "}
-            Following
-          </p>
-        </div>
-      </div>
-      {state.userProfileDetails._id == state.userData._id &&
-      editProfileContainer.showContainer ? (
-        <div className="edit-profile-container">
-          <label htmlFor="update-avatar"></label>
-          <input
-            type="file"
-            name="img"
-            id="img"
-            accept="image/*"
-            onError={(e) => (e.target.style.display = "none")}
-            onChange={(event) => {
-              setEditProfileContainer(() => ({
-                ...editProfileContainer,
-                image: event.target.files[0],
-              }));
-              const reader = new FileReader();
-              reader.onloadend = () => {
-                setEditProfileContainer(() => ({
-                  ...editProfileContainer,
-                  previewImage: reader.result,
-                }));
-              };
-              reader.readAsDataURL(event.target.files[0]);
-            }}
-          />
-          {editProfileContainer.previewImage && (
-            <div>
-              <img
-                src={editProfileContainer.previewImage}
-                alt="Preview"
-                className="avatar-image"
-              />
-              <i
-                className="fa-solid fa-xmark"
-                onClick={() =>
+          <div className="following-section-profile">
+            <p>
+              {state.userProfileDetails.followers
+                ? state.userProfileDetails.followers.length
+                : 0}{" "}
+              Followers
+            </p>
+            <p>
+              {state.userProfileDetails.following
+                ? state.userProfileDetails.following.length
+                : 0}{" "}
+              Following
+            </p>
+          </div>
+          {state.userProfileDetails._id == state.userData._id &&
+          editProfileContainer.showContainer ? (
+            <div className="edit-profile-container">
+              <label htmlFor="update-avatar"></label>
+              <input
+                type="file"
+                name="img"
+                id="img"
+                accept="image/*"
+                onError={(e) => (e.target.style.display = "none")}
+                onChange={(event) => {
                   setEditProfileContainer(() => ({
                     ...editProfileContainer,
-                    previewImage: null,
-                  }))
-                }
-              ></i>
+                    image: event.target.files[0],
+                  }));
+                  const reader = new FileReader();
+                  reader.onloadend = () => {
+                    setEditProfileContainer(() => ({
+                      ...editProfileContainer,
+                      previewImage: reader.result,
+                    }));
+                  };
+                  reader.readAsDataURL(event.target.files[0]);
+                }}
+              />
+              {editProfileContainer.previewImage && (
+                <div>
+                  <img
+                    src={editProfileContainer.previewImage}
+                    alt="Preview"
+                    className="avatar-image"
+                  />
+                  <i
+                    className="fa-solid fa-xmark"
+                    onClick={() =>
+                      setEditProfileContainer(() => ({
+                        ...editProfileContainer,
+                        previewImage: null,
+                      }))
+                    }
+                  ></i>
+                </div>
+              )}
+              <label htmlFor="bio">Update Bio : </label>
+              <input
+                type="text"
+                required
+                onChange={(event) => {
+                  setEditProfileContainer(() => ({
+                    ...editProfileContainer,
+                    bio: event.target.value,
+                  }));
+                }}
+                defaultValue={state.userProfileDetails?.userBio}
+              />
+              <label htmlFor="portfolio-link">Update Portfolio Link : </label>
+              <input
+                type="email"
+                required
+                onChange={(event) => {
+                  setEditProfileContainer(() => ({
+                    ...editProfileContainer,
+                    url: event.target.value,
+                  }));
+                }}
+                defaultValue={state.userProfileDetails?.userPortfolioUrl}
+              />
+
+              <label htmlFor="password">Change Password : </label>
+              <input
+                type="text"
+                required
+                onChange={(event) => {
+                  setEditProfileContainer(() => ({
+                    ...editProfileContainer,
+                    password: event.target.value,
+                  }));
+                }}
+                defaultValue={state.userProfileDetails?.password}
+              />
+              <button
+                type="submit"
+                onClick={() => {
+                  editUserBioHandler();
+                  setEditProfileContainer(() => ({
+                    ...editProfileContainer,
+                    showContainer: false,
+                  }));
+                }}
+              >
+                Save
+              </button>
+              <button
+                type="reset"
+                onClick={() => {
+                  setEditProfileContainer(() => ({
+                    ...editProfileContainer,
+                    showContainer: false,
+                  }));
+                }}
+              >
+                Discard
+              </button>
             </div>
+          ) : (
+            ""
           )}
-          <label htmlFor="bio">Update Bio : </label>
-          <input
-            type="text"
-            required
-            onChange={(event) => {
-              setEditProfileContainer(() => ({
-                ...editProfileContainer,
-                bio: event.target.value,
-              }));
-            }}
-            defaultValue={state.userProfileDetails?.userBio}
-          />
-          <label htmlFor="portfolio-link">Update Portfolio Link : </label>
-          <input
-            type="email"
-            required
-            onChange={(event) => {
-              setEditProfileContainer(() => ({
-                ...editProfileContainer,
-                url: event.target.value,
-              }));
-            }}
-            defaultValue={state.userProfileDetails?.userPortfolioUrl}
-          />
-
-          <label htmlFor="password">Change Password : </label>
-          <input
-            type="text"
-            required
-            onChange={(event) => {
-              setEditProfileContainer(() => ({
-                ...editProfileContainer,
-                password: event.target.value,
-              }));
-            }}
-            defaultValue={state.userProfileDetails?.password}
-          />
-          <button
-            type="submit"
-            onClick={() => {
-              editUserBioHandler();
-              setEditProfileContainer(() => ({
-                ...editProfileContainer,
-                showContainer: false,
-              }));
-            }}
-          >
-            Save
-          </button>
-          <button
-            type="reset"
-            onClick={() => {
-              setEditProfileContainer(() => ({
-                ...editProfileContainer,
-                showContainer: false,
-              }));
-            }}
-          >
-            Discard
-          </button>
         </div>
-      ) : (
-        ""
-      )}
 
-      <div className="user-posts-section">
-        <ul>
-          {state.specifiedUserPosts
-            ? state.specifiedUserPosts.map((post) => {
-                const {
-                  content,
-                  likes,
-                  username,
-                  id,
-                  userFullName,
-                  createdAt,
-                } = post;
+        <div className="user-posts-section">
+          <ul>
+            {state.specifiedUserPosts
+              ? state.specifiedUserPosts.map((post) => {
+                  const {
+                    content,
+                    likes,
+                    username,
+                    id,
+                    userFullName,
+                    createdAt,
+                  } = post;
 
-                return (
-                  <li key={id}>
-                    <PostCard post={post} />
-                  </li>
-                );
-              })
-            : "No Posts Found"}
-        </ul>
+                  return (
+                    <li key={id}>
+                      <PostCard post={post} />
+                    </li>
+                  );
+                })
+              : "No Posts Found"}
+          </ul>
+        </div>
       </div>
+
       <Footer />
     </div>
   );

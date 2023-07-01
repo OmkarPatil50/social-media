@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { AppContext } from "..";
 
 export const AppContextProvider = ({ children }) => {
@@ -95,58 +95,30 @@ export const AppContextProvider = ({ children }) => {
       case "UPDATE_SPECIFIED_USER_POSTS": {
         return {
           ...state,
-          specifiedUserPosts: [...action.payload].sort((a, b) => {
-            const dateA = new Date(a.createdAt);
-            const dateB = new Date(b.createdAt);
-            if (dateA > dateB) {
-              return -1;
-            } else if (dateB > dateA) {
-              return 1;
-            }
-          }),
+          specifiedUserPosts: action.payload,
         };
       }
 
       case "SORT_BY_DATE_LATEST": {
         return {
           ...state,
-          specifiedUserPosts: [...state.specifiedUserPosts].sort((a, b) => {
-            const dateA = new Date(a.createdAt);
-            const dateB = new Date(b.createdAt);
-            if (dateA > dateB) {
-              return -1;
-            } else if (dateB > dateA) {
-              return 1;
-            }
-          }),
+          sortByLatest: true,
+          sortByOldest: false,
         };
       }
 
       case "SORT_BY_DATE_OLDEST": {
         return {
           ...state,
-          specifiedUserPosts: [...state.specifiedUserPosts].sort((a, b) => {
-            const dateA = new Date(a.createdAt);
-            const dateB = new Date(b.createdAt);
-            if (dateA > dateB) {
-              return 1;
-            } else if (dateB > dateA) {
-              return -1;
-            }
-          }),
+          sortByOldest: true,
+          sortByLatest: false,
         };
       }
 
       case "SORT_BY_TRENDING": {
         return {
           ...state,
-          specifiedUserPosts: [...state.specifiedUserPosts].sort((a, b) => {
-            if (b.likes.likeCount > a.likes.likeCount) {
-              return 1;
-            } else if (a.likes.likeCount > b.likes.likeCount) {
-              return -1;
-            }
-          }),
+          sortByTrending: true,
         };
       }
 
@@ -185,9 +157,54 @@ export const AppContextProvider = ({ children }) => {
       _id: "",
     },
     userProfileDetails: {},
+    sortByLatest: true,
+    sortByOldest: false,
+    sortByTrending: false,
   };
 
   const [state, dispatch] = useReducer(reducerFunction, initialValue);
+
+  useEffect(() => {
+    let data = [...state.specifiedUserPosts];
+    if (state.sortByLatest) {
+      data = data.sort((a, b) => {
+        const dateA = new Date(a.createdAt);
+        const dateB = new Date(b.createdAt);
+        if (dateA > dateB) {
+          return -1;
+        } else if (dateB > dateA) {
+          return 1;
+        }
+      });
+    }
+    if (state.sortByOldest) {
+      data = data.sort((a, b) => {
+        const dateA = new Date(a.createdAt);
+        const dateB = new Date(b.createdAt);
+        if (dateA > dateB) {
+          return 1;
+        } else if (dateB > dateA) {
+          return -1;
+        }
+      });
+    }
+    if (state.sortByTrending) {
+      data = data.sort((a, b) => {
+        if (b.likes.likeCount > a.likes.likeCount) {
+          return 1;
+        } else if (a.likes.likeCount > b.likes.likeCount) {
+          return -1;
+        }
+      });
+    }
+    console.log(data);
+    dispatch({ type: "UPDATE_SPECIFIED_USER_POSTS", payload: data });
+  }, [
+    state.sortByLatest,
+    state.sortByOldest,
+    state.sortByTrending,
+    state.userPosts,
+  ]);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>

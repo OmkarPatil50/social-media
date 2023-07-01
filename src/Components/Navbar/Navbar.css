@@ -31,7 +31,7 @@
   justify-content: space-around;
   position: fixed;
   left: 0;
-  top: 87.5px;
+  top: 85px;
   background-color: var(--lynx-white-color);
   font-family: var(--font);
 }

@@ -101,7 +101,8 @@
   text-decoration: none;
   color: var(--black-color);
   align-self: flex-start;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   color: var(--black-color);
   font-weight: var(--regular-weight);
   word-wrap: break-word;
@@ -144,7 +145,7 @@
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 1;
+  z-index: 11;
   display: flex;
   justify-content: center;
   align-items: center;
