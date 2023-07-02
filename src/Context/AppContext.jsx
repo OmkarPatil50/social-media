@@ -197,7 +197,6 @@ export const AppContextProvider = ({ children }) => {
         }
       });
     }
-    console.log(data);
     dispatch({ type: "UPDATE_SPECIFIED_USER_POSTS", payload: data });
   }, [
     state.sortByLatest,

@@ -260,7 +260,7 @@ export const posts = [
   },
 
   {
-    _id: "1",
+    _id: 1,
     content: 'Just returned from a refreshing morning run. Feeling energized!',
     likes: {
       likeCount: 0,
@@ -276,7 +276,7 @@ export const posts = [
   }
   ,
   {
-    _id: "1",
+    _id: 1,
     content: 'Celebrating a milestone achievement today. Hard work pays off!',
     likes: {
       likeCount: 0,
@@ -292,7 +292,7 @@ export const posts = [
   }
   ,
   {
-    _id: "1",
+    _id: 1,
     content: 'Enjoying a relaxing weekend getaway. Taking a break from the hustle and bustle.',
     likes: {
       likeCount: 0,
@@ -308,7 +308,7 @@ export const posts = [
   }
   ,
   {
-    _id: "1",
+    _id: 1,
     content: 'Trying out a new recipe in the kitchen. Fingers crossed for delicious results!',
     likes: {
       likeCount: 0,
@@ -324,7 +324,7 @@ export const posts = [
   }
   ,
   {
-    _id: "1",
+    _id: 1,
     content: 'Enjoying a movie night with friends. Popcorn and laughter all around!',
     likes: {
       likeCount: 0,

@@ -1,10 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Footer.css";
 import { AppContext } from "../..";
 import { Link } from "react-router-dom";
 
 function Footer() {
   const { state, dispatch } = useContext(AppContext);
+  const [peopleSearchText, setPeopleSearchText] = useState("");
+  const [foundPeople, setFoundPeople] = useState([]);
 
   const getAllUsers = async () => {
     try {
@@ -53,16 +55,58 @@ function Footer() {
     }
   };
 
+  useEffect(() => {
+    const foundPeopleList = state.allUsers.filter(({ firstName, lastName }) => {
+      return (
+        firstName.toUpperCase().includes(peopleSearchText.toUpperCase()) ||
+        lastName.toUpperCase().includes(peopleSearchText.toUpperCase())
+      );
+    });
+    setFoundPeople(foundPeopleList);
+  }, [peopleSearchText]);
+
   return (
     <div className="footer-section">
-      <label htmlFor="search-bar">
+      <label htmlFor="search-bar" className="search-bar-label">
         <i className="fa-solid fa-magnifying-glass mag-"></i>
         <input
           type="search"
-          placeholder="Search Posts,People,Anything"
+          placeholder="Search People By Their Names"
           className="footer-search-bar"
+          onChange={(event) => setPeopleSearchText(event.target.value)}
         />
       </label>
+      {peopleSearchText.length ? (
+        <ul className="found-people-list">
+          {foundPeople.map((user) => {
+            return (
+              <li>
+                <Link to={`/users/${user._id}`} className="footer-user-head">
+                  <div
+                    className="avatar-image-div-nav"
+                    style={{
+                      backgroundColor: "gray",
+                    }}
+                  >
+                    <img
+                      src={""}
+                      alt=""
+                      className="avatar-image-nav"
+                      onError={(e) => (e.target.style.display = "none")}
+                    />
+                  </div>
+                  <div>
+                    <p className="user-name-footer">{`${user.firstName} ${user.lastName}`}</p>
+                    <p className="username-footer">@{user.username}</p>
+                  </div>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        ""
+      )}
       <div className="to-follow-list">
         <div className="to-follow-header">
           <p className="who-to-follow-tag">Who to follow?</p>

@@ -190,7 +190,7 @@ function PostCard({ post }) {
                 <label htmlFor="edit-post" className="edit-post-label">
                   New Post Content:
                 </label>
-                <input
+                <textarea
                   type="text"
                   defaultValue={post.content}
                   onChange={(event) => setNewPostData(event.target.value)}
