@@ -104,6 +104,7 @@ export const AppContextProvider = ({ children }) => {
           ...state,
           sortByLatest: true,
           sortByOldest: false,
+          sortByTrending: false,
         };
       }
 
@@ -112,6 +113,7 @@ export const AppContextProvider = ({ children }) => {
           ...state,
           sortByOldest: true,
           sortByLatest: false,
+          sortByTrending: false,
         };
       }
 

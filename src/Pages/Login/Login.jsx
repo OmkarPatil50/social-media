@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../..";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -40,6 +41,9 @@ function Login() {
 
   return (
     <div className="landing-page">
+      <Helmet>
+        <title>Sociocourt | Login</title>
+      </Helmet>
       <section className="app-info">
         <h1 className="app-heading">
           <span>Socio</span>court

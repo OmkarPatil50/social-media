@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../..";
 import "./Lander.css";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function Landing() {
   const { state, dispatch } = useContext(AppContext);
@@ -45,6 +46,9 @@ function Landing() {
 
   return (
     <div className="landing-page">
+      <Helmet>
+        <title>Sociocourt | Signup</title>
+      </Helmet>
       <section className="app-info">
         <h1 className="app-heading">
           <span>Socio</span>court

@@ -4,6 +4,7 @@ import Footer from "../../Components/Footer/Footer";
 import { AppContext } from "../..";
 import PostCard from "../../Components/PostCard/PostCard";
 import "./Bookmark.css";
+import { Helmet } from "react-helmet";
 
 function Bookmark() {
   const { state, dispatch } = useContext(AppContext);
@@ -27,6 +28,9 @@ function Bookmark() {
   }, []);
   return (
     <div className="main-page">
+      <Helmet>
+        <title>Sociocourt | Bookmarks</title>
+      </Helmet>
       <Navbar />
       <section className="page-main-section">
         <h1>Bookmarks</h1>

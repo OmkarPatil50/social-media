@@ -5,6 +5,7 @@ import "./Profile.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import PostCard from "../../Components/PostCard/PostCard";
+import { Helmet } from "react-helmet";
 
 function Profile() {
   const { userId } = useParams();
@@ -121,6 +122,16 @@ function Profile() {
 
   return (
     <div className="main-page">
+      {state.userProfileDetails._id == state.userData._id ? (
+        <Helmet>
+          <title>Sociocourt | Profile</title>
+        </Helmet>
+      ) : (
+        <Helmet>
+          <title>Sociocourt | User</title>
+        </Helmet>
+      )}
+
       <Navbar />
       <div className="page-main-section">
         <div className="profile-page-header">

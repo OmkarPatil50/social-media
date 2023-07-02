@@ -4,6 +4,7 @@ import { AppContext } from "../..";
 import PostCard from "../../Components/PostCard/PostCard";
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
+import { Helmet } from "react-helmet";
 
 function PostDetails() {
   const { postID } = useParams();
@@ -40,6 +41,9 @@ function PostDetails() {
   }, []);
   return (
     <div className="post-details-page">
+      <Helmet>
+        <title>Sociocourt | Post</title>
+      </Helmet>
       <Navbar />
       <PostCard post={state.userPostDetails} />
       <Footer />

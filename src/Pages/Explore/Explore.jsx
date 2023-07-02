@@ -4,6 +4,7 @@ import PostCard from "../../Components/PostCard/PostCard";
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 function Explore() {
   const { state, dispatch } = useContext(AppContext);
@@ -67,6 +68,9 @@ function Explore() {
 
   return (
     <div className="main-page">
+      <Helmet>
+        <title>Sociocourt | Explore</title>
+      </Helmet>
       <Navbar />
       <section className="page-main-section">
         <h1>Explore</h1>

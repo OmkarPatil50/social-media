@@ -4,6 +4,7 @@ import { AppContext } from "../..";
 import PostCard from "../../Components/PostCard/PostCard";
 import Footer from "../../Components/Footer/Footer";
 import "./Home.css";
+import { Helmet } from "react-helmet";
 
 function Home() {
   const { state, dispatch } = useContext(AppContext);
@@ -93,6 +94,9 @@ function Home() {
 
   return (
     <div className="main-page">
+      <Helmet>
+        <title>Sociocourt | Home</title>
+      </Helmet>
       <Navbar />
       <section className="page-main-section">
         {state.specifiedUserPosts?.length === 0 ? (

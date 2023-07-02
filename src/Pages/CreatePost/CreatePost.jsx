@@ -5,6 +5,7 @@ import Footer from "../../Components/Footer/Footer";
 import { useState } from "react";
 import { useContext } from "react";
 import { AppContext } from "../..";
+import { Helmet } from "react-helmet";
 
 function CreatePost() {
   const { state, dispatch } = useContext(AppContext);
@@ -33,6 +34,9 @@ function CreatePost() {
 
   return (
     <div className="main-page">
+      <Helmet>
+        <title>Sociocourt | New Post</title>
+      </Helmet>
       <Navbar />
       <div className="page-main-section">
         <div className="section-new-post">
