@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../..";
 import { Link } from "react-router-dom";
 import "./PostCard.css";
+import { toast } from "react-toastify";
 
 function PostCard({ post }) {
   const { content, likes, username, id, firstName, lastName, createdAt, _id } =
@@ -22,6 +23,16 @@ function PostCard({ post }) {
       const jsonResponse = await response.json();
       if (jsonResponse.posts) {
         dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
+        toast.success("You Liked the Post!", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
     } catch (err) {
       console.error(err);
@@ -39,6 +50,16 @@ function PostCard({ post }) {
       const jsonResponse = await response.json();
       if (jsonResponse.posts) {
         dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
+        toast.error("You Disliked the post!", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
     } catch (err) {
       console.error(err);
@@ -56,6 +77,16 @@ function PostCard({ post }) {
       const jsonResponse = await response.json();
       if (jsonResponse.posts) {
         dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
+        toast.error("Post Deleted Successfully!", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
     } catch (err) {
       console.error(err);
@@ -79,6 +110,16 @@ function PostCard({ post }) {
           payload: !state.showPostOptions,
         });
         setShowEditWindow(false);
+        toast.success("Post Edited Successfully!", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
     } catch (err) {
       console.error(err);
@@ -96,6 +137,16 @@ function PostCard({ post }) {
       const jsonResponse = await response.json();
       if (jsonResponse.bookmarks) {
         dispatch({ type: "UPDATE_BOOKMARKS", payload: jsonResponse.bookmarks });
+        toast.success("Added to Bookmark!", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
     } catch (err) {
       console.error(err);
@@ -114,6 +165,16 @@ function PostCard({ post }) {
 
       if (jsonResponse.bookmarks) {
         dispatch({ type: "UPDATE_BOOKMARKS", payload: jsonResponse.bookmarks });
+        toast.error("Removed from Bookmark!", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
     } catch (err) {
       console.error(err);

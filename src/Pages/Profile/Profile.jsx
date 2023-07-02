@@ -6,6 +6,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import PostCard from "../../Components/PostCard/PostCard";
 import { Helmet } from "react-helmet";
+import { toast } from "react-toastify";
 
 function Profile() {
   const { userId } = useParams();
@@ -72,6 +73,20 @@ function Profile() {
       const jsonResponse = await response.json();
       if (jsonResponse.user && jsonResponse.followUser) {
         dispatch({ type: "UPDATE_USER_DATA", payload: jsonResponse.user });
+
+        toast.success(
+          `You started following ${state.userProfileDetails.firstName} ${state.userProfileDetails.lastName}`,
+          {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          }
+        );
       }
     } catch (err) {
       console.error(err);
@@ -91,6 +106,19 @@ function Profile() {
 
       if (jsonResponse.user && jsonResponse.followUser) {
         dispatch({ type: "UPDATE_USER_DATA", payload: jsonResponse.user });
+        toast.error(
+          `You Unfollowed ${state.userProfileDetails.firstName} ${state.userProfileDetails.lastName}`,
+          {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          }
+        );
       }
     } catch (err) {
       console.error(err);
@@ -114,6 +142,16 @@ function Profile() {
       const jsonResponse = await response.json();
       if (jsonResponse.user) {
         dispatch({ type: "UPDATE_USER_DATA", payload: jsonResponse.user });
+        toast.success("User Bio Updated Successfully!", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
     } catch (err) {
       console.error(err);

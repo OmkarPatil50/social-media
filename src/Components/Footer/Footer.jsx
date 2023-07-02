@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Footer.css";
 import { AppContext } from "../..";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Footer() {
   const { state, dispatch } = useContext(AppContext);
@@ -24,7 +25,7 @@ function Footer() {
     getAllUsers();
   }, [state.allUsers, state.userData]);
 
-  const followUserHandler = async (id) => {
+  const followUserHandler = async (id, userFirstName, userLastName) => {
     try {
       const response = await fetch(`/api/users/follow/${id}`, {
         method: "POST",
@@ -33,6 +34,20 @@ function Footer() {
       const jsonResponse = await response.json();
       if (jsonResponse.user && jsonResponse.followUser) {
         dispatch({ type: "UPDATE_USER_DATA", payload: jsonResponse.user });
+
+        toast.success(
+          `You started following ${userFirstName} ${userLastName}`,
+          {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          }
+        );
       }
     } catch (err) {
       console.error(err);
@@ -149,8 +164,16 @@ function Footer() {
                       state?.userData?.following?.some(
                         (user) => user._id === state.userProfileDetails._id
                       )
-                        ? unFollowUserHandler(user._id)
-                        : followUserHandler(user._id);
+                        ? unFollowUserHandler(
+                            user._id,
+                            user.firstName,
+                            user.lastName
+                          )
+                        : followUserHandler(
+                            user._id,
+                            user.firstName,
+                            user.lastName
+                          );
                     }}
                     className="follow-btn-footer"
                   >

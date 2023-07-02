@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { AppContext } from "../..";
 import { Helmet } from "react-helmet";
+import { toast } from "react-toastify";
 
 function CreatePost() {
   const { state, dispatch } = useContext(AppContext);
@@ -25,6 +26,16 @@ function CreatePost() {
       const jsonResponse = await response.json();
       if (jsonResponse.posts) {
         dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
+        toast.success("New Post Created Successfully!", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
         setPostContent("");
       }
     } catch (err) {

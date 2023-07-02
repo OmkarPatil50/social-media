@@ -5,6 +5,7 @@ import PostCard from "../../Components/PostCard/PostCard";
 import Footer from "../../Components/Footer/Footer";
 import "./Home.css";
 import { Helmet } from "react-helmet";
+import { toast } from "react-toastify";
 
 function Home() {
   const { state, dispatch } = useContext(AppContext);
@@ -45,6 +46,16 @@ function Home() {
         if (jsonResponse.posts) {
           dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
           setPostContent("");
+          toast.success("New Post Created Successfully!", {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
       }
     } catch (err) {
@@ -156,6 +167,16 @@ function Home() {
                     onClick={() => {
                       setHomeHeading("Latest Posts");
                       dispatch({ type: "SORT_BY_DATE_LATEST" });
+                      toast.success("Sorted By Date Successfully!", {
+                        position: "bottom-center",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                      });
                     }}
                   >
                     Latest
@@ -165,6 +186,16 @@ function Home() {
                     onClick={() => {
                       setHomeHeading("Oldest Posts");
                       dispatch({ type: "SORT_BY_DATE_OLDEST" });
+                      toast.success("Sorted By Date Successfully!", {
+                        position: "bottom-center",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                      });
                     }}
                   >
                     Oldest
@@ -174,6 +205,16 @@ function Home() {
                     onClick={() => {
                       setHomeHeading("Trending Posts");
                       dispatch({ type: "SORT_BY_TRENDING" });
+                      toast.success("Sorted By Trending Successfully!", {
+                        position: "bottom-center",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                      });
                     }}
                   >
                     Trending

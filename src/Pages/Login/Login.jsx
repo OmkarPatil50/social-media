@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { AppContext } from "../..";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { toast } from "react-toastify";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -31,8 +32,45 @@ function Login() {
             type: "UPDATE_USER_DATA",
             payload: jsonResponse.foundUser,
           });
-          navigate("/");
+          setTimeout(
+            () =>
+              toast.success("Logged In Successfully!", {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              }),
+            2000
+          );
+
+          setTimeout(() => navigate("/"), 6000);
+        } else {
+          toast.error("Invalid Credentials!", {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
+      } else {
+        toast.error("Please Fill All Credentials!", {
+          position: "bottom-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
     } catch (err) {
       console.error(err);

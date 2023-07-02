@@ -3,6 +3,7 @@ import { AppContext } from "../..";
 import "./Lander.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { toast } from "react-toastify";
 
 function Landing() {
   const { state, dispatch } = useContext(AppContext);
@@ -14,30 +15,79 @@ function Landing() {
         state.userSignupData.firstName.length &&
         state.userSignupData.lastName.length &&
         state.userSignupData.userName.length &&
-        state.userSignupData.userPassword.length
+        state.userSignupData.userPassword.length &&
+        state.userSignupData.isSignupConditionsChecked
       ) {
-        const response = await fetch("/api/auth/signup", {
-          method: "POST",
-          body: JSON.stringify({
-            firstName: state.userSignupData.firstName,
-            lastName: state.userSignupData.lastName,
-            username: state.userSignupData.userName,
-            password: state.userSignupData.userPassword,
-          }),
-        });
-
-        const jsonResponse = await response.json();
-
-        localStorage.setItem("encodedToken", jsonResponse.encodedToken);
-
-        if (jsonResponse.encodedToken) {
-          dispatch({ type: "UPDATE_USER_LOGGEDIN", payload: true });
-          dispatch({
-            type: "UPDATE_USER_DATA",
-            payload: jsonResponse.createdUser,
+        if (
+          state.userSignupData.userPassword ===
+          state.userSignupData.userConfirmPassword
+        ) {
+          const response = await fetch("/api/auth/signup", {
+            method: "POST",
+            body: JSON.stringify({
+              firstName: state.userSignupData.firstName,
+              lastName: state.userSignupData.lastName,
+              username: state.userSignupData.userName,
+              password: state.userSignupData.userPassword,
+            }),
           });
-          navigate("/");
+
+          const jsonResponse = await response.json();
+
+          localStorage.setItem("encodedToken", jsonResponse.encodedToken);
+
+          if (jsonResponse.encodedToken) {
+            dispatch({ type: "UPDATE_USER_LOGGEDIN", payload: true });
+            dispatch({
+              type: "UPDATE_USER_DATA",
+              payload: jsonResponse.createdUser,
+            });
+            toast.success("Logged In Successfully!", {
+              position: "bottom-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            setTimeout(() => navigate("/"), 3000);
+          } else {
+            toast.error("Invalid Credentials!", {
+              position: "bottom-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          }
+        } else {
+          toast.error("Password Must Match Confirm Password!", {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
+      } else {
+        toast.error("Please Fill All Credentials!", {
+          position: "bottom-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
     } catch (err) {
       console.error(err);
