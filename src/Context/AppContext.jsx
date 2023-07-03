@@ -128,12 +128,17 @@ export const AppContextProvider = ({ children }) => {
         return { ...state, allUsers: action.payload };
       }
 
+      case "UPDATE_SHOW_LOADER": {
+        return { ...state, showLoader: action.payload };
+      }
+
       default:
         return state;
     }
   };
 
   const initialValue = {
+    showLoader: false,
     userSignupData: {
       firstName: "",
       lastName: "",

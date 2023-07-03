@@ -7,6 +7,7 @@ import Footer from "../../Components/Footer/Footer";
 import PostCard from "../../Components/PostCard/PostCard";
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
+import Loader from "../../Components/Loader/Loader";
 
 function Profile() {
   const { userId } = useParams();
@@ -30,6 +31,10 @@ function Profile() {
           type: "UPDATE_PROFILE_DETAILS_OBJ",
           payload: jsonResponse.user,
         });
+        setTimeout(
+          () => dispatch({ type: "UPDATE_SHOW_LOADER", payload: false }),
+          2000
+        );
       }
     } catch (err) {
       console.error(err);
@@ -51,6 +56,10 @@ function Profile() {
           type: "UPDATE_SPECIFIED_USER_POSTS",
           payload: jsonResponse.posts,
         });
+        setTimeout(
+          () => dispatch({ type: "UPDATE_SHOW_LOADER", payload: false }),
+          2000
+        );
       }
     } catch (err) {
       console.error(err);
@@ -73,7 +82,10 @@ function Profile() {
       const jsonResponse = await response.json();
       if (jsonResponse.user && jsonResponse.followUser) {
         dispatch({ type: "UPDATE_USER_DATA", payload: jsonResponse.user });
-
+        setTimeout(
+          () => dispatch({ type: "UPDATE_SHOW_LOADER", payload: false }),
+          2000
+        );
         toast.success(
           `You started following ${state.userProfileDetails.firstName} ${state.userProfileDetails.lastName}`,
           {
@@ -106,6 +118,10 @@ function Profile() {
 
       if (jsonResponse.user && jsonResponse.followUser) {
         dispatch({ type: "UPDATE_USER_DATA", payload: jsonResponse.user });
+        setTimeout(
+          () => dispatch({ type: "UPDATE_SHOW_LOADER", payload: false }),
+          2000
+        );
         toast.error(
           `You Unfollowed ${state.userProfileDetails.firstName} ${state.userProfileDetails.lastName}`,
           {
@@ -141,6 +157,10 @@ function Profile() {
       });
       const jsonResponse = await response.json();
       if (jsonResponse.user) {
+        setTimeout(
+          () => dispatch({ type: "UPDATE_SHOW_LOADER", payload: false }),
+          2000
+        );
         dispatch({ type: "UPDATE_USER_DATA", payload: jsonResponse.user });
         toast.success("User Bio Updated Successfully!", {
           position: "bottom-center",
@@ -160,6 +180,7 @@ function Profile() {
 
   return (
     <div className="main-page">
+      {state.showLoader ? <Loader /> : ""}
       {state.userProfileDetails._id == state.userData._id ? (
         <Helmet>
           <title>Sociocourt | Profile</title>
@@ -224,6 +245,8 @@ function Profile() {
             <button
               className="edit-profile-btn"
               onClick={() => {
+                dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+
                 state?.userData?.following?.some(
                   (user) => user._id === state.userProfileDetails._id
                 )
@@ -341,6 +364,8 @@ function Profile() {
                     type="submit"
                     className="save-btn-profile"
                     onClick={() => {
+                      dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+
                       editUserBioHandler();
                       setEditProfileContainer(() => ({
                         ...editProfileContainer,
@@ -354,6 +379,8 @@ function Profile() {
                     type="reset"
                     className="save-btn-profile"
                     onClick={() => {
+                      dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+
                       setEditProfileContainer(() => ({
                         ...editProfileContainer,
                         showContainer: false,

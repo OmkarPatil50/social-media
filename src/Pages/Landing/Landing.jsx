@@ -4,6 +4,7 @@ import "./Lander.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
+import Loader from "../../Components/Loader/Loader";
 
 function Landing() {
   const { state, dispatch } = useContext(AppContext);
@@ -42,7 +43,7 @@ function Landing() {
               type: "UPDATE_USER_DATA",
               payload: jsonResponse.createdUser,
             });
-            toast.success("Logged In Successfully!", {
+            toast.success("Signed Up Successfully!", {
               position: "bottom-center",
               autoClose: 3000,
               hideProgressBar: false,
@@ -52,8 +53,15 @@ function Landing() {
               progress: undefined,
               theme: "light",
             });
-            setTimeout(() => navigate("/"), 3000);
+            dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
+
+            navigate("/");
           } else {
+            setTimeout(
+              () => dispatch({ type: "UPDATE_SHOW_LOADER", payload: false }),
+              1000
+            );
+
             toast.error("Invalid Credentials!", {
               position: "bottom-center",
               autoClose: 3000,
@@ -66,6 +74,10 @@ function Landing() {
             });
           }
         } else {
+          setTimeout(
+            () => dispatch({ type: "UPDATE_SHOW_LOADER", payload: false }),
+            1000
+          );
           toast.error("Password Must Match Confirm Password!", {
             position: "bottom-center",
             autoClose: 3000,
@@ -78,6 +90,10 @@ function Landing() {
           });
         }
       } else {
+        setTimeout(
+          () => dispatch({ type: "UPDATE_SHOW_LOADER", payload: false }),
+          1000
+        );
         toast.error("Please Fill All Credentials!", {
           position: "bottom-center",
           autoClose: 2000,
@@ -96,6 +112,7 @@ function Landing() {
 
   return (
     <div className="landing-page">
+      {state.showLoader ? <Loader /> : ""}
       <Helmet>
         <title>Sociocourt | Signup</title>
       </Helmet>
@@ -214,13 +231,25 @@ function Landing() {
             />
             I accept all Terms & Conditions
           </label>
-          <button type="submit" onClick={getSignupData} className="sign-up-btn">
+          <button
+            type="submit"
+            onClick={() => {
+              dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+              getSignupData();
+            }}
+            className="sign-up-btn"
+          >
             Create New Account
           </button>
           <button
             type="submit"
             className="sign-up-btn"
-            onClick={() =>
+            onClick={() => {
+              dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+              setTimeout(
+                () => dispatch({ type: "UPDATE_SHOW_LOADER", payload: false }),
+                1000
+              );
               dispatch({
                 type: "UPDATE_USER_SIGNUP_DATA",
                 payload: {
@@ -232,8 +261,8 @@ function Landing() {
                   userConfirmPassword: "12345",
                   isSignupConditionsChecked: true,
                 },
-              })
-            }
+              });
+            }}
           >
             Fill Test Credentials
           </button>

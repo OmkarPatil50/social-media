@@ -5,6 +5,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
+import Loader from "../../Components/Loader/Loader";
 
 function Explore() {
   const { state, dispatch } = useContext(AppContext);
@@ -16,6 +17,10 @@ function Explore() {
       if (jsonResponse.posts) {
         dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
         dispatch({ type: "UPDATE_PROFILE_DETAILS_OBJ", payload: {} });
+        setTimeout(
+          () => dispatch({ type: "UPDATE_SHOW_LOADER", payload: false }),
+          2000
+        );
       }
     } catch (err) {
       console.error(err);
@@ -35,6 +40,10 @@ function Explore() {
           type: "UPDATE_PROFILE_DETAILS_OBJ",
           payload: jsonResponse.user,
         });
+        setTimeout(
+          () => dispatch({ type: "UPDATE_SHOW_LOADER", payload: false }),
+          2000
+        );
       }
     } catch (err) {
       console.error(err);
@@ -56,6 +65,10 @@ function Explore() {
           type: "UPDATE_SPECIFIED_USER_POSTS",
           payload: jsonResponse.posts,
         });
+        setTimeout(
+          () => dispatch({ type: "UPDATE_SHOW_LOADER", payload: false }),
+          2000
+        );
       }
     } catch (err) {
       console.error(err);
@@ -68,6 +81,7 @@ function Explore() {
 
   return (
     <div className="main-page">
+      {state.showLoader ? <Loader /> : ""}
       <Helmet>
         <title>Sociocourt | Explore</title>
       </Helmet>

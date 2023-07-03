@@ -7,36 +7,40 @@ import { useContext } from "react";
 import { AppContext } from "../..";
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
+import Loader from "../../Components/Loader/Loader";
 
 function CreatePost() {
   const { state, dispatch } = useContext(AppContext);
   const [postContent, setPostContent] = useState("");
-
   const addPostHandler = async () => {
     try {
-      const response = await fetch("/api/posts/", {
-        method: "POST",
-        body: JSON.stringify({
-          postData: postContent,
-        }),
-        headers: {
-          authorization: localStorage.getItem("encodedToken"),
-        },
-      });
-      const jsonResponse = await response.json();
-      if (jsonResponse.posts) {
-        dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
-        toast.success("New Post Created Successfully!", {
-          position: "bottom-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+      if (postContent) {
+        const response = await fetch("/api/posts/", {
+          method: "POST",
+          body: JSON.stringify({
+            postData: postContent,
+          }),
+          headers: {
+            authorization: localStorage.getItem("encodedToken"),
+          },
         });
-        setPostContent("");
+        const jsonResponse = await response.json();
+        if (jsonResponse.posts) {
+          dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
+          setPostContent("");
+          dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
+
+          toast.success("New Post Created Successfully!", {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
       }
     } catch (err) {
       console.error(err);
@@ -45,6 +49,7 @@ function CreatePost() {
 
   return (
     <div className="main-page">
+      {state.showLoader ? <Loader /> : ""}
       <Helmet>
         <title>Sociocourt | New Post</title>
       </Helmet>
@@ -76,7 +81,10 @@ function CreatePost() {
             </label>
             <button
               type="submit"
-              onClick={addPostHandler}
+              onClick={() => {
+                dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+                addPostHandler();
+              }}
               className="post-btn-home"
             >
               Post

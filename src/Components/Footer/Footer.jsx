@@ -93,10 +93,21 @@ function Footer() {
       </label>
       {peopleSearchText.length ? (
         <ul className="found-people-list">
+          {foundPeople.length === 0 ? (
+            <p className="no-one-tag-footer">No User Found</p>
+          ) : (
+            ""
+          )}
           {foundPeople.map((user) => {
             return (
-              <li>
-                <Link to={`/users/${user._id}`} className="footer-user-head">
+              <li className="found-people-list-item">
+                <Link
+                  to={`/users/${user._id}`}
+                  className="footer-user-head"
+                  onClick={() => {
+                    dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+                  }}
+                >
                   <div
                     className="avatar-image-div-nav"
                     style={{
@@ -135,11 +146,30 @@ function Footer() {
                 ? acc
                 : [...acc, curr];
             }, [])
+            .filter((user) => user.id != state.userData.id).length === 0 ? (
+            <p className="no-one-tag-footer">No one to Follow...!</p>
+          ) : (
+            ""
+          )}
+          {state.allUsers
+            ?.reduce((acc, curr) => {
+              return curr.followers?.some(
+                (follower) => follower._id === state.userData._id
+              )
+                ? acc
+                : [...acc, curr];
+            }, [])
             .filter((user) => user.id != state.userData.id)
             .map((user) => {
               return (
                 <li key={user._id} className="footer-user">
-                  <Link to={`/users/${user._id}`} className="footer-user-head">
+                  <Link
+                    to={`/users/${user._id}`}
+                    className="footer-user-head"
+                    onClick={() => {
+                      dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+                    }}
+                  >
                     <div
                       className="avatar-image-div-nav"
                       style={{
@@ -161,6 +191,8 @@ function Footer() {
 
                   <button
                     onClick={() => {
+                      dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+
                       state?.userData?.following?.some(
                         (user) => user._id === state.userProfileDetails._id
                       )

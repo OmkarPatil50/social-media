@@ -14,6 +14,7 @@ import { useContext } from 'react';
 import { AppContext } from '.';
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+
 function App() {
 
   const { state, dispatch } = useContext(AppContext)
@@ -26,22 +27,18 @@ function App() {
       type: "UPDATE_USER_DATA",
       payload: {},
     });
-    setTimeout(
-      () =>
-        toast.success("Logged Out Successfully!", {
-          position: "bottom-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        }),
-      2000
-    );
 
-    setTimeout(() => navigate("/login"), 6000);
+    toast.success("Logged Out Successfully!", {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    })
+    navigate("/login")
   }
 
   return (

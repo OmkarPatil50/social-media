@@ -3,6 +3,7 @@ import { AppContext } from "../..";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
+import Loader from "../../Components/Loader/Loader";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -32,23 +33,19 @@ function Login() {
             type: "UPDATE_USER_DATA",
             payload: jsonResponse.foundUser,
           });
-          setTimeout(
-            () =>
-              toast.success("Logged In Successfully!", {
-                position: "bottom-center",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-              }),
-            2000
-          );
-
-          setTimeout(() => navigate("/"), 6000);
+          toast.success("Logged In Successfully!", {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setTimeout(() => navigate("/"), 1000);
         } else {
+          dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
           toast.error("Invalid Credentials!", {
             position: "bottom-center",
             autoClose: 3000,
@@ -61,6 +58,7 @@ function Login() {
           });
         }
       } else {
+        dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
         toast.error("Please Fill All Credentials!", {
           position: "bottom-center",
           autoClose: 2000,
@@ -82,6 +80,7 @@ function Login() {
       <Helmet>
         <title>Sociocourt | Login</title>
       </Helmet>
+      {state.showLoader ? <Loader /> : ""}
       <section className="app-info">
         <h1 className="app-heading">
           <span>Socio</span>court
@@ -125,7 +124,10 @@ function Login() {
           />
           <button
             type="submit"
-            onClick={getLoginDetails}
+            onClick={() => {
+              dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+              getLoginDetails();
+            }}
             className="sign-up-btn"
           >
             Login
@@ -135,6 +137,11 @@ function Login() {
             onClick={() => {
               setUsername("adarshbalika");
               setPassword("adarshBalika123");
+              dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+              setTimeout(
+                () => dispatch({ type: "UPDATE_SHOW_LOADER", payload: false }),
+                1000
+              );
             }}
           >
             Fill Test Credentials

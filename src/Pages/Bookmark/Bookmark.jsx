@@ -5,6 +5,7 @@ import { AppContext } from "../..";
 import PostCard from "../../Components/PostCard/PostCard";
 import "./Bookmark.css";
 import { Helmet } from "react-helmet";
+import Loader from "../../Components/Loader/Loader";
 
 function Bookmark() {
   const { state, dispatch } = useContext(AppContext);
@@ -17,6 +18,10 @@ function Bookmark() {
       const jsonResponse = await response.json();
       if (jsonResponse.bookmarks) {
         dispatch({ type: "UPDATE_BOOKMARKS", payload: jsonResponse.bookmarks });
+        setTimeout(
+          () => dispatch({ type: "UPDATE_SHOW_LOADER", payload: false }),
+          2000
+        );
       }
     } catch (err) {
       console.error(err);
@@ -28,6 +33,7 @@ function Bookmark() {
   }, []);
   return (
     <div className="main-page">
+      {state.showLoader ? <Loader /> : ""}
       <Helmet>
         <title>Sociocourt | Bookmarks</title>
       </Helmet>

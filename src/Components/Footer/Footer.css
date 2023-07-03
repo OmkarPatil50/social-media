@@ -53,6 +53,17 @@
   position: absolute;
   overflow-y: auto;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+}
+
+.found-people-list-item {
+  box-sizing: border-box;
+  border: 1px solid var(--white-color);
+}
+
+.found-people-list-item:hover {
+  font-weight: 500;
+  border-left: 4px solid var(--primary-color);
 }
 
 .to-follow-list {
@@ -118,4 +129,13 @@
 .follow-btn-footer::before {
   content: "+";
   margin-right: 5px;
+}
+
+.no-one-tag-footer {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-color);
+  font-weight: 500;
 }

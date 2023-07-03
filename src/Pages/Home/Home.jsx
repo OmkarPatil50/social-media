@@ -6,6 +6,7 @@ import Footer from "../../Components/Footer/Footer";
 import "./Home.css";
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
+import Loader from "../../Components/Loader/Loader";
 
 function Home() {
   const { state, dispatch } = useContext(AppContext);
@@ -21,6 +22,7 @@ function Home() {
       if (jsonResponse.posts) {
         dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
         dispatch({ type: "UPDATE_PROFILE_DETAILS_OBJ", payload: {} });
+        dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
       }
     } catch (err) {
       console.error(err);
@@ -46,6 +48,7 @@ function Home() {
         if (jsonResponse.posts) {
           dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
           setPostContent("");
+          dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
           toast.success("New Post Created Successfully!", {
             position: "bottom-center",
             autoClose: 3000,
@@ -57,6 +60,20 @@ function Home() {
             theme: "light",
           });
         }
+      } else {
+        setTimeout(() => {
+          dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
+          toast.error("Can't Post Empty Thoughts!", {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }, 2000);
       }
     } catch (err) {
       console.error(err);
@@ -105,6 +122,8 @@ function Home() {
 
   return (
     <div className="main-page">
+      {state.showLoader ? <Loader /> : ""}
+
       <Helmet>
         <title>Sociocourt | Home</title>
       </Helmet>
@@ -141,7 +160,10 @@ function Home() {
             </label>
             <button
               type="submit"
-              onClick={addPostHandler}
+              onClick={() => {
+                dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+                addPostHandler();
+              }}
               className="post-btn-home"
             >
               Post
@@ -167,16 +189,25 @@ function Home() {
                     onClick={() => {
                       setHomeHeading("Latest Posts");
                       dispatch({ type: "SORT_BY_DATE_LATEST" });
-                      toast.success("Sorted By Date Successfully!", {
-                        position: "bottom-center",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: false,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                      });
+                      dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+
+                      setTimeout(() => {
+                        dispatch({
+                          type: "UPDATE_SHOW_LOADER",
+                          payload: false,
+                        });
+
+                        toast.success("Sorted By Date Successfully!", {
+                          position: "bottom-center",
+                          autoClose: 3000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: false,
+                          draggable: true,
+                          progress: undefined,
+                          theme: "light",
+                        });
+                      }, 1000);
                     }}
                   >
                     Latest
@@ -186,16 +217,25 @@ function Home() {
                     onClick={() => {
                       setHomeHeading("Oldest Posts");
                       dispatch({ type: "SORT_BY_DATE_OLDEST" });
-                      toast.success("Sorted By Date Successfully!", {
-                        position: "bottom-center",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: false,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                      });
+                      dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+
+                      setTimeout(() => {
+                        dispatch({
+                          type: "UPDATE_SHOW_LOADER",
+                          payload: false,
+                        });
+
+                        toast.success("Sorted By Date Successfully!", {
+                          position: "bottom-center",
+                          autoClose: 3000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: false,
+                          draggable: true,
+                          progress: undefined,
+                          theme: "light",
+                        });
+                      }, 1000);
                     }}
                   >
                     Oldest
@@ -205,16 +245,25 @@ function Home() {
                     onClick={() => {
                       setHomeHeading("Trending Posts");
                       dispatch({ type: "SORT_BY_TRENDING" });
-                      toast.success("Sorted By Trending Successfully!", {
-                        position: "bottom-center",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: false,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                      });
+                      dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+
+                      setTimeout(() => {
+                        dispatch({
+                          type: "UPDATE_SHOW_LOADER",
+                          payload: false,
+                        });
+
+                        toast.success("Sorted By Trending Successfully!", {
+                          position: "bottom-center",
+                          autoClose: 3000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: false,
+                          draggable: true,
+                          progress: undefined,
+                          theme: "light",
+                        });
+                      }, 1000);
                     }}
                   >
                     Trending

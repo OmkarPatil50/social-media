@@ -11,27 +11,63 @@ function Navbar() {
     <div className="navbar-section">
       <div className="navigation-section">
         <nav>
-          <Link className="nav-items" to="/">
+          <Link
+            className="nav-items"
+            to="/"
+            onClick={() => {
+              dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+            }}
+          >
             {" "}
             <i className="fa-solid fa-house"></i>Home
           </Link>
-          <Link className="nav-items" to="/explore">
+          <Link
+            className="nav-items"
+            to="/explore"
+            onClick={() => {
+              dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+            }}
+          >
             <i className="fa-solid fa-regular fa-rocket"></i>Explore
           </Link>
-          <Link className="nav-items" to="/bookmark">
+          <Link
+            className="nav-items"
+            to="/bookmark"
+            onClick={() => {
+              dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+            }}
+          >
             {" "}
             <i className="fa-solid fa-bookmark"></i>Bookmark
           </Link>
-          <Link className="nav-items" to={`/users/${state.userData._id}`}>
+          <Link
+            className="nav-items"
+            to={`/users/${state.userData._id}`}
+            onClick={() => {
+              dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+            }}
+          >
             <i className="fa-solid fa-user"></i>Profile
           </Link>
         </nav>
-        <Link to="/createpost" className="btn-new-post">
+        <Link
+          to="/createpost"
+          className="btn-new-post"
+          onClick={() => {
+            dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+          }}
+        >
           Create New Post
         </Link>
       </div>
 
-      <Link to={`/users/${state.userData._id}`} className="profile-sub-section">
+      <Link
+        to={`/users/${state.userData._id}`}
+        className="profile-sub-section"
+        onClick={() => {
+          dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+        }}
+      >
         <div
           className="avatar-image-div-nav"
           style={{

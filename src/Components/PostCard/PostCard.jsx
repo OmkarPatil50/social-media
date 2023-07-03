@@ -3,6 +3,7 @@ import { AppContext } from "../..";
 import { Link } from "react-router-dom";
 import "./PostCard.css";
 import { toast } from "react-toastify";
+import Loader from "../Loader/Loader";
 
 function PostCard({ post }) {
   const { content, likes, username, id, firstName, lastName, createdAt, _id } =
@@ -77,6 +78,8 @@ function PostCard({ post }) {
       const jsonResponse = await response.json();
       if (jsonResponse.posts) {
         dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
+        dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
+
         toast.error("Post Deleted Successfully!", {
           position: "bottom-center",
           autoClose: 3000,
@@ -110,6 +113,7 @@ function PostCard({ post }) {
           payload: !state.showPostOptions,
         });
         setShowEditWindow(false);
+        dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
         toast.success("Post Edited Successfully!", {
           position: "bottom-center",
           autoClose: 3000,
@@ -259,6 +263,14 @@ function PostCard({ post }) {
                 />
                 <button
                   onClick={() => {
+                    dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+
+                    setTimeout(() => {
+                      dispatch({
+                        type: "UPDATE_SHOW_LOADER",
+                        payload: false,
+                      });
+                    }, 1000);
                     editPostHandler();
                   }}
                   className="update-post-btn"
@@ -323,6 +335,14 @@ function PostCard({ post }) {
 
           <button
             onClick={() => {
+              dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+
+              setTimeout(() => {
+                dispatch({
+                  type: "UPDATE_SHOW_LOADER",
+                  payload: false,
+                });
+              }, 1000);
               deletePostHandler();
               dispatch({
                 type: "SHOW_POST_OPTIONS",
