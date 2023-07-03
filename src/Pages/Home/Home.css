@@ -45,7 +45,7 @@
 }
 
 .section-new-post {
-  width: 100%;
+  width: inherit;
   display: flex;
   background-color: var(--white-color);
 }

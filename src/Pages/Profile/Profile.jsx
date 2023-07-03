@@ -398,6 +398,11 @@ function Profile() {
         </div>
 
         <div className="user-posts-section">
+          {state.specifiedUserPosts.length === 0 ? (
+            <h3 className="empty-profile-page-tag">No Posts Found...!</h3>
+          ) : (
+            ""
+          )}
           <ul>
             {state.specifiedUserPosts
               ? state.specifiedUserPosts.map((post) => {

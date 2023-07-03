@@ -40,15 +40,16 @@
 }
 
 .profile-page-header {
-  margin: 0;
+  box-sizing: border-box;
+  width: inherit;
   display: flex;
   padding: 20px 20px 0px;
-  margin: 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: var(--lynx-white-color);
   height: fit-content;
+  margin: 0;
 }
 
 .user-name-profile {
@@ -157,4 +158,11 @@
 
 .following-section-count {
   font-weight: 500;
+}
+
+.empty-profile-page-tag {
+  width: 100%;
+  display: flex;
+  padding: 0 10px;
+  justify-content: center;
 }
