@@ -86,7 +86,7 @@ function Footer() {
         <i className="fa-solid fa-magnifying-glass mag-"></i>
         <input
           type="search"
-          placeholder="Search People By Their Names"
+          placeholder="Search People..."
           className="footer-search-bar"
           onChange={(event) => setPeopleSearchText(event.target.value)}
         />
