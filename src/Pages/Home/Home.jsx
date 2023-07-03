@@ -222,7 +222,7 @@ function Home() {
                       setHomeHeading("Latest Posts");
                       dispatch({ type: "SORT_BY_DATE_LATEST" });
                       dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
-
+                      setShowSortItems(false);
                       setTimeout(() => {
                         dispatch({
                           type: "UPDATE_SHOW_LOADER",
@@ -250,6 +250,7 @@ function Home() {
                       setHomeHeading("Oldest Posts");
                       dispatch({ type: "SORT_BY_DATE_OLDEST" });
                       dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+                      setShowSortItems(false);
 
                       setTimeout(() => {
                         dispatch({
@@ -278,6 +279,7 @@ function Home() {
                       setHomeHeading("Trending Posts");
                       dispatch({ type: "SORT_BY_TRENDING" });
                       dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+                      setShowSortItems(false);
 
                       setTimeout(() => {
                         dispatch({
