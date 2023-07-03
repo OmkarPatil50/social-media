@@ -20,7 +20,19 @@ function Home() {
       const jsonResponse = await response.json();
 
       if (jsonResponse.posts) {
-        dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
+        setHomeHeading("Latest Posts");
+        dispatch({
+          type: "UPDATE_POSTS",
+          payload: jsonResponse.posts.sort((a, b) => {
+            const dateA = new Date(a.createdAt);
+            const dateB = new Date(b.createdAt);
+            if (dateA > dateB) {
+              return -1;
+            } else if (dateB > dateA) {
+              return 1;
+            }
+          }),
+        });
         dispatch({ type: "UPDATE_PROFILE_DETAILS_OBJ", payload: {} });
         dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
       }
@@ -46,7 +58,19 @@ function Home() {
         });
         const jsonResponse = await response.json();
         if (jsonResponse.posts) {
-          dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
+          setHomeHeading("Latest Posts");
+          dispatch({
+            type: "UPDATE_POSTS",
+            payload: jsonResponse.posts.sort((a, b) => {
+              const dateA = new Date(a.createdAt);
+              const dateB = new Date(b.createdAt);
+              if (dateA > dateB) {
+                return -1;
+              } else if (dateB > dateA) {
+                return 1;
+              }
+            }),
+          });
           setPostContent("");
           dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
           toast.success("New Post Created Successfully!", {
@@ -108,7 +132,15 @@ function Home() {
       if (jsonResponse.posts) {
         dispatch({
           type: "UPDATE_SPECIFIED_USER_POSTS",
-          payload: jsonResponse.posts,
+          payload: jsonResponse.posts.sort((a, b) => {
+            const dateA = new Date(a.createdAt);
+            const dateB = new Date(b.createdAt);
+            if (dateA > dateB) {
+              return -1;
+            } else if (dateB > dateA) {
+              return 1;
+            }
+          }),
         });
       }
     } catch (err) {

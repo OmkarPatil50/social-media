@@ -27,7 +27,18 @@ function CreatePost() {
         });
         const jsonResponse = await response.json();
         if (jsonResponse.posts) {
-          dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
+          dispatch({
+            type: "UPDATE_POSTS",
+            payload: jsonResponse.posts.sort((a, b) => {
+              const dateA = new Date(a.createdAt);
+              const dateB = new Date(b.createdAt);
+              if (dateA > dateB) {
+                return -1;
+              } else if (dateB > dateA) {
+                return 1;
+              }
+            }),
+          });
           setPostContent("");
           dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
           toast.success("New Post Created Successfully!", {

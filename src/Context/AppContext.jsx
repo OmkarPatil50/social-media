@@ -75,7 +75,13 @@ export const AppContextProvider = ({ children }) => {
       }
 
       case "UPDATE_POSTS": {
-        return { ...state, userPosts: action.payload };
+        return {
+          ...state,
+          userPosts: action.payload,
+          sortByLatest: true,
+          sortByOldest: false,
+          sortByTrending: false,
+        };
       }
       case "UPDATE_BOOKMARKS": {
         return { ...state, userBookmarks: action.payload };
@@ -121,6 +127,8 @@ export const AppContextProvider = ({ children }) => {
         return {
           ...state,
           sortByTrending: true,
+          sortByLatest: false,
+          sortByOldest: false,
         };
       }
 
@@ -206,10 +214,10 @@ export const AppContextProvider = ({ children }) => {
     }
     dispatch({ type: "UPDATE_SPECIFIED_USER_POSTS", payload: data });
   }, [
+    state.userPosts,
     state.sortByLatest,
     state.sortByOldest,
     state.sortByTrending,
-    state.userPosts,
   ]);
 
   return (
