@@ -12,9 +12,8 @@ function Navbar() {
       <div className="navigation-section">
         <nav>
           <NavLink
-            activeClassName="active"
+            activeclassname="active"
             className="nav-items"
-            exact
             to="/"
             onClick={() => {
               dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
@@ -24,7 +23,7 @@ function Navbar() {
             <i className="fa-solid fa-house"></i>Home
           </NavLink>
           <NavLink
-            activeClassName="active"
+            activeclassname="active"
             className="nav-items"
             to="/explore"
             onClick={() => {
@@ -34,7 +33,7 @@ function Navbar() {
             <i className="fa-solid fa-regular fa-rocket"></i>Explore
           </NavLink>
           <NavLink
-            activeClassName="active"
+            activeclassname="active"
             className="nav-items"
             to="/bookmark"
             onClick={() => {
@@ -45,7 +44,7 @@ function Navbar() {
             <i className="fa-solid fa-bookmark"></i>Bookmark
           </NavLink>
           <NavLink
-            activeClassName="active"
+            activeclassname="active"
             className="nav-items"
             to={`/users/${state.userData._id}`}
             onClick={() => {

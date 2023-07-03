@@ -8,6 +8,7 @@ import { formatDate } from "../utils/authUtils";
 export const users = [
   {
     _id: 1,
+    image: 'https://loremflickr.com/320/240/person',
     firstName: "Adarsh",
     lastName: "Balika",
     username: "adarshbalika",
@@ -17,6 +18,7 @@ export const users = [
   },
   {
     _id: 2,
+    image: 'https://loremflickr.com/320/240/dog',
     firstName: 'John',
     lastName: 'Doe',
     username: 'johndoe',
@@ -28,6 +30,7 @@ export const users = [
   },
   {
     _id: 3,
+    image: 'https://loremflickr.com/320/240/mountain',
     firstName: 'Jane',
     lastName: 'Smith',
     username: 'janesmith',
@@ -38,6 +41,7 @@ export const users = [
   },
   {
     _id: 4,
+    image: 'https://loremflickr.com/320/240/river',
     firstName: 'Alice',
     lastName: 'Johnson',
     username: 'alicejohnson',
@@ -48,6 +52,7 @@ export const users = [
   },
   {
     _id: 5,
+    image: 'https://loremflickr.com/320/240/love',
     firstName: 'Bob',
     lastName: 'Williams',
     username: 'bobwilliams',

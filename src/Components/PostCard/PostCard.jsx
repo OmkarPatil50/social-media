@@ -12,6 +12,7 @@ function PostCard({ post }) {
 
   const [showEditWindow, setShowEditWindow] = useState(false);
   const [newPostData, setNewPostData] = useState("");
+  const [userImage, setUserImage] = useState("");
 
   const likePostHandler = async () => {
     try {
@@ -201,15 +202,6 @@ function PostCard({ post }) {
     getAllUsers();
   }, [state.userData]);
 
-  const getImage = () => {
-    return state.allUsers?.reduce(
-      ((acc, curr) => {
-        return curr._id == post._id ? (acc = curr.image) : acc;
-      },
-      "")
-    );
-  };
-
   const isUsersPost = (userId) => {
     return userId === state.userData._id;
   };
@@ -219,11 +211,15 @@ function PostCard({ post }) {
       <div
         className="avatar-image-div-nav"
         style={{
-          backgroundColor: post.image ? "" : "gray",
+          backgroundColor: userImage ? "" : "gray",
         }}
       >
         <img
-          src={getImage}
+          src={
+            state.allUsers.find((user) => {
+              return user._id === post._id;
+            }).image
+          }
           alt=""
           className="avatar-image-nav"
           onError={(e) => (e.target.style.display = "none")}
@@ -300,6 +296,11 @@ function PostCard({ post }) {
                   ? "solid"
                   : "regular"
               } fa-heart`}
+              style={{
+                color: likes.likedBy?.some((likedPost) => likedPost._id == _id)
+                  ? "#ff3b30"
+                  : "black",
+              }}
             ></i>
           </button>
           <button>
@@ -318,6 +319,11 @@ function PostCard({ post }) {
                   ? "solid"
                   : "regular"
               } fa-bookmark`}
+              style={{
+                color: state.userBookmarks?.some((post) => post.id === id)
+                  ? "#ff3b30"
+                  : "black",
+              }}
             ></i>
           </button>
 

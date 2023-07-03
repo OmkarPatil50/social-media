@@ -298,7 +298,7 @@ function Home() {
                     </li>
                   );
                 })
-              : "No Posts Found"}
+              : ""}
           </ul>
         </section>
       </section>

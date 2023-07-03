@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./CreatePost.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
@@ -8,6 +8,7 @@ import { AppContext } from "../..";
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
 import Loader from "../../Components/Loader/Loader";
+import PostCard from "../../Components/PostCard/PostCard";
 
 function CreatePost() {
   const { state, dispatch } = useContext(AppContext);
@@ -29,7 +30,6 @@ function CreatePost() {
           dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
           setPostContent("");
           dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
-
           toast.success("New Post Created Successfully!", {
             position: "bottom-center",
             autoClose: 3000,
@@ -41,11 +41,29 @@ function CreatePost() {
             theme: "light",
           });
         }
+      } else {
+        setTimeout(() => {
+          dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
+          toast.error("Can't Post Empty Thoughts!", {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }, 2000);
       }
     } catch (err) {
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
+  }, []);
 
   return (
     <div className="main-page">

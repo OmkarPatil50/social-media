@@ -58,7 +58,7 @@ function Login() {
           });
         }
       } else {
-        dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+        dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
         toast.error("Please Fill All Credentials!", {
           position: "bottom-center",
           autoClose: 2000,

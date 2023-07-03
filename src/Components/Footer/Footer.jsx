@@ -115,7 +115,7 @@ function Footer() {
                     }}
                   >
                     <img
-                      src={""}
+                      src={user.image}
                       alt=""
                       className="avatar-image-nav"
                       onError={(e) => (e.target.style.display = "none")}
@@ -177,7 +177,7 @@ function Footer() {
                       }}
                     >
                       <img
-                        src={""}
+                        src={user.image}
                         alt=""
                         className="avatar-image-nav"
                         onError={(e) => (e.target.style.display = "none")}
