@@ -54,7 +54,7 @@ function App() {
       </div>
       <Routes>
         <Route path='/signup' element={<Landing />} />
-        <Route path='/' element={
+        <Route exact path='/' element={
           <RequireAuth>
             <Home />
           </RequireAuth>

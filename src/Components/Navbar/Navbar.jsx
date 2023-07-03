@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "./Navbar.css";
 import { useContext } from "react";
 import { AppContext } from "../..";
@@ -11,8 +11,10 @@ function Navbar() {
     <div className="navbar-section">
       <div className="navigation-section">
         <nav>
-          <Link
+          <NavLink
+            activeClassName="active"
             className="nav-items"
+            exact
             to="/"
             onClick={() => {
               dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
@@ -20,8 +22,9 @@ function Navbar() {
           >
             {" "}
             <i className="fa-solid fa-house"></i>Home
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
+            activeClassName="active"
             className="nav-items"
             to="/explore"
             onClick={() => {
@@ -29,8 +32,9 @@ function Navbar() {
             }}
           >
             <i className="fa-solid fa-regular fa-rocket"></i>Explore
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
+            activeClassName="active"
             className="nav-items"
             to="/bookmark"
             onClick={() => {
@@ -39,8 +43,9 @@ function Navbar() {
           >
             {" "}
             <i className="fa-solid fa-bookmark"></i>Bookmark
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
+            activeClassName="active"
             className="nav-items"
             to={`/users/${state.userData._id}`}
             onClick={() => {
@@ -48,7 +53,7 @@ function Navbar() {
             }}
           >
             <i className="fa-solid fa-user"></i>Profile
-          </Link>
+          </NavLink>
         </nav>
         <Link
           to="/createpost"
