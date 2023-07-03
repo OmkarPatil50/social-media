@@ -122,7 +122,7 @@ function Landing() {
         </h1>
         <div className="app-quotes-container">
           <p className="app-quote">
-            <span className="app-quotes-span">Follow</span>PEOPLE AROUND THE
+            <span className="app-quotes-span">FOLLOW</span> PEOPLE AROUND THE
             GLOBE
           </p>
           <p className="app-quote">
@@ -268,6 +268,7 @@ function Landing() {
           </button>
         </div>
       </section>
+      
     </div>
   );
 }

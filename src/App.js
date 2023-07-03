@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route, useNavigate, Link } from 'react-router-dom'
 import Landing from './Pages/Landing/Landing';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
@@ -44,9 +44,11 @@ function App() {
   return (
     <div className="App">
       <div className="app-top-bar">
-        <h1 className="app-heading-small">
-          <span>Socio</span>court
-        </h1>
+        <Link to='/' className='link'>
+          <h1 className="app-heading-small">
+            <span>Socio</span>court
+          </h1>
+        </Link>
         <div className="log-out-tag">
           <i className="fa-solid fa-right-from-bracket" onClick={logoutHandler}></i>
         </div>

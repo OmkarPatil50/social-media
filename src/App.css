@@ -10,9 +10,14 @@
   justify-content: space-between;
 }
 
+.link {
+  text-decoration: none;
+}
+
 .app-heading-small {
   padding: 0px 30px;
   font-size: var(--l-size);
+  color: black;
 }
 
 .app-heading-small span {
