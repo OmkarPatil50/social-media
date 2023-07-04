@@ -157,8 +157,8 @@ ul {
 }
 .page-heading {
   width: inherit;
-  margin: 10px 0 5px;
-  text-align: center;
+  margin: 0px 0 20px;
+  text-align: start;
   align-self: center;
 }
 
