@@ -5,6 +5,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import { Helmet } from "react-helmet";
 import PostDetailsCard from "../../Components/PostDetailsCard/PostDetailsCard";
+import NavbarMobile from "../../Components/NavbarMobile/NavbarMobile";
 
 function PostDetails() {
   const { postID } = useParams();
@@ -46,6 +47,7 @@ function PostDetails() {
       </Helmet>
       <Navbar />
       <PostDetailsCard post={state.userPostDetails} />
+      <NavbarMobile />
       <Footer />
     </div>
   );
