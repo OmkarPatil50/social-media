@@ -312,24 +312,32 @@ function Home() {
 
         <section className="posts-section">
           <ul>
-            {state.specifiedUserPosts
-              ? state.specifiedUserPosts.map((post) => {
-                  const {
-                    content,
-                    likes,
-                    username,
-                    _id,
-                    id,
-                    userFullName,
-                    createdAt,
-                  } = post;
+            {state.userPosts
+              ? state.userPosts
+                  .filter(({ _id }) => {
+                    return (
+                      state.userData.following.some(
+                        (user) => user._id === _id
+                      ) === true || _id === state.userData._id
+                    );
+                  })
+                  .map((post) => {
+                    const {
+                      content,
+                      likes,
+                      username,
+                      _id,
+                      id,
+                      userFullName,
+                      createdAt,
+                    } = post;
 
-                  return (
-                    <li key={id}>
-                      <PostCard post={post} />
-                    </li>
-                  );
-                })
+                    return (
+                      <li key={id}>
+                        <PostCard post={post} />
+                      </li>
+                    );
+                  })
               : ""}
           </ul>
         </section>
