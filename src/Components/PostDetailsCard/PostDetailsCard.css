@@ -1,0 +1,55 @@
+:root {
+  --primary-color: #ff3b30;
+  --secondary-color: #fff6ea;
+  --action-color: #3b82f6;
+  --grey-color: #9a9a9a;
+  --black-color: #282828;
+  --white-color: #fff;
+  --lynx-white-color: #f7f7f7;
+  --violet-color: #5348c7;
+  --lynx-gray-color: #c5c5c5;
+  --font: "Open Sans", sans-serif;
+  --xxl-size: 4rem;
+  --xl-size: 2.5rem;
+  --l-size: 2rem;
+  --m-size: 1.5rem;
+  --s-size: 1rem;
+  --xs-size: 0.5rem;
+  --xl-font: 3rem;
+  --light-weight: 300;
+  --regular-weight: 400;
+  --semibold-weight: 600;
+  --bold-weight: 700;
+  --black-weight: 900;
+}
+
+.post-details-card {
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  background-color: var(--white-color);
+  width: 760px;
+  height: fit-content;
+  padding: 10px;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.post-details-content {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100px;
+  max-height: 50vh;
+  padding: 0px 5px;
+  text-decoration: none;
+  color: var(--black-color);
+  align-self: flex-start;
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: var(--black-color);
+  font-weight: var(--regular-weight);
+  word-wrap: break-word;
+  position: relative;
+  margin-top: 10px;
+}

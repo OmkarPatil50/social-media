@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../..";
-import PostCard from "../../Components/PostCard/PostCard";
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import { Helmet } from "react-helmet";
+import PostDetailsCard from "../../Components/PostDetailsCard/PostDetailsCard";
 
 function PostDetails() {
   const { postID } = useParams();
@@ -38,14 +38,14 @@ function PostDetails() {
 
   useEffect(() => {
     getPostDetails();
-  }, []);
+  }, [state.userPosts]);
   return (
-    <div className="post-details-page">
+    <div className="main-page">
       <Helmet>
         <title>Sociocourt | Post</title>
       </Helmet>
       <Navbar />
-      <PostCard post={state.userPostDetails} />
+      <PostDetailsCard post={state.userPostDetails} />
       <Footer />
     </div>
   );

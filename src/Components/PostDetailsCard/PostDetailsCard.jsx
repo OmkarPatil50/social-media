@@ -1,17 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../..";
-import { Link } from "react-router-dom";
-import "./PostCard.css";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "./PostDetailsCard.css";
+import { Helmet } from "react-helmet";
 import Loader from "../Loader/Loader";
 
-function PostCard({ post }) {
-  const { content, likes, username, id, firstName, lastName, createdAt, _id } =
-    post;
+function PostDetailsCard({ post, location }) {
   const { state, dispatch } = useContext(AppContext);
-
   const [showEditWindow, setShowEditWindow] = useState(false);
   const [newPostData, setNewPostData] = useState("");
+
+  const navigate = useNavigate();
+
+  const { content, likes, username, id, firstName, lastName, createdAt, _id } =
+    post;
 
   const likePostHandler = async () => {
     try {
@@ -90,6 +93,19 @@ function PostCard({ post }) {
           progress: undefined,
           theme: "light",
         });
+        dispatch({
+          type: "UPDATE_POST_DETAILS_OBJ",
+          payload: {
+            content: "",
+            createdAt: "",
+            id: "",
+            likes: "",
+            updatedAt: "",
+            username: "",
+            _id: "",
+          },
+        });
+        navigate("/");
       }
     } catch (err) {
       console.error(err);
@@ -191,6 +207,12 @@ function PostCard({ post }) {
       const jsonResponse = await response.json();
       if (jsonResponse.users) {
         dispatch({ type: "UPDATE_ALL_USERS", payload: jsonResponse.users });
+        setTimeout(() => {
+          dispatch({
+            type: "UPDATE_SHOW_LOADER",
+            payload: false,
+          });
+        }, 1000);
       }
     } catch (err) {
       console.error(err);
@@ -204,9 +226,12 @@ function PostCard({ post }) {
   const isUsersPost = (userId) => {
     return userId === state.userData._id;
   };
-
   return (
-    <div className="post-card">
+    <div className="post-details-card">
+      {state.showLoader ? <Loader /> : ""}
+      <Helmet>
+        <title>Sociocourt | Post</title>
+      </Helmet>
       <div
         className="avatar-image-div-nav"
         style={{
@@ -282,16 +307,7 @@ function PostCard({ post }) {
             ""
           )}
         </div>
-        <Link
-          to={`/posts/${id}`}
-          onClick={() =>
-            dispatch({
-              type: "UPDATE_SHOW_LOADER",
-              payload: true,
-            })
-          }
-          className="post-content"
-        >
+        <Link to={`/posts/${id}`} className="post-details-content">
           {content}
         </Link>
         <div className="btn-section-postcard">
@@ -378,4 +394,4 @@ function PostCard({ post }) {
   );
 }
 
-export default PostCard;
+export default PostDetailsCard;

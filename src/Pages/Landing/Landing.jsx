@@ -268,7 +268,6 @@ function Landing() {
           </button>
         </div>
       </section>
-      
     </div>
   );
 }
