@@ -88,6 +88,9 @@
   transition-duration: 0.5s;
 }
 
+.already-have-account-btn-mobile-view {
+  display: none;
+}
 /* ----------------------------------------------signup----------------------------------------- */
 
 .sign-up-section {
@@ -154,4 +157,62 @@
 
 .sign-up-btn:hover {
   opacity: 0.7;
+}
+
+/* -----------------------------------------mobileView----------------------------------------------------- */
+@media screen and (max-width: 768px) {
+  .app-info {
+    display: none;
+  }
+  .sign-up-section {
+    width: 90%;
+    margin: 20px auto;
+    padding: 10px;
+    display: block;
+  }
+  .section-header {
+    font-size: var(--m-size);
+    text-align: center;
+  }
+
+  .sign-up-details {
+    width: 100%;
+  }
+
+  .name-section {
+    width: 100%;
+  }
+  .sign-up-details label {
+    font-size: 14px;
+  }
+
+  .sign-up-details input {
+    font-size: 14px;
+  }
+
+  .sign-up-btn {
+    padding: 7.5px;
+    font-size: 14px;
+  }
+  .already-have-account-btn-mobile-view {
+    text-decoration: none;
+    background: none;
+    border: none;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    margin: 20px 0 10px;
+  }
+
+  .already-have-account-link {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 14px;
+  }
+
+  .already-have-account-link:hover {
+    text-decoration: underline;
+    transition-duration: 0.5s;
+  }
 }

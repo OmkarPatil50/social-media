@@ -6,6 +6,7 @@ import PostCard from "../../Components/PostCard/PostCard";
 import "./Bookmark.css";
 import { Helmet } from "react-helmet";
 import Loader from "../../Components/Loader/Loader";
+import NavbarMobile from "../../Components/NavbarMobile/NavbarMobile";
 
 function Bookmark() {
   const { state, dispatch } = useContext(AppContext);
@@ -39,7 +40,7 @@ function Bookmark() {
       </Helmet>
       <Navbar />
       <section className="page-main-section">
-        <h1>Bookmarks</h1>
+        <h1 className="page-heading">Bookmarks</h1>
         {state.userBookmarks.length === 0 ? (
           <h1 className="empty-page-tag">No Bookmarks Yet</h1>
         ) : (
@@ -65,6 +66,7 @@ function Bookmark() {
           })}
         </ul>
       </section>
+      <NavbarMobile />
       <Footer />
     </div>
   );

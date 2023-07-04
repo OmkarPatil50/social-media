@@ -8,6 +8,7 @@ import PostCard from "../../Components/PostCard/PostCard";
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
 import Loader from "../../Components/Loader/Loader";
+import NavbarMobile from "../../Components/NavbarMobile/NavbarMobile";
 
 function Profile() {
   const { userId } = useParams();
@@ -425,7 +426,7 @@ function Profile() {
           </ul>
         </div>
       </div>
-
+      <NavbarMobile />
       <Footer />
     </div>
   );

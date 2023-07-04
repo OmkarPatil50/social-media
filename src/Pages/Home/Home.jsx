@@ -7,6 +7,7 @@ import "./Home.css";
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
 import Loader from "../../Components/Loader/Loader";
+import NavbarMobile from "../../Components/NavbarMobile/NavbarMobile";
 
 function Home() {
   const { state, dispatch } = useContext(AppContext);
@@ -203,8 +204,7 @@ function Home() {
           </div>
         </div>
         {state.specifiedUserPosts.length ? (
-          <>
-            <h1>{homeHeading}</h1>
+          <div className="sort-section">
             <div className="sort-btn-section">
               <button
                 onClick={() => {
@@ -222,7 +222,6 @@ function Home() {
                       setHomeHeading("Latest Posts");
                       dispatch({ type: "SORT_BY_DATE_LATEST" });
                       dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
-                      setShowSortItems(false);
                       setTimeout(() => {
                         dispatch({
                           type: "UPDATE_SHOW_LOADER",
@@ -250,7 +249,6 @@ function Home() {
                       setHomeHeading("Oldest Posts");
                       dispatch({ type: "SORT_BY_DATE_OLDEST" });
                       dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
-                      setShowSortItems(false);
 
                       setTimeout(() => {
                         dispatch({
@@ -279,7 +277,6 @@ function Home() {
                       setHomeHeading("Trending Posts");
                       dispatch({ type: "SORT_BY_TRENDING" });
                       dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
-                      setShowSortItems(false);
 
                       setTimeout(() => {
                         dispatch({
@@ -307,7 +304,8 @@ function Home() {
                 ""
               )}
             </div>
-          </>
+            <h1 className="homeheading">{homeHeading}</h1>
+          </div>
         ) : (
           ""
         )}
@@ -336,6 +334,7 @@ function Home() {
           </ul>
         </section>
       </section>
+      <NavbarMobile />
       <Footer />
     </div>
   );

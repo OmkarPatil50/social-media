@@ -267,6 +267,12 @@ function Landing() {
             Fill Test Credentials
           </button>
         </div>
+        <button className="already-have-account-btn-mobile-view">
+          <Link to="/login" className="already-have-account-link">
+            Already have an account?{" "}
+            <i className="fa-solid fa-chevron-right"></i>
+          </Link>
+        </button>
       </section>
     </div>
   );

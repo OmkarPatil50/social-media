@@ -139,6 +139,9 @@ export const AppContextProvider = ({ children }) => {
       case "UPDATE_SHOW_LOADER": {
         return { ...state, showLoader: action.payload };
       }
+      case "UPDATE_MOBILE_FILTER": {
+        return { ...state, isFiltersOpen: !state.isFiltersOpen };
+      }
 
       default:
         return state;
@@ -175,6 +178,7 @@ export const AppContextProvider = ({ children }) => {
     sortByLatest: true,
     sortByOldest: false,
     sortByTrending: false,
+    isFiltersOpen: false,
   };
 
   const [state, dispatch] = useReducer(reducerFunction, initialValue);

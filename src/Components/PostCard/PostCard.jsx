@@ -311,7 +311,7 @@ function PostCard({ post }) {
               style={{
                 color: likes.likedBy?.some((likedPost) => likedPost._id == _id)
                   ? "#ff3b30"
-                  : "black",
+                  : "#2f4f4f",
               }}
             ></i>
           </button>
@@ -334,7 +334,7 @@ function PostCard({ post }) {
               style={{
                 color: state.userBookmarks?.some((post) => post.id === id)
                   ? "#ff3b30"
-                  : "black",
+                  : "#2f4f4f",
               }}
             ></i>
           </button>

@@ -6,6 +6,7 @@ import Footer from "../../Components/Footer/Footer";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Loader from "../../Components/Loader/Loader";
+import NavbarMobile from "../../Components/NavbarMobile/NavbarMobile";
 
 function Explore() {
   const { state, dispatch } = useContext(AppContext);
@@ -87,7 +88,7 @@ function Explore() {
       </Helmet>
       <Navbar />
       <section className="page-main-section">
-        <h1>Explore</h1>
+        <h1 className="page-heading">Explore</h1>
         {state.userPosts.length === 0 ? (
           <h1 className="empty-page-tag">No Post to Explore</h1>
         ) : (
@@ -114,6 +115,7 @@ function Explore() {
         </ul>
       </section>
 
+      <NavbarMobile />
       <Footer />
     </div>
   );

@@ -110,3 +110,21 @@
 .nav-username {
   color: var(--grey-color);
 }
+
+/* ----------------------------mobileView------------------------------------------ */
+
+@media screen and (max-width: 768px) {
+  .navbar-section {
+    display: none;
+  }
+  .avatar-image-nav {
+    width: 25px;
+    height: 25px;
+  }
+
+  .avatar-image-div-nav {
+    margin: 10px 5px;
+    width: 25px;
+    height: 25px;
+  }
+}

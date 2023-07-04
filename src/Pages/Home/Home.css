@@ -90,6 +90,7 @@
 
 ul {
   list-style: none;
+  margin: 0;
 }
 
 .empty-page-tag {
@@ -98,6 +99,14 @@ ul {
   position: fixed;
   top: 45%;
   left: 40%;
+}
+
+.sort-section {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
 }
 
 .sort-items-toggle {
@@ -114,6 +123,8 @@ ul {
 }
 
 .sort-btn-section {
+  width: 50%;
+  display: flex;
   position: relative;
 }
 
@@ -137,4 +148,65 @@ ul {
   position: absolute;
   top: 0;
   left: 30px;
+}
+
+/* --------------------------------mobileView------------------------ */
+
+@media screen and (max-width: 768px) {
+  .main-page {
+    position: relative;
+    top: 50px;
+    left: 0;
+    background-color: var(--lynx-white-color);
+    padding: 10px;
+  }
+
+  .page-main-section {
+    width: 100%;
+    display: flex;
+    flex-basis: 100%;
+  }
+  .new-post-input {
+    font-size: 14px;
+  }
+
+  .post-btn-home {
+    margin: 0 10px 10px;
+    padding: 5px 10px;
+  }
+
+  .empty-page-tag {
+    width: 100%;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .sort-items-toggle {
+    font-size: 16px;
+  }
+  .sort-type-btn {
+    margin: 5px;
+    font-size: 10px;
+  }
+  .sort-btn-section {
+    z-index: 1;
+    width: 70%;
+    display: flex;
+  }
+
+  .homeheading {
+    font-size: 14px;
+    text-align: center;
+    margin: 5px 0;
+    align-self: center;
+  }
+  .page-heading {
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+  }
 }
