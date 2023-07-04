@@ -20,7 +20,8 @@ export const posts = [
     username: "adarshbalika",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    id: uuid()
+    id: uuid(),
+    postImage: 'https://loremflickr.com/320/240/nature'
   },
   {
     _id: 4,
@@ -35,7 +36,9 @@ export const posts = [
     username: 'alicejohnson',
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    id: uuid()
+    id: uuid(),
+    postImage: 'https://loremflickr.com/500/500/home'
+
   },
   {
     _id: 2,
@@ -50,7 +53,9 @@ export const posts = [
     username: "johndoe",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    id: uuid()
+    id: uuid(),
+    postImage: 'https://loremflickr.com/320/240/nature'
+
   }
   ,
   {
@@ -66,7 +71,9 @@ export const posts = [
     username: "janesmith",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    id: uuid()
+    id: uuid(),
+    postImage: 'https://loremflickr.com/320/240/bike'
+
   }
   ,
   {
@@ -82,7 +89,9 @@ export const posts = [
     username: "alicejohnson",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    id: uuid()
+    id: uuid(),
+    postImage: 'https://loremflickr.com/320/240/car'
+
   }
   ,
   {
@@ -98,7 +107,9 @@ export const posts = [
     username: "bobwilliams",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    id: uuid()
+    id: uuid(),
+    postImage: 'https://loremflickr.com/320/240/tv'
+
   },
   {
     _id: 1,
@@ -113,7 +124,9 @@ export const posts = [
     username: "adarshbalika",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    id: uuid()
+    id: uuid(),
+    postImage: 'https://loremflickr.com/320/240/book'
+
   },
 
   {
@@ -129,7 +142,9 @@ export const posts = [
     username: "johndoe",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    id: uuid()
+    id: uuid(),
+    postImage: 'https://loremflickr.com/320/240/beach'
+
   }
   ,
   {
@@ -145,7 +160,9 @@ export const posts = [
     username: "janesmith",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    id: uuid()
+    id: uuid(),
+    postImage: 'https://loremflickr.com/320/240/dog'
+
   }
   ,
   {
@@ -161,7 +178,9 @@ export const posts = [
     username: "alicejohnson",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    id: uuid()
+    id: uuid(),
+    postImage: 'https://loremflickr.com/320/240/conference'
+
   }
   ,
   {
@@ -177,7 +196,9 @@ export const posts = [
     username: "bobwilliams",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    id: uuid()
+    id: uuid(),
+    postImage: 'https://loremflickr.com/320/240/coffee'
+
   },
   {
     _id: 1,
@@ -192,7 +213,9 @@ export const posts = [
     username: "adarshbalika",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    id: uuid()
+    id: uuid(),
+    postImage: 'https://loremflickr.com/320/240/work'
+
   },
 
   {
@@ -208,7 +231,9 @@ export const posts = [
     username: "johndoe",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    id: uuid()
+    id: uuid(),
+    postImage: 'https://loremflickr.com/320/240/mountains'
+
   }
   ,
   {
@@ -224,7 +249,9 @@ export const posts = [
     username: "janesmith",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    id: uuid()
+    id: uuid(),
+    postImage: 'https://loremflickr.com/320/240/cooking'
+
   }
   ,
   {
@@ -240,7 +267,9 @@ export const posts = [
     username: "alicejohnson",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    id: uuid()
+    id: uuid(),
+    postImage: 'https://loremflickr.com/320/240/book'
+
   }
   ,
   {
@@ -256,7 +285,9 @@ export const posts = [
     username: "bobwilliams",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    id: uuid()
+    id: uuid(),
+    postImage: 'https://loremflickr.com/320/240/concert'
+
   },
 
   {

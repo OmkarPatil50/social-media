@@ -81,7 +81,8 @@ export const createPostHandler = function (schema, request) {
 
     const post = {
       _id: user._id,
-      content: postData,
+      content: postData.text,
+      postImage: postData.previewImage,
       likes: {
         likeCount: 0,
         likedBy: [],
@@ -139,7 +140,7 @@ export const editPostHandler = function (schema, request) {
         }
       );
     }
-    post = { ...post, content: postData };
+    post = { ...post, content: postData.text, postImage: post.image };
     this.db.posts.update({ id: postId }, post);
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {

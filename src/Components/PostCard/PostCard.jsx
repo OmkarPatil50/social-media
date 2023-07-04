@@ -6,12 +6,26 @@ import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
 
 function PostCard({ post }) {
-  const { content, likes, username, id, firstName, lastName, createdAt, _id } =
-    post;
+  const {
+    content,
+    likes,
+    username,
+    id,
+    firstName,
+    lastName,
+    createdAt,
+    _id,
+    postImage,
+  } = post;
   const { state, dispatch } = useContext(AppContext);
 
   const [showEditWindow, setShowEditWindow] = useState(false);
-  const [newPostData, setNewPostData] = useState("");
+  const [newPostData, setNewPostData] = useState({
+    text: "",
+    showPostImage: true,
+    image: postImage,
+    previewImage: postImage,
+  });
 
   const likePostHandler = async () => {
     try {
@@ -246,7 +260,11 @@ function PostCard({ post }) {
                   className="close-btn"
                   onClick={() => {
                     setShowEditWindow(false);
-                    setNewPostData("");
+                    setNewPostData({
+                      text: "",
+                      image: postImage,
+                      previewImage: postImage,
+                    });
                   }}
                 >
                   <i className="fa-solid fa-xmark"></i>
@@ -257,9 +275,16 @@ function PostCard({ post }) {
                 <textarea
                   type="text"
                   defaultValue={post.content}
-                  onChange={(event) => setNewPostData(event.target.value)}
+                  onChange={(event) =>
+                    setNewPostData(() => ({
+                      ...newPostData,
+                      text: event.target.value,
+                    }))
+                  }
                   className="edit-post-input"
                 />
+                <label htmlFor="edit-post" className="edit-post-label"></label>
+
                 <button
                   onClick={() => {
                     dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
@@ -294,6 +319,11 @@ function PostCard({ post }) {
         >
           {content}
         </Link>
+        {postImage && (
+          <div className="post-image-div">
+            <img src={postImage} alt="post-image" className="post-image" />
+          </div>
+        )}
         <div className="btn-section-postcard">
           <button
             onClick={

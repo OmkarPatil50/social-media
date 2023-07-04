@@ -11,7 +11,11 @@ import NavbarMobile from "../../Components/NavbarMobile/NavbarMobile";
 
 function Home() {
   const { state, dispatch } = useContext(AppContext);
-  const [postContent, setPostContent] = useState("");
+  const [postContent, setPostContent] = useState({
+    text: "",
+    image: "",
+    previewImage: "",
+  });
   const [showSortItems, setShowSortItems] = useState(false);
   const [homeHeading, setHomeHeading] = useState("Latest Posts");
 
@@ -59,6 +63,7 @@ function Home() {
         });
         const jsonResponse = await response.json();
         if (jsonResponse.posts) {
+          console.log(jsonResponse);
           setHomeHeading("Latest Posts");
           dispatch({
             type: "UPDATE_POSTS",
@@ -185,22 +190,73 @@ function Home() {
             <label htmlFor="new-post">
               <textarea
                 required
-                onChange={(event) => setPostContent(event.target.value)}
-                value={postContent}
+                onChange={(event) =>
+                  setPostContent(() => ({
+                    ...postContent,
+                    text: event.target.value,
+                  }))
+                }
+                value={postContent.text}
                 className="new-post-input"
                 placeholder="Write Something Interesting...!"
               />
             </label>
-            <button
-              type="submit"
-              onClick={() => {
-                dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
-                addPostHandler();
-              }}
-              className="post-btn-home"
-            >
-              Post
-            </button>
+            {postContent.previewImage && (
+              <div className="preview-image-box">
+                <img
+                  src={postContent.previewImage}
+                  alt="Preview"
+                  className="new-post-image"
+                />
+                <i
+                  className="fa-solid fa-xmark"
+                  id="delete-image-new-post"
+                  onClick={() =>
+                    setPostContent(() => ({
+                      ...postContent,
+                      previewImage: null,
+                    }))
+                  }
+                ></i>
+              </div>
+            )}
+            <div className="new-post-btn-section">
+              <input
+                type="file"
+                name="file"
+                id="file"
+                accept="image/*"
+                className="inputfile"
+                onChange={(event) => {
+                  setPostContent(() => ({
+                    ...postContent,
+                    image: event.target.files[0],
+                  }));
+                  const reader = new FileReader();
+                  reader.onloadend = () => {
+                    setPostContent(() => ({
+                      ...postContent,
+                      previewImage: reader.result,
+                    }));
+                  };
+                  reader.readAsDataURL(event.target.files[0]);
+                }}
+              />
+              <label htmlFor="file">
+                <i className="fa-solid fa-image"></i>
+              </label>
+              <button
+                type="submit"
+                onClick={() => {
+                  dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+                  addPostHandler();
+                  setPostContent({ text: "", image: "", previewImage: "" });
+                }}
+                className="post-btn-home"
+              >
+                Post
+              </button>
+            </div>
           </div>
         </div>
         {state.specifiedUserPosts.length ? (
