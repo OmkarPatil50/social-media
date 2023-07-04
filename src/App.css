@@ -101,12 +101,16 @@
     overflow-y: auto;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.7);
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .found-people-list-item-mobile {
     box-sizing: border-box;
     border: 1px solid var(--white-color);
     font-size: 14px;
+    padding: 0;
   }
   .user-name-footer-mobile {
     margin: 0 10px;

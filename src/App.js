@@ -68,6 +68,7 @@ function App() {
                 type="search"
                 placeholder="Search People..."
                 className="nav-search-bar-mobile-view"
+                value={peopleSearchText}
                 onChange={(event) => setPeopleSearchText(event.target.value)}
               />
             </label>
@@ -86,6 +87,7 @@ function App() {
                         className="footer-user-head"
                         onClick={() => {
                           dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+                          setPeopleSearchText('')
                         }}
                       >
                         <div
