@@ -180,6 +180,7 @@ ul {
   }
   .new-post-input {
     font-size: 14px;
+    margin: 0;
   }
 
   .post-btn-home {
@@ -198,10 +199,11 @@ ul {
   }
 
   .sort-items-toggle {
+    margin: 10px 0 0;
     font-size: 16px;
   }
   .sort-type-btn {
-    margin: 5px;
+    margin: 10px 5px 0;
     font-size: 10px;
   }
   .sort-btn-section {
@@ -213,8 +215,8 @@ ul {
   .homeheading {
     font-size: 14px;
     text-align: center;
-    margin: 5px 0;
-    align-self: center;
+    margin: 10px 0 0;
+    align-self: baseline;
   }
   .page-heading {
     width: 100%;
