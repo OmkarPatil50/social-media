@@ -22,9 +22,7 @@ export const users = [
     firstName: 'John',
     lastName: 'Doe',
     username: 'johndoe',
-    password: 'johnDoe456', createdAt: formatDate(),
-    updatedAt: formatDate(),
-
+    password: 'johnDoe456',
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -35,7 +33,6 @@ export const users = [
     lastName: 'Smith',
     username: 'janesmith',
     password: 'janeSmith789',
-
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -46,18 +43,16 @@ export const users = [
     lastName: 'Johnson',
     username: 'alicejohnson',
     password: 'alice123',
-
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
   {
     _id: 5,
-    image: 'https://loremflickr.com/320/240/love',
+    image: 'https://loremflickr.com/320/240/boy',
     firstName: 'Bob',
     lastName: 'Williams',
     username: 'bobwilliams',
     password: 'bob456',
-
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
