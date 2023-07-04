@@ -94,11 +94,11 @@ ul {
 }
 
 .empty-page-tag {
-  width: 100vw;
+  width: inherit;
+  text-align: center;
   height: 100vh;
   position: fixed;
   top: 45%;
-  left: 40%;
 }
 
 .sort-section {
@@ -148,6 +148,18 @@ ul {
   position: absolute;
   top: 0;
   left: 30px;
+}
+.homeheading {
+  font-size: 18px;
+  text-align: center;
+  margin: 15px 0;
+  align-self: center;
+}
+.page-heading {
+  width: inherit;
+  font-size: var(--m-size);
+  margin: 0 0 20px;
+  text-align: center;
 }
 
 /* --------------------------------mobileView------------------------ */

@@ -87,6 +87,7 @@ function Footer() {
         <input
           type="search"
           placeholder="Search People..."
+          value={peopleSearchText}
           className="footer-search-bar"
           onChange={(event) => setPeopleSearchText(event.target.value)}
         />
@@ -106,6 +107,7 @@ function Footer() {
                   className="footer-user-head"
                   onClick={() => {
                     dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
+                    setPeopleSearchText("");
                   }}
                 >
                   <div
