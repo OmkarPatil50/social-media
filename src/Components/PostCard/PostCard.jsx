@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../..";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./PostCard.css";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
@@ -19,12 +19,11 @@ function PostCard({ post }) {
   } = post;
   const { state, dispatch } = useContext(AppContext);
 
+  const location = useLocation();
+
   const [showEditWindow, setShowEditWindow] = useState(false);
   const [newPostData, setNewPostData] = useState({
     text: "",
-    showPostImage: true,
-    image: postImage,
-    previewImage: postImage,
   });
 
   const likePostHandler = async () => {
@@ -90,6 +89,61 @@ function PostCard({ post }) {
         },
       });
       const jsonResponse = await response.json();
+      if (jsonResponse.posts) {
+        dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
+        dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
+
+        toast.error("Post Deleted Successfully!", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const deletePostFromBookmarkHandler = async () => {
+    try {
+      const response2 = await fetch(`/api/users/remove-bookmark/${id}`, {
+        method: "POST",
+        headers: {
+          authorization: localStorage.getItem("encodedToken"),
+        },
+      });
+      const jsonResponse2 = await response2.json();
+
+      if (jsonResponse2.bookmarks) {
+        dispatch({
+          type: "UPDATE_BOOKMARKS",
+          payload: jsonResponse2.bookmarks,
+        });
+        toast.error("Removed from Bookmark!", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+
+      const response = await fetch(`/api/posts/${id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: localStorage.getItem("encodedToken"),
+        },
+      });
+      const jsonResponse = await response.json();
+
       if (jsonResponse.posts) {
         dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
         dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
@@ -384,17 +438,19 @@ function PostCard({ post }) {
           <button
             onClick={() => {
               dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
-
               setTimeout(() => {
                 dispatch({
                   type: "UPDATE_SHOW_LOADER",
                   payload: false,
                 });
               }, 1000);
-              deletePostHandler();
+              state.userBookmarks?.some((post) => post.id === id)
+                ? deletePostFromBookmarkHandler()
+                : deletePostHandler();
+              
               dispatch({
                 type: "SHOW_POST_OPTIONS",
-                payload: !state.showPostOptions,
+                payload: !state.showPostOptions,  
               });
             }}
             disabled={!isUsersPost(_id)}

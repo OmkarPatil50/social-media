@@ -216,6 +216,7 @@ ul {
     width: 100%;
     display: flex;
     flex-basis: 100%;
+    padding-bottom: 30px;
   }
   .new-post-input {
     font-size: 14px;

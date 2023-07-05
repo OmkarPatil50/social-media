@@ -140,7 +140,7 @@ export const editPostHandler = function (schema, request) {
         }
       );
     }
-    post = { ...post, content: postData.text, postImage: post.image };
+    post = { ...post, content: postData.text, };
     this.db.posts.update({ id: postId }, post);
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {

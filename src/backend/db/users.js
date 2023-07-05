@@ -8,7 +8,7 @@ import { formatDate } from "../utils/authUtils";
 export const users = [
   {
     _id: 1,
-    image: 'https://loremflickr.com/320/240/person',
+    image: 'https://loremflickr.com/320/240/littlegirl',
     firstName: "Adarsh",
     lastName: "Balika",
     username: "adarshbalika",
