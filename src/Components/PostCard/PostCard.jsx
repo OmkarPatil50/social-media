@@ -447,10 +447,10 @@ function PostCard({ post }) {
               state.userBookmarks?.some((post) => post.id === id)
                 ? deletePostFromBookmarkHandler()
                 : deletePostHandler();
-              
+
               dispatch({
                 type: "SHOW_POST_OPTIONS",
-                payload: !state.showPostOptions,  
+                payload: !state.showPostOptions,
               });
             }}
             disabled={!isUsersPost(_id)}

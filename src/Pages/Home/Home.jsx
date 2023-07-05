@@ -372,7 +372,7 @@ function Home() {
               ? state.userPosts
                   .filter(({ _id }) => {
                     return (
-                      state.userData.following.some(
+                      state.userData.following?.some(
                         (user) => user._id === _id
                       ) === true || _id === state.userData._id
                     );

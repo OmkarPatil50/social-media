@@ -115,13 +115,13 @@ function App() {
             ) : (
               ""
             )}
+            <div className="log-out-tag">
+              <i className="fa-solid fa-right-from-bracket" onClick={logoutHandler}></i>
+            </div>
+
           </> : ''
         }
 
-
-        <div className="log-out-tag">
-          <i className="fa-solid fa-right-from-bracket" onClick={logoutHandler}></i>
-        </div>
 
       </div>
       <Routes>
