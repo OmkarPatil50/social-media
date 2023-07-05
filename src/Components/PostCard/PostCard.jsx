@@ -124,16 +124,6 @@ function PostCard({ post }) {
           type: "UPDATE_BOOKMARKS",
           payload: jsonResponse2.bookmarks,
         });
-        toast.error("Removed from Bookmark!", {
-          position: "bottom-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
       }
 
       const response = await fetch(`/api/posts/${id}`, {
