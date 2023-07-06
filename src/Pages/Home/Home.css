@@ -116,6 +116,11 @@ ul {
   border: none;
   align-self: flex-start;
   font-size: 20px;
+  z-index: -1;
+}
+
+.sort-items-toggle i {
+  z-index: -1;
 }
 
 .sort-items-toggle:hover {
