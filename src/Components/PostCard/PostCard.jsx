@@ -388,7 +388,8 @@ function PostCard({ post }) {
                   ? "#ff3b30"
                   : "#2f4f4f",
               }}
-            ></i>
+            ></i>{" "}
+            {likes.likeCount}
           </button>
           <button>
             <i className="fa-regular fa-comments"></i>
