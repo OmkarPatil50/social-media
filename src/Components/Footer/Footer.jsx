@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Footer.css";
 import { AppContext } from "../..";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function Footer() {
   const { state, dispatch } = useContext(AppContext);
   const [peopleSearchText, setPeopleSearchText] = useState("");
   const [foundPeople, setFoundPeople] = useState([]);
+
+  const navigate = useNavigate();
 
   const getAllUsers = async () => {
     try {
@@ -17,7 +19,7 @@ function Footer() {
         dispatch({ type: "UPDATE_ALL_USERS", payload: jsonResponse.users });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -50,7 +52,7 @@ function Footer() {
         );
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -66,7 +68,7 @@ function Footer() {
         dispatch({ type: "UPDATE_USER_DATA", payload: jsonResponse.user });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 

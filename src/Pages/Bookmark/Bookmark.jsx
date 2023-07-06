@@ -7,9 +7,12 @@ import "./Bookmark.css";
 import { Helmet } from "react-helmet";
 import Loader from "../../Components/Loader/Loader";
 import NavbarMobile from "../../Components/NavbarMobile/NavbarMobile";
+import { useNavigate } from "react-router-dom";
 
 function Bookmark() {
   const { state, dispatch } = useContext(AppContext);
+  const navigate = useNavigate()
+
 
   const getBookmarkData = async () => {
     try {
@@ -25,7 +28,7 @@ function Bookmark() {
         );
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 

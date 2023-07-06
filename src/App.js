@@ -14,6 +14,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '.';
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import Error from './Pages/Error/Error';
 
 function App() {
 
@@ -62,7 +63,7 @@ function App() {
           </h1>
         </Link>
         {
-          location.pathname !== '/signup' && location.pathname !== '/login' ? <>
+          location.pathname !== '/signup' && location.pathname !== '/login' && location.pathname !== '/error' ? <>
             <label htmlFor="search-bar" className="search-bar-label">
               <input
                 type="search"
@@ -143,6 +144,7 @@ function App() {
         <Route path='/users/:userId' element={<RequireAuth><Profile /></RequireAuth>} />
         <Route path='/explore' element={<RequireAuth><Explore /></RequireAuth>} />
         <Route path='/createpost' element={<RequireAuth><CreatePost /></RequireAuth>} />
+        <Route path='/error' element={<Error />} />
 
 
 

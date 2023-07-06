@@ -7,9 +7,13 @@ import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Loader from "../../Components/Loader/Loader";
 import NavbarMobile from "../../Components/NavbarMobile/NavbarMobile";
+import { useNavigate } from "react-router-dom";
 
 function Explore() {
   const { state, dispatch } = useContext(AppContext);
+
+  const navigate = useNavigate();
+
   const getPostData = async () => {
     try {
       const response = await fetch("/api/posts");
@@ -24,7 +28,7 @@ function Explore() {
         );
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -47,7 +51,7 @@ function Explore() {
         );
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -72,7 +76,7 @@ function Explore() {
         );
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 

@@ -106,7 +106,7 @@ function Landing() {
         });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../..";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./PostCard.css";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
@@ -20,6 +20,7 @@ function PostCard({ post }) {
   const { state, dispatch } = useContext(AppContext);
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [showEditWindow, setShowEditWindow] = useState(false);
   const [newPostData, setNewPostData] = useState({
@@ -49,7 +50,7 @@ function PostCard({ post }) {
         });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -76,7 +77,7 @@ function PostCard({ post }) {
         });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -105,7 +106,7 @@ function PostCard({ post }) {
         });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -150,7 +151,7 @@ function PostCard({ post }) {
         });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -184,7 +185,7 @@ function PostCard({ post }) {
         });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -211,7 +212,7 @@ function PostCard({ post }) {
         });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -239,7 +240,7 @@ function PostCard({ post }) {
         });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -251,7 +252,7 @@ function PostCard({ post }) {
         dispatch({ type: "UPDATE_ALL_USERS", payload: jsonResponse.users });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 

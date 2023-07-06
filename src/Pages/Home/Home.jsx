@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
 import Loader from "../../Components/Loader/Loader";
 import NavbarMobile from "../../Components/NavbarMobile/NavbarMobile";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const { state, dispatch } = useContext(AppContext);
@@ -18,6 +19,8 @@ function Home() {
   });
   const [showSortItems, setShowSortItems] = useState(false);
   const [homeHeading, setHomeHeading] = useState("Latest Posts");
+
+  const navigate = useNavigate();
 
   const getPostData = async () => {
     try {
@@ -42,7 +45,7 @@ function Home() {
         dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
   useEffect(() => {
@@ -106,7 +109,7 @@ function Home() {
         }, 2000);
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -121,7 +124,7 @@ function Home() {
         });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -150,7 +153,7 @@ function Home() {
         });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 

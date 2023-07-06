@@ -39,7 +39,7 @@ function PostDetailsCard({ post, location }) {
         });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -66,7 +66,7 @@ function PostDetailsCard({ post, location }) {
         });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -108,7 +108,7 @@ function PostDetailsCard({ post, location }) {
         navigate("/");
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -142,7 +142,7 @@ function PostDetailsCard({ post, location }) {
         });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -169,7 +169,7 @@ function PostDetailsCard({ post, location }) {
         });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -197,7 +197,7 @@ function PostDetailsCard({ post, location }) {
         });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -215,7 +215,7 @@ function PostDetailsCard({ post, location }) {
         }, 1000);
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 

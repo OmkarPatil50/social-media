@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../..";
 import "./Profile.css";
 import Navbar from "../../Components/Navbar/Navbar";
@@ -23,6 +23,8 @@ function Profile() {
     previewImage: null,
   });
 
+  const navigate = useNavigate();
+
   const getUserProfileDetails = async () => {
     try {
       const response = await fetch(`/api/users/${userId}`);
@@ -38,7 +40,7 @@ function Profile() {
         );
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -63,7 +65,7 @@ function Profile() {
         );
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -102,7 +104,7 @@ function Profile() {
         );
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -138,7 +140,7 @@ function Profile() {
         );
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
@@ -175,7 +177,7 @@ function Profile() {
         });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 

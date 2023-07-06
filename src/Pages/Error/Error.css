@@ -1,0 +1,30 @@
+.error-page {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-page h1 {
+  color: #ff3b30;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.error-img {
+  width: 500px;
+  height: 350px;
+  background: url("./error.svg");
+  background-position: center;
+  background-size: cover;
+}
+
+/* ---------------------------mobileview-------------------------- */
+@media screen and (max-width: 768px) {
+  .error-img {
+    width: 100%;
+    height: 250px;
+  }
+}

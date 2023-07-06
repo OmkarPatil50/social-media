@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
 import Loader from "../../Components/Loader/Loader";
 import PostCard from "../../Components/PostCard/PostCard";
+import { useNavigate } from "react-router-dom";
 
 function CreatePost() {
   const { state, dispatch } = useContext(AppContext);
@@ -17,6 +18,9 @@ function CreatePost() {
     image: "",
     previewImage: "",
   });
+
+  const navigate = useNavigate();
+
   const addPostHandler = async () => {
     try {
       if (postContent) {
@@ -73,7 +77,7 @@ function CreatePost() {
         }, 2000);
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 

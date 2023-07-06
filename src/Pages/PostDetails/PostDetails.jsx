@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../..";
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
@@ -10,6 +10,8 @@ import NavbarMobile from "../../Components/NavbarMobile/NavbarMobile";
 function PostDetails() {
   const { postID } = useParams();
   const { state, dispatch } = useContext(AppContext);
+
+  const navigate = useNavigate();
 
   const getPostDetails = async () => {
     try {
@@ -22,7 +24,7 @@ function PostDetails() {
         });
       }
     } catch (err) {
-      console.error(err);
+      navigate("/error");
     }
   };
 
