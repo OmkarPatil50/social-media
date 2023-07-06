@@ -4,7 +4,7 @@
 SocialConnect is a cutting-edge social media app designed to bring people together and foster meaningful connections in the digital world. With its intuitive user interface and a wide range of features, SocialConnect offers a seamless platform for users to express themselves, engage with others, and explore exciting content. Whether you're a seasoned social media enthusiast or a casual user, SocialConnect has something for everyone.
 </p>
 
-Live: <h3>https://socialconnectapp.vercel.app/</h3>
+<h3>Live: https://socialconnectapp.vercel.app/</h3>
 
 <h3>
 User Feed:
