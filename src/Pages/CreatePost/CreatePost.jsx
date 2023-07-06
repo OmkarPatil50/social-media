@@ -89,7 +89,7 @@ function CreatePost() {
     <div className="main-page">
       {state.showLoader ? <Loader /> : ""}
       <Helmet>
-        <title>Sociocourt | New Post</title>
+        <title>SocialConnect | New Post</title>
       </Helmet>
       <Navbar />
       <div className="page-main-section">

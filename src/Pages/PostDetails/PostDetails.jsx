@@ -45,7 +45,7 @@ function PostDetails() {
   return (
     <div className="main-page">
       <Helmet>
-        <title>Sociocourt | Post</title>
+        <title>SocialConnect | Post</title>
       </Helmet>
       <Navbar />
       <PostDetailsCard post={state.userPostDetails} />

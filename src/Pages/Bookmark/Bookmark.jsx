@@ -39,7 +39,7 @@ function Bookmark() {
     <div className="main-page">
       {state.showLoader ? <Loader /> : ""}
       <Helmet>
-        <title>Sociocourt | Bookmarks</title>
+        <title>SocialConnect | Bookmarks</title>
       </Helmet>
       <Navbar />
       <section className="page-main-section">

@@ -166,7 +166,7 @@ function Home() {
       {state.showLoader ? <Loader /> : ""}
 
       <Helmet>
-        <title>Sociocourt | Home</title>
+        <title>SocialConnect | Home</title>
       </Helmet>
       <Navbar />
       <section className="page-main-section">

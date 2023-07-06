@@ -88,7 +88,7 @@ function Explore() {
     <div className="main-page">
       {state.showLoader ? <Loader /> : ""}
       <Helmet>
-        <title>Sociocourt | Explore</title>
+        <title>SocialConnect | Explore</title>
       </Helmet>
       <Navbar />
       <section className="page-main-section">

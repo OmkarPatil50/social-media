@@ -186,11 +186,11 @@ function Profile() {
       {state.showLoader ? <Loader /> : ""}
       {state.userProfileDetails._id == state.userData._id ? (
         <Helmet>
-          <title>Sociocourt | Profile</title>
+          <title>SocialConnect | Profile</title>
         </Helmet>
       ) : (
         <Helmet>
-          <title>Sociocourt | User</title>
+          <title>SocialConnect | User</title>
         </Helmet>
       )}
 
