@@ -118,6 +118,13 @@ Logout:
 When users are ready to temporarily disconnect from SocialConnect, the logout option ensures their account remains secure and inaccessible to unauthorized users. Logging out helps maintain privacy and security, giving users peace of mind when they're not actively using the app.
 </p>
 
+<h3>
+Loading & Alerts:
+</h3>
+<p>
+The app incorporates loading screens and alerts to enhance user experience. Loading screens indicate the progress of data retrieval or operations, ensuring users are aware that the app is working. Alerts notify users about important updates of user's operations.
+</p>
+
 <p>
 With its user-centric design and a multitude of features, SocialConnect provides an immersive and inclusive social media experience. Whether users want to share their thoughts, discover new connections, or explore trending content, SocialConnect has everything they need to thrive in the digital social landscape.
 </p>
