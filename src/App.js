@@ -59,7 +59,7 @@ function App() {
       <div className="app-top-bar">
         <Link to='/' className='link'>
           <h1 className="app-heading-small">
-            <span>Socio</span>court
+            <span>Social</span>Connect
           </h1>
         </Link>
         {

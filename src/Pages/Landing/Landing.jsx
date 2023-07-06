@@ -114,11 +114,11 @@ function Landing() {
     <div className="landing-page">
       {state.showLoader ? <Loader /> : ""}
       <Helmet>
-        <title>Sociocourt | Signup</title>
+        <title>SocialConnect | Signup</title>
       </Helmet>
       <section className="app-info">
         <h1 className="app-heading">
-          <span>Socio</span>court
+          <span>Social</span>Connect
         </h1>
         <div className="app-quotes-container">
           <p className="app-quote">

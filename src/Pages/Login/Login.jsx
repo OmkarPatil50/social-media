@@ -78,12 +78,12 @@ function Login() {
   return (
     <div className="landing-page">
       <Helmet>
-        <title>Sociocourt | Login</title>
+        <title>SocialConnect | Login</title>
       </Helmet>
       {state.showLoader ? <Loader /> : ""}
       <section className="app-info">
         <h1 className="app-heading">
-          <span>Socio</span>court
+          <span>Social</span>Connect
         </h1>
         <div className="app-quotes-container">
           <p className="app-quote">
