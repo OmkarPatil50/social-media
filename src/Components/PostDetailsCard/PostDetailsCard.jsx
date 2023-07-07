@@ -13,8 +13,17 @@ function PostDetailsCard({ post, location }) {
 
   const navigate = useNavigate();
 
-  const { content, likes, username, id, firstName, lastName, createdAt, _id } =
-    post;
+  const {
+    content,
+    likes,
+    username,
+    id,
+    firstName,
+    lastName,
+    createdAt,
+    _id,
+    postImage,
+  } = post;
 
   const likePostHandler = async () => {
     try {
@@ -310,6 +319,11 @@ function PostDetailsCard({ post, location }) {
         <Link to={`/posts/${id}`} className="post-details-content">
           {content}
         </Link>
+        {postImage && (
+          <div className="post-image-div">
+            <img src={postImage} alt="post-image" className="post-image" />
+          </div>
+        )}
         <div className="btn-section-postcard">
           <button
             onClick={

@@ -39,7 +39,7 @@
 .post-details-content {
   box-sizing: border-box;
   width: 100%;
-  min-height: 100px;
+  min-height: 50px;
   max-height: 50vh;
   padding: 0px 5px;
   text-decoration: none;
