@@ -66,7 +66,6 @@ function Home() {
         });
         const jsonResponse = await response.json();
         if (jsonResponse.posts) {
-          console.log(jsonResponse);
           setHomeHeading("Latest Posts");
           dispatch({
             type: "UPDATE_POSTS",
