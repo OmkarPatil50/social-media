@@ -372,19 +372,25 @@ function PostCard({ post }) {
         <div className="btn-section-postcard">
           <button
             onClick={
-              likes.likedBy?.some((likedPost) => likedPost._id == _id)
+              likes.likedBy?.some(
+                (likedPost) => likedPost._id == state.userData._id
+              )
                 ? dislikePostHandler
                 : likePostHandler
             }
           >
             <i
               className={`fa-${
-                likes.likedBy?.some((likedPost) => likedPost._id == _id)
+                likes.likedBy?.some(
+                  (likedPost) => likedPost._id == state.userData._id
+                )
                   ? "solid"
                   : "regular"
               } fa-heart`}
               style={{
-                color: likes.likedBy?.some((likedPost) => likedPost._id == _id)
+                color: likes.likedBy?.some(
+                  (likedPost) => likedPost._id == state.userData._id
+                )
                   ? "#ff3b30"
                   : "#2f4f4f",
               }}
