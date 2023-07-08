@@ -15,6 +15,8 @@ export const users = [
     password: "adarshBalika123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    userBio: 'Hey! This is adarsh Balika',
+    userPortfolioUrl: 'www.adarshbalika.com'
   },
   {
     _id: 2,
@@ -25,6 +27,8 @@ export const users = [
     password: 'johnDoe456',
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    userBio: 'John the Genius || Working @Microsoft',
+    userPortfolioUrl: 'www.johndoe.com'
   },
   {
     _id: 3,

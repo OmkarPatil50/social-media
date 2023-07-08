@@ -226,7 +226,8 @@ function Profile() {
 
           {state.userProfileDetails.userPortfolioUrl ? (
             <p className="user-profile-details-url">
-              @{state.userProfileDetails.userPortfolioUrl}
+              <i className="fa-solid fa-globe"></i>{" "}
+              {state.userProfileDetails.userPortfolioUrl}
             </p>
           ) : (
             ""
