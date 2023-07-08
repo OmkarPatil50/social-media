@@ -16,11 +16,11 @@ function Profile() {
 
   const [editProfileContainer, setEditProfileContainer] = useState({
     showContainer: false,
-    bio: "",
-    url: "",
+    bio: state.userData?.userBio,
+    url: state.userData?.userPortfolioUrl,
     password: state.userData.password,
     image: null,
-    previewImage: null,
+    previewImage: state.userData.image,
   });
 
   const navigate = useNavigate();
