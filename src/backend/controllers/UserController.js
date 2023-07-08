@@ -191,10 +191,10 @@ export const removePostFromBookmarkHandler = function (schema, request) {
       (currPost) => currPost.id != postId
     );
     user = { ...user, bookmarks: filteredBookmarks };
-    this.db.users.update(
-      { id: user.id },
-      { ...user, updatedAt: formatDate() }
-    );
+    // this.db.users.update(
+    //   { id: user.id },
+    //   { ...user, updatedAt: formatDate() }
+    // );
     return new Response(200, {}, { bookmarks: user.bookmarks });
   } catch (error) {
     return new Response(
