@@ -170,7 +170,7 @@ function Home() {
       </Helmet>
       <Navbar />
       <section className="page-main-section">
-        {state.specifiedUserPosts?.length === 0 ? (
+        {state.feedPosts?.length === 0 ? (
           <h1 className="empty-page-tag">Let's Create Some Posts...!</h1>
         ) : (
           ""
@@ -262,7 +262,7 @@ function Home() {
             </div>
           </div>
         </div>
-        {state.specifiedUserPosts.length ? (
+        {state.feedPosts.length ? (
           <div className="sort-section">
             <div className="sort-btn-section">
               <button
@@ -371,32 +371,24 @@ function Home() {
 
         <section className="posts-section">
           <ul>
-            {state.userPosts
-              ? state.userPosts
-                  .filter(({ _id }) => {
-                    return (
-                      state.userData.following?.some(
-                        (user) => user._id === _id
-                      ) === true || _id === state.userData._id
-                    );
-                  })
-                  .map((post) => {
-                    const {
-                      content,
-                      likes,
-                      username,
-                      _id,
-                      id,
-                      userFullName,
-                      createdAt,
-                    } = post;
+            {state.feedPosts
+              ? state.feedPosts.map((post) => {
+                  const {
+                    content,
+                    likes,
+                    username,
+                    _id,
+                    id,
+                    userFullName,
+                    createdAt,
+                  } = post;
 
-                    return (
-                      <li key={id}>
-                        <PostCard post={post} />
-                      </li>
-                    );
-                  })
+                  return (
+                    <li key={id}>
+                      <PostCard post={post} />
+                    </li>
+                  );
+                })
               : ""}
           </ul>
         </section>

@@ -105,6 +105,10 @@ export const AppContextProvider = ({ children }) => {
         };
       }
 
+      case "UPDATE_FEED_POSTS": {
+        return { ...state, feedPosts: action.payload };
+      }
+
       case "SORT_BY_DATE_LATEST": {
         return {
           ...state,
@@ -164,6 +168,7 @@ export const AppContextProvider = ({ children }) => {
     userLoggedIn: false,
     userPosts: [],
     specifiedUserPosts: [],
+    feedPosts: [],
     userBookmarks: [],
     userPostDetails: {
       content: "",
@@ -184,7 +189,14 @@ export const AppContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducerFunction, initialValue);
 
   useEffect(() => {
-    let data = [...state.specifiedUserPosts];
+    let data = [
+      ...state.userPosts.filter(({ _id }) => {
+        return (
+          state.userData.following?.some((user) => user._id === _id) === true ||
+          _id === state.userData._id
+        );
+      }),
+    ];
     if (state.sortByLatest) {
       data = data.sort((a, b) => {
         const dateA = new Date(a.createdAt);
@@ -216,7 +228,7 @@ export const AppContextProvider = ({ children }) => {
         }
       });
     }
-    dispatch({ type: "UPDATE_SPECIFIED_USER_POSTS", payload: data });
+    dispatch({ type: "UPDATE_FEED_POSTS", payload: data });
   }, [
     state.userPosts,
     state.sortByLatest,
