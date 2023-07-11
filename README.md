@@ -6,6 +6,8 @@ SocialConnect is a cutting-edge social media app designed to bring people togeth
 
 <h3>Live: https://socialconnectapp.vercel.app/</h3>
 
+<h3>Demo Video : https://www.loom.com/share/ad7128a8632a49438bda567a43bcf185?sid=4405e6df-0640-4edd-bb87-0015adfada4a</h3>
+
 <h3>
 User Feed:
 </h3>
