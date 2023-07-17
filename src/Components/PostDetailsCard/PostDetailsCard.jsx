@@ -91,7 +91,6 @@ function PostDetailsCard({ post, location }) {
       if (jsonResponse.posts) {
         dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
         dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
-
         toast.error("Post Deleted Successfully!", {
           position: "bottom-center",
           autoClose: 3000,
@@ -101,18 +100,6 @@ function PostDetailsCard({ post, location }) {
           draggable: true,
           progress: undefined,
           theme: "light",
-        });
-        dispatch({
-          type: "UPDATE_POST_DETAILS_OBJ",
-          payload: {
-            content: "",
-            createdAt: "",
-            id: "",
-            likes: "",
-            updatedAt: "",
-            username: "",
-            _id: "",
-          },
         });
         navigate("/");
       }
@@ -165,6 +152,8 @@ function PostDetailsCard({ post, location }) {
       });
       const jsonResponse = await response.json();
       if (jsonResponse.bookmarks) {
+        console.log(jsonResponse, "from add");
+
         dispatch({ type: "UPDATE_BOOKMARKS", payload: jsonResponse.bookmarks });
         toast.success("Added to Bookmark!", {
           position: "bottom-center",
@@ -193,8 +182,54 @@ function PostDetailsCard({ post, location }) {
       const jsonResponse = await response.json();
 
       if (jsonResponse.bookmarks) {
+        console.log(jsonResponse, "from delete");
         dispatch({ type: "UPDATE_BOOKMARKS", payload: jsonResponse.bookmarks });
         toast.error("Removed from Bookmark!", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    } catch (err) {
+      navigate("/error");
+    }
+  };
+
+  const deletePostFromBookmarkHandler = async () => {
+    try {
+      const response2 = await fetch(`/api/users/remove-bookmark/${id}`, {
+        method: "POST",
+        headers: {
+          authorization: localStorage.getItem("encodedToken"),
+        },
+      });
+      const jsonResponse2 = await response2.json();
+
+      if (jsonResponse2.bookmarks) {
+        dispatch({
+          type: "UPDATE_BOOKMARKS",
+          payload: jsonResponse2.bookmarks,
+        });
+      }
+
+      const response = await fetch(`/api/posts/${id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: localStorage.getItem("encodedToken"),
+        },
+      });
+      const jsonResponse = await response.json();
+
+      if (jsonResponse.posts) {
+        dispatch({ type: "UPDATE_POSTS", payload: jsonResponse.posts });
+        dispatch({ type: "UPDATE_SHOW_LOADER", payload: false });
+
+        toast.error("Post Deleted Successfully!", {
           position: "bottom-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -327,23 +362,30 @@ function PostDetailsCard({ post, location }) {
         <div className="btn-section-postcard">
           <button
             onClick={
-              likes.likedBy?.some((likedPost) => likedPost._id == _id)
+              likes.likedBy?.some(
+                (likedPost) => likedPost._id == state.userData._id
+              )
                 ? dislikePostHandler
                 : likePostHandler
             }
           >
             <i
               className={`fa-${
-                likes.likedBy?.some((likedPost) => likedPost._id == _id)
+                likes.likedBy?.some(
+                  (likedPost) => likedPost._id == state.userData._id
+                )
                   ? "solid"
                   : "regular"
               } fa-heart`}
               style={{
-                color: likes.likedBy?.some((likedPost) => likedPost._id == _id)
+                color: likes.likedBy?.some(
+                  (likedPost) => likedPost._id == state.userData._id
+                )
                   ? "#ff3b30"
-                  : "black",
+                  : "#2f4f4f",
               }}
-            ></i>
+            ></i>{" "}
+            {likes.likeCount}
           </button>
           <button>
             <i className="fa-regular fa-comments"></i>
@@ -364,7 +406,7 @@ function PostDetailsCard({ post, location }) {
               style={{
                 color: state.userBookmarks?.some((post) => post.id === id)
                   ? "#ff3b30"
-                  : "black",
+                  : "#2f4f4f",
               }}
             ></i>
           </button>
@@ -384,14 +426,16 @@ function PostDetailsCard({ post, location }) {
           <button
             onClick={() => {
               dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });
-
               setTimeout(() => {
                 dispatch({
                   type: "UPDATE_SHOW_LOADER",
                   payload: false,
                 });
               }, 1000);
-              deletePostHandler();
+              state.userBookmarks?.some((post) => post.id === id)
+                ? deletePostFromBookmarkHandler()
+                : deletePostHandler();
+
               dispatch({
                 type: "SHOW_POST_OPTIONS",
                 payload: !state.showPostOptions,
