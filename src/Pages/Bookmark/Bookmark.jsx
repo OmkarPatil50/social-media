@@ -11,8 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 function Bookmark() {
   const { state, dispatch } = useContext(AppContext);
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const getBookmarkData = async () => {
     try {

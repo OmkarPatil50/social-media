@@ -9,7 +9,9 @@ import Loader from "../Loader/Loader";
 function PostDetailsCard({ post, location }) {
   const { state, dispatch } = useContext(AppContext);
   const [showEditWindow, setShowEditWindow] = useState(false);
-  const [newPostData, setNewPostData] = useState("");
+  const [newPostData, setNewPostData] = useState({
+    text: "",
+  });
 
   const navigate = useNavigate();
 
@@ -152,8 +154,6 @@ function PostDetailsCard({ post, location }) {
       });
       const jsonResponse = await response.json();
       if (jsonResponse.bookmarks) {
-        console.log(jsonResponse, "from add");
-
         dispatch({ type: "UPDATE_BOOKMARKS", payload: jsonResponse.bookmarks });
         toast.success("Added to Bookmark!", {
           position: "bottom-center",
@@ -170,7 +170,6 @@ function PostDetailsCard({ post, location }) {
       navigate("/error");
     }
   };
-
   const removePostFromBookmarkHandler = async () => {
     try {
       const response = await fetch(`/api/users/remove-bookmark/${id}`, {
@@ -182,7 +181,6 @@ function PostDetailsCard({ post, location }) {
       const jsonResponse = await response.json();
 
       if (jsonResponse.bookmarks) {
-        console.log(jsonResponse, "from delete");
         dispatch({ type: "UPDATE_BOOKMARKS", payload: jsonResponse.bookmarks });
         toast.error("Removed from Bookmark!", {
           position: "bottom-center",
@@ -315,7 +313,9 @@ function PostDetailsCard({ post, location }) {
                   className="close-btn"
                   onClick={() => {
                     setShowEditWindow(false);
-                    setNewPostData("");
+                    setNewPostData({
+                      text: "",
+                    });
                   }}
                 >
                   <i className="fa-solid fa-xmark"></i>
@@ -326,9 +326,16 @@ function PostDetailsCard({ post, location }) {
                 <textarea
                   type="text"
                   defaultValue={post.content}
-                  onChange={(event) => setNewPostData(event.target.value)}
+                  onChange={(event) =>
+                    setNewPostData(() => ({
+                      ...newPostData,
+                      text: event.target.value,
+                    }))
+                  }
                   className="edit-post-input"
                 />
+                <label htmlFor="edit-post" className="edit-post-label"></label>
+
                 <button
                   onClick={() => {
                     dispatch({ type: "UPDATE_SHOW_LOADER", payload: true });

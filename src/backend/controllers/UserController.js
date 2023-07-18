@@ -188,7 +188,7 @@ export const removePostFromBookmarkHandler = function (schema, request) {
       return new Response(400, {}, { errors: ["Post not bookmarked yet"] });
     }
     const filteredBookmarks = user.bookmarks.filter(
-      (currPost) => currPost.id != postId
+      (currPost) => currPost.id !== postId
     );
     user = { ...user, bookmarks: filteredBookmarks };
     // this.db.users.update(
