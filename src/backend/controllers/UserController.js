@@ -102,6 +102,7 @@ export const getBookmarkPostsHandler = function (schema, request) {
         }
       );
     }
+
     return new Response(200, {}, { bookmarks: user.bookmarks });
   } catch (error) {
     return new Response(
@@ -145,6 +146,7 @@ export const bookmarkPostHandler = function (schema, request) {
       );
     }
     user.bookmarks.push(post);
+
     // this.db.users.update(
     //   { id: user.id },
     //   { ...user, updatedAt: formatDate() }
@@ -168,7 +170,7 @@ export const bookmarkPostHandler = function (schema, request) {
 
 export const removePostFromBookmarkHandler = function (schema, request) {
   const { postId } = request.params;
-  let user = requiresAuth.call(this, request);
+  const user = requiresAuth.call(this, request);
   try {
     if (!user) {
       return new Response(
@@ -181,7 +183,7 @@ export const removePostFromBookmarkHandler = function (schema, request) {
         }
       );
     }
-    const isBookmarked = user.bookmarks.some(
+    const isBookmarked = user.bookmarks.find(
       (currPost) => currPost.id == postId
     );
     if (!isBookmarked) {
@@ -190,12 +192,13 @@ export const removePostFromBookmarkHandler = function (schema, request) {
     const filteredBookmarks = user.bookmarks.filter(
       (currPost) => currPost.id !== postId
     );
-    user = { ...user, bookmarks: filteredBookmarks };
-    // this.db.users.update(
-    //   { id: user.id },
-    //   { ...user, updatedAt: formatDate() }
-    // );
-    return new Response(200, {}, { bookmarks: user.bookmarks });
+    // user = { ...user, bookmarks: filteredBookmarks };
+    user.bookmarks = filteredBookmarks
+    this.db.users.update(
+      { id: user.id },
+      { ...user, updatedAt: formatDate() }
+    );
+    return new Response(200, {}, { bookmarks: filteredBookmarks });
   } catch (error) {
     return new Response(
       500,
